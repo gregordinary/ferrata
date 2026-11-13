@@ -185,6 +185,15 @@ RUSTUP_TOOLCHAIN=nightly-2026-07-09 cargo public-api -p ferrata --all-features \
     --omit blanket-impls,auto-derived-impls > public-api.txt
 ```
 
+CI's `semver` job builds the newest release tag and the tree, and runs
+[cargo-semver-checks](https://github.com/obi1kenobi/cargo-semver-checks)
+between them. While `version` still names the last release, it fails on a
+breaking change and lists the items it breaks. Bumping the version to the
+next breaking release, 0.1.x to 0.2.0, turns it green, and each item it
+listed takes a **Breaking.** entry in CHANGELOG.md. The job sees only the
+API's signatures: a change in what a request resolves to is a release of its
+own even when the job passes.
+
 ## Properties and fuzzing
 
 Some of what ferrata answers can be checked without apk: every resolution
