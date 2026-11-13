@@ -1,6 +1,6 @@
 [package]
 name = "ferrata"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2024"
 rust-version = "1.91"
 license = "MIT OR Apache-2.0"
@@ -13,8 +13,6 @@ categories = ["algorithms", "parser-implementations", "no-std"]
 # scenario tooling, the integration tests and the fuzzing harness are
 # development inputs, and stay in the repository, where the suite runs.
 include = ["/src", "/README.md", "/CHANGELOG.md", "/LICENSE-APACHE", "/LICENSE-MIT"]
-# Not published until the first release.
-publish = false
 
 # The scenario tooling is a member, so `cargo test --workspace` runs the
 # catalog's checks with the library's tests. The fuzzing harness is a

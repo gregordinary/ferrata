@@ -12,7 +12,7 @@ ferrata resolves is part of its contract. Its entry states how the answers
 over each Alpine release measured change: how many names resolve otherwise,
 and in what way.
 
-## [Unreleased]
+## [0.1.0] - 2026-11-13
 
 The first release, following apk-tools 3.0 (`Dialect::V3_0`), measured
 against apk-tools 3.0.9, which Alpine v3.23, v3.24 and edge ship.
@@ -40,7 +40,8 @@ against apk-tools 3.0.9, which Alpine v3.23, v3.24 and edge ship.
 Measured against apk.static 3.0.9 over Alpine v3.24 (`main` and `community`):
 
 - Every name requested alone: 28,660 of 28,661 in apk's exact sequence; the
-  other installs apk's packages in another order.
+  other installs apk's packages in another order. Over Alpine v3.23, 27,574
+  of 27,577: one in another order, and two with another set of packages.
 - 2,000 layered pairs, a name installed into an empty root and another
   requested over it: 2,000 as apk answers them.
 - 2,000 layered pairs whose root is installed from Alpine v3.23: 1,999 as
@@ -51,3 +52,5 @@ Measured against apk.static 3.0.9 over Alpine v3.24 (`main` and `community`):
 
 The documentation of the `resolve` module lists the 28 cases known to differ
 from apk.
+
+[0.1.0]: https://github.com/gregordinary/ferrata/releases/tag/v0.1.0
