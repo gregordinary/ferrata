@@ -1,0 +1,49 @@
+[statement]
+The order is the walk's, not the order the names come to be required in.
+`y` is required last, by `c`, but the walk reaches it first, through `pw`,
+a candidate for `w` that is not chosen (`w2` ranks higher): `x`, numbered
+after it, is decided first, for 2, which holds `K`, and `y` is left with 1.
+
+[repository]
+P:a
+V:1
+D:w x
+
+P:c
+V:1
+D:y
+
+P:x
+V:2
+p:K=1
+
+P:x
+V:1
+
+P:y
+V:2
+p:K=1
+
+P:y
+V:1
+
+P:pw
+V:1
+p:w
+D:y
+
+P:w2
+V:1
+k:100
+p:w
+
+[request]
+a
+c
+
+[answer apk-tools 3.0.9-r0]
+install w2 1
+install x 2
+install a 1
+install y 1
+install c 1

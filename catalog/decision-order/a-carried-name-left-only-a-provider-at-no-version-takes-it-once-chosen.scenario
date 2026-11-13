@@ -1,0 +1,21 @@
+[statement]
+Observed; the rule is not yet known in full. `v`'s one candidate, `a`,
+provides `v` and `d` at no version without a priority and needs `a` and
+`d`; `d` 3 cannot stand beside it. apk installs `a` alone, which answers
+`v` and `d`, rather than refuse `d` for want of a candidate it would
+choose (`a-name-some-package-carries-is-decided-though-no-candidate-apk-would-choose-is-left`).
+
+[repository]
+P:d
+V:3
+
+P:a
+V:2
+D:a d
+p:d v
+
+[request]
+v
+
+[answer apk-tools 3.0.9-r0]
+install a 2

@@ -1,0 +1,15 @@
+[statement]
+A package may forbid a name it provides itself: the conflict does not
+reach the package that states it.
+
+[repository]
+P:p
+V:1
+p:x=1
+D:!x
+
+[request]
+p
+
+[answer apk-tools 3.0.9-r0]
+install p 1

@@ -1,0 +1,21 @@
+[statement]
+Of the providers of a name, the one providing it at the later version is
+chosen, whatever their priorities: `p1` provides `x` at 2 with priority 1,
+`p2` at 1 with priority 100.
+
+[repository]
+P:p2
+V:1
+p:x=1
+k:100
+
+P:p1
+V:1
+p:x=2
+k:1
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p1 1

@@ -1,0 +1,106 @@
+[statement]
+Reduced from postmarketOS v26.06 over Alpine v3.24 (`main` and
+`community`, 2026-11-11), asked for `postmarketos-base-ui-gnome`;
+postmarketOS's repository first. `modemmanager` needs `polkit`, which the
+package `polkit` carries and `polkit-elogind` provides at its version;
+`postmarketos-base-ui-gnome-openrc`, installed for its condition on
+`openrc`, needs `polkit-elogind`. apk takes `polkit` for `modemmanager`,
+then cannot install `polkit-elogind` beside it, and refuses, where
+`polkit-elogind` alone would answer both. Observed; the rule is not yet
+known.
+
+[repository]
+P:postmarketos-base-mesa
+V:62-r0
+i:postmarketos-base=62-r0 mesa
+
+P:postmarketos-base-openrc
+V:62-r0
+k:10
+D:openrc openrc-user-pam
+p:postmarketos-base-init
+
+P:postmarketos-base-ui
+V:51-r0
+D:postmarketos-base
+
+P:postmarketos-base-ui-gnome
+V:11-r0
+D:dnsmasq modemmanager postmarketos-base-ui
+
+P:postmarketos-base-ui-gnome-openrc
+V:11-r0
+D:polkit-elogind
+i:openrc
+
+P:postmarketos-base
+V:62-r0
+D:postmarketos-base-init
+
+[repository]
+P:dnsmasq-dnssec-dbus
+V:2.92_p2-r0
+p:dnsmasq=2.92_p2-r0
+
+P:mesa-gbm
+V:26.1.6-r0
+D:mesa=26.1.6-r0
+p:so:libgbm.so.1=1.0.0
+
+P:openrc
+V:0.63.2-r0
+p:so:libeinfo.so.1=1
+
+P:openrc-user-pam
+V:0.63.2-r0
+D:so:libeinfo.so.1
+
+[repository]
+P:modemmanager
+V:1.25.95_git20260527-r1
+D:polkit
+
+P:modemmanager-openrc
+V:1.25.95_git20260527-r1
+i:openrc modemmanager=1.25.95_git20260527-r1
+
+P:networkmanager-dnsmasq
+V:1.52.2-r0
+i:networkmanager=1.52.2-r0 dnsmasq
+
+P:networkmanager-openrc
+V:1.52.2-r0
+i:openrc networkmanager=1.52.2-r0
+
+P:polkit
+V:127-r2
+
+P:polkit-elogind
+V:127-r2
+p:polkit=127-r2
+
+P:polkit-lang
+V:127-r2
+i:polkit=127-r2 lang
+
+P:webkit2gtk-6.0
+V:2.48.1-r4
+D:so:libgbm.so.1
+
+P:webkit2gtk-6.0-lang
+V:2.48.1-r4
+i:webkit2gtk-6.0=2.48.1-r4 lang
+
+[request]
+postmarketos-base-ui-gnome
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   polkit-127-r2:
+|     conflicts: polkit-elogind-127-r2
+|     satisfies: modemmanager-1.25.95_git20260527-r1[polkit]
+|   polkit-elogind-127-r2:
+|     conflicts: polkit-127-r2[polkit=127-r2]
+|     satisfies: modemmanager-1.25.95_git20260527-r1[polkit]
+|                postmarketos-base-ui-gnome-openrc-11-r0[polkit-elogind]
+refused

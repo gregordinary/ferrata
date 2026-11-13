@@ -1,0 +1,38 @@
+[statement]
+As `provided-names-are-decided-depth-first-v-reached-first`, with `app`
+listing `B` first: `w` is decided first and installs `kw`, which then
+provides `v`. The shape of the Alpine neochat case
+(`reduced/neochat-takes-kwallet-alone`).
+
+[repository]
+P:app
+V:1
+D:B A
+
+P:pa
+V:1
+p:A=1
+D:v
+
+P:pb
+V:1
+p:B=1
+D:w
+
+P:kw
+V:1
+p:v w=1
+
+P:gk
+V:1
+p:v
+k:100
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install kw 1
+install pb 1
+install pa 1
+install app 1

@@ -1,0 +1,91 @@
+[statement]
+Reduced from postmarketOS v26.06 over Alpine v3.24 (`main` and
+`community`, 2026-11-11), asked for `device-asus-me176c`; postmarketOS's
+repository first. `postmarketos-base` needs `postmarketos-ramdisk`, which
+`postmarketos-initramfs` provides and which needs `udev`, and then
+`postmarketos-base-init`, which `postmarketos-base-openrc` provides and
+which needs `busybox-mdev-openrc`, which needs `openrc`. apk installs the
+second chain's packages before the first's: placing `udev-init-scripts`
+reaches `udev-init-scripts-openrc`, which the walk has not reached and
+which provides `dev-openrc`, and so `busybox-mdev-openrc`, which provides
+it too and which its condition does not name, with `openrc` under it
+(`install-order/a-package-whose-condition-may-hold-leads-to-a-provider-it-does-not-name`).
+
+[repository]
+P:postmarketos-initramfs
+V:3.11.0-r1
+D:udev
+p:postmarketos-ramdisk=3.11.0-r1
+
+P:postmarketos-base-openrc
+V:62-r0
+k:10
+D:busybox-mdev-openrc udev-init-scripts-openrc
+p:postmarketos-base-init
+
+P:device-asus-me176c
+V:8-r1
+D:postmarketos-base
+
+P:postmarketos-base
+V:62-r0
+D:postmarketos-ramdisk postmarketos-base-init
+
+[repository]
+P:bridge
+V:1.5-r5
+
+P:busybox-mdev-openrc
+V:1.37.0-r31
+D:openrc>=0.24.1-r6
+p:dev-openrc
+
+P:eudev
+V:3.2.14-r6
+D:udev-init-scripts so:libblkid.so.1
+p:udev=176
+
+P:ifupdown-ng
+V:0.13.0-r0
+k:900
+D:bridge
+p:ifupdown-any
+
+P:libblkid
+V:2.42.3-r1
+D:so:libeconf.so.0
+p:so:libblkid.so.1=1.1.0
+
+P:libeconf
+V:0.8.3-r0
+p:so:libeconf.so.0=0.8.3
+
+P:openrc
+V:0.63.2-r0
+D:ifupdown-any
+
+P:udev-init-scripts
+V:35-r1
+
+P:udev-init-scripts-openrc
+V:35-r1
+p:dev-openrc
+i:openrc udev-init-scripts=35-r1
+
+[request]
+device-asus-me176c
+
+[answer apk-tools 3.0.9-r0]
+install udev-init-scripts 35-r1
+install bridge 1.5-r5
+install ifupdown-ng 0.13.0-r0
+install openrc 0.63.2-r0
+install udev-init-scripts-openrc 35-r1
+install busybox-mdev-openrc 1.37.0-r31
+install libeconf 0.8.3-r0
+install libblkid 2.42.3-r1
+install eudev 3.2.14-r6
+install postmarketos-initramfs 3.11.0-r1
+install postmarketos-base-openrc 62-r0
+install postmarketos-base 62-r0
+install device-asus-me176c 8-r1

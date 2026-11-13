@@ -1,0 +1,48 @@
+[statement]
+Observed; the rule is not yet known. `c`, requested, keeps `c` 3,
+installed, which provides `v` and needs `d<3`, whose one candidate `d` 2
+needs `b~2`. `b` 3, installed for the world, forbids `v`, so `b` gives
+way to `f` 2, installed, which provides `b` 1
+(`a-world-name-gives-way-to-a-requested-name`), and completes `d` 2's
+condition. apk takes `d` 2 for `c` 3 and refuses on its dependency, where
+a package whose condition holds is passed over for a dependency the
+package completing it cannot meet
+(`install-if/a-dependency-the-condition-s-package-cannot-meet-passes-over-the-package`).
+
+[repository]
+P:d
+V:2
+D:b~2
+i:f
+
+P:c
+V:2
+p:v=1
+
+[installed]
+P:b
+V:3
+D:!v
+
+P:c
+V:3
+D:d<3
+p:v
+
+P:f
+V:2
+D:c
+p:b=1
+
+[world]
+b
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   f-2:
+|     breaks: d-2[b~2]
+|     satisfies: world[b]
+refused

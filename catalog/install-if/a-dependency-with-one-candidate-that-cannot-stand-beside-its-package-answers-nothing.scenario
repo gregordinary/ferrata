@@ -1,0 +1,35 @@
+[statement]
+A dependency with a single candidate of a package whose condition will
+hold answers no name where that candidate cannot be installed beside the
+package, as it answers others
+(`a-dependency-of-a-condition-that-will-hold-answers-an-earlier-name`):
+`e` 3, the best candidate for `e`, has the condition `f`, which `e` 2
+needs, and needs `x`, which only `e` 2 provides. apk takes `e` 3 for `e`
+and refuses.
+
+[repository]
+P:e
+V:3
+D:x
+i:f
+
+P:e
+V:2
+D:f
+p:x=1
+
+P:f
+V:1
+
+[request]
+e
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   e-2:
+|     conflicts: e-3
+|     satisfies: world[e] e-3[x]
+|   e-3:
+|     conflicts: e-2
+|     satisfies: world[e]
+refused

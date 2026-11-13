@@ -1,0 +1,19 @@
+[statement]
+A provider's priority (`k:`) is read as a number that saturates at 2^64 - 1 before it is kept modulo 2^16, so a number past that is 65535: `p1` at `k:18446744073709551616` against `p2` at `k:65534`.
+
+[repository]
+P:p1
+V:1.0-r0
+p:v
+k:18446744073709551616
+
+P:p2
+V:1.0-r0
+p:v
+k:65534
+
+[request]
+v
+
+[answer apk-tools 3.0.9-r0]
+install p1 1.0-r0

@@ -1,0 +1,43 @@
+[statement]
+`base`, the one candidate for `B`, completes `e`'s condition, and `e`'s
+dependency `Y` has `lo` alone, which would be installed with `e` at once:
+`X`, decided before `B`, takes `lo`, which provides it, and `hi` is not
+installed. Contrast
+`a-dependency-with-one-candidate-is-installed-at-once`.
+
+[repository]
+P:top
+V:1
+D:z B
+
+P:base
+V:1
+p:B=1
+
+P:z
+V:1
+D:X
+
+P:e
+V:1
+i:base
+D:Y
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install lo 1
+install z 1
+install base 1
+install e 1
+install top 1

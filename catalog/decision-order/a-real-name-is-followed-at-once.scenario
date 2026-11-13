@@ -1,0 +1,38 @@
+[statement]
+A dependency on a real package name is followed at once, before any name
+provided by another package is decided: `pb`, the single provider of `B`,
+depends on the real `kw`, and `kw` is installed before `v`, reached
+first, is decided, so `v` needs nothing more.
+
+[repository]
+P:app
+V:1
+D:A B
+
+P:pa
+V:1
+p:A=1
+D:v
+
+P:pb
+V:1
+p:B=1
+D:kw
+
+P:kw
+V:1
+p:v w=1
+
+P:gk
+V:1
+p:v
+k:100
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install kw 1
+install pa 1
+install pb 1
+install app 1

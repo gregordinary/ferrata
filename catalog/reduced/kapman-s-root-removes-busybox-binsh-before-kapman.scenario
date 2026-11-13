@@ -1,0 +1,37 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `kapman`'s closure from v3.23 installed, `carla` asked. The
+world is empty and `x`, unrelated, is requested, so every installed
+package goes. apk removes `busybox-binsh`, needed by `icu-data-en`
+through `/bin/sh`, which it provides at no version, right after
+`icu-data-en` and before `kapman`, which the installed database lists
+after both; compare
+`installed/a-provider-at-no-version-goes-after-the-first-removals`.
+`busybox-binsh`, first in the database, pulls `icu-data-en`, which needs it
+through a name it provides at no version
+(`installed/a-removal-waiting-on-removals-pulls-them-first`).
+
+[repository]
+P:x
+V:1-r0
+
+[installed]
+P:busybox-binsh
+V:1.37.0-r30
+p:/bin/sh
+
+P:icu-data-en
+V:76.1-r1
+D:/bin/sh
+
+P:kapman
+V:25.08.3-r0
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+remove icu-data-en 76.1-r1
+remove busybox-binsh 1.37.0-r30
+remove kapman 25.08.3-r0
+install x 1-r0

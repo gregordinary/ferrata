@@ -1,0 +1,44 @@
+[statement]
+The walk that orders provided names goes through every candidate, chosen or
+not: `q`, needed by `p2`, which is not installed, comes before `u` in it, and
+is decided first when `t` requires it; `r2` answers `q` and `u` both.
+
+[repository]
+P:app
+V:1
+D:v u t
+
+P:p1
+V:1
+p:v
+k:100
+
+P:p2
+V:1
+p:v
+k:10
+D:q
+
+P:r1
+V:1
+p:u
+k:100
+
+P:r2
+V:1
+p:u q=1
+k:10
+
+P:t
+V:1
+D:q
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install r2 1
+install t 1
+install app 1

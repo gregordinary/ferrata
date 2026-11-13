@@ -1,0 +1,51 @@
+[statement]
+A removal that follows the replacement of the package that needed it
+waits until the walk has placed what placing the replacement led to:
+`a` 2, which no longer needs `six`, triggers `apyc` 2, whose condition
+names it, and `apyc` needs `d`. apk upgrades `a`, installs `d`, upgrades
+`apyc`, and only then removes `six`. The rule of
+`reduced/picard-removes-py3-six-after-py3-dateutil-pyc`.
+
+[repository]
+P:a
+V:2
+
+P:apyc
+V:2
+i:a=2
+D:d
+
+P:d
+V:1
+
+P:app
+V:2
+D:a=2
+
+[installed]
+P:apyc
+V:1
+
+P:six
+V:1
+
+P:a
+V:1
+D:six
+
+P:app
+V:1
+D:a
+
+[world]
+app
+
+[request]
+app>1
+
+[answer apk-tools 3.0.9-r0]
+upgrade a 1 2
+install d 1
+upgrade apyc 1 2
+remove six 1
+upgrade app 1 2

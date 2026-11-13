@@ -1,0 +1,17 @@
+[statement]
+Packages removed come before packages installed, whatever their names.
+
+[repository]
+P:anew
+V:1
+
+[installed]
+P:zold
+V:1
+
+[request]
+anew
+
+[answer apk-tools 3.0.9-r0]
+remove zold 1
+install anew 1

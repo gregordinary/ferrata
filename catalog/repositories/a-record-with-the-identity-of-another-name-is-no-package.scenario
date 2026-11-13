@@ -1,0 +1,23 @@
+[statement]
+apk tells packages apart by their identity alone: a record with the
+identity of a record of another name, read before it, is no package of
+its own. `two` has the identity of `one`, so apk has no package for the
+name `two`, and refuses.
+
+[repository]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:one
+V:1
+
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:two
+V:1
+
+[request]
+two
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   two (no such package):
+|     required by: world[two]
+refused

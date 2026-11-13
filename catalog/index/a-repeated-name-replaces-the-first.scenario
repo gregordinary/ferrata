@@ -1,0 +1,16 @@
+[statement]
+A repeated `P:` replaces the one before it: the record is named `other`.
+
+[repository]
+P:app
+P:other
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   app (no such package):
+|     required by: world[app]
+refused

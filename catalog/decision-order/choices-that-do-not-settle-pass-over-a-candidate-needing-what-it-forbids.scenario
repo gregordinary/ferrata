@@ -1,0 +1,29 @@
+[statement]
+Observed where the preliminary choices do not settle: `a` and `b` are
+requested; `b` 2, the best candidate for `b`, forbids `v` and needs `d`,
+whose one candidate `d` 2 needs `v`, which only `a` 2, the one candidate
+for `a`, provides. apk takes `b` 1.
+
+[repository]
+P:d
+V:2
+D:v
+
+P:b
+V:2
+D:d !v
+
+P:a
+V:2
+p:v=3
+
+P:b
+V:1
+
+[request]
+a
+b
+
+[answer apk-tools 3.0.9-r0]
+install a 2
+install b 1

@@ -1,0 +1,29 @@
+[statement]
+An installed package whose version an installed dependent does not admit is
+replaced by one it does, whatever the request: `lib` 1.0 becomes 2.0, for
+`a`'s `lib>=2`.
+
+[repository]
+P:lib
+V:2.0-r0
+
+P:b
+V:1.0-r0
+
+[installed]
+P:a
+V:1.0-r0
+D:lib>=2
+
+P:lib
+V:1.0-r0
+
+[world]
+a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+upgrade lib 1.0-r0 2.0-r0
+install b 1.0-r0

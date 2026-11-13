@@ -1,0 +1,31 @@
+[statement]
+`a` needs `lib<2` and `b` needs `lib>=2`; one package holds a name, so apk
+refuses, though each requirement alone has a version that meets it.
+Contrast `requirements-no-package-meets-together`, which shows the same
+through a name packages provide.
+
+[repository]
+P:a
+V:1
+D:lib<2
+
+P:b
+V:1
+D:lib>=2
+
+P:lib
+V:1
+
+P:lib
+V:2
+
+[request]
+a
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   lib-1:
+|     breaks: b-1[lib>=2]
+|     satisfies: a-1[lib<2]
+refused

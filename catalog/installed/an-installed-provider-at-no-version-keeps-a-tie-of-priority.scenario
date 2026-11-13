@@ -1,0 +1,27 @@
+[statement]
+Of two providers at no version with equal priority, the installed one is
+kept, though the other is listed first in the repository.
+
+[repository]
+P:r
+V:1
+p:v
+k:10
+
+P:b
+V:1
+
+[installed]
+P:q
+V:1
+p:v
+k:10
+
+[world]
+v
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 1

@@ -1,0 +1,31 @@
+[statement]
+Of two versions of one package providing a name alike, the one installed
+is kept, whatever their priorities: `c` 1, installed, and `c` 3 provide
+`w` at no version, `c` 3 with the higher priority, and the world's `w`
+keeps `c` 1. Of two packages of different names at no version, the higher
+priority goes first, installed or not
+(`a-higher-priority-outranks-an-installed-provider-at-no-version`).
+
+[repository]
+P:c
+V:3
+k:10
+p:w
+
+P:b
+V:1
+
+[installed]
+P:c
+V:1
+k:5
+p:w
+
+[world]
+w
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 1

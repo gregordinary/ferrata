@@ -1,0 +1,5 @@
+# Vendored test vectors are kept byte-for-byte as recorded.
+/tests/versions/** -text
+# Scenarios hold index text exactly, a carriage return included where one is
+# the point.
+/catalog/** -text

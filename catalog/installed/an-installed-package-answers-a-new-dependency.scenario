@@ -1,0 +1,25 @@
+[statement]
+A package installed answers a dependency of a package the request installs,
+at its own version, though nothing in the world names it: `lib` 1.0 stays,
+rather than being removed or upgraded.
+
+[repository]
+P:lib
+V:1.0-r0
+
+P:lib
+V:2.0-r0
+
+P:foo
+V:1.0-r0
+D:lib
+
+[installed]
+P:lib
+V:1.0-r0
+
+[request]
+foo
+
+[answer apk-tools 3.0.9-r0]
+install foo 1.0-r0

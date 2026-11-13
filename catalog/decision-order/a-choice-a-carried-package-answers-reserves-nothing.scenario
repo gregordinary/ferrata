@@ -1,0 +1,53 @@
+[statement]
+A name a package installed for a carried name answers reserves nothing by
+its preliminary choice. `r`, whose condition never holds, needs `F`, and
+`f1`, its best candidate, would hold `K` against `s1`; but `z`, a carried
+name decided before `S`, provides `F` itself, so `S` takes `s1`. Contrast
+`install-if/a-condition-that-never-holds-reserves-a-provider`.
+
+[repository]
+P:top
+V:1
+D:n z
+
+P:n
+V:1
+
+P:z
+V:1
+p:F
+D:S F
+
+P:r
+V:1
+i:n zz
+D:F
+
+P:f1
+V:1
+k:100
+p:F K=1
+
+P:f2
+V:1
+k:10
+p:F
+
+P:s1
+V:1
+k:100
+p:S K=1
+
+P:s2
+V:1
+k:10
+p:S
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install s1 1
+install z 1
+install top 1

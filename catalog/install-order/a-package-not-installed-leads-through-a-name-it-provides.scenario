@@ -1,0 +1,36 @@
+[statement]
+A package not installed, whose condition names a package placed, leads the
+walk to the package installed that provides a name it provides: placing
+`o` reaches `md`, whose condition names it and which is not installed,
+and `md` provides `dev`, which `bmo` provides, so `bmo` follows `o`, before
+`ac`.
+
+[repository]
+P:top
+V:1
+D:ac bmo
+
+P:ac
+V:1
+D:o
+
+P:bmo
+V:1
+p:dev
+
+P:md
+V:1
+p:dev
+i:o mdevd
+
+P:o
+V:1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install o 1
+install bmo 1
+install ac 1
+install top 1

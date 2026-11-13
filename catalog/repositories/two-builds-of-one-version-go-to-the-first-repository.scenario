@@ -1,0 +1,29 @@
+[statement]
+Two builds of one version, with different identities, in two repositories:
+apk installs the one from the repository configured first. Each build
+depends on a marker package that tells them apart.
+
+[repository]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:foo
+V:1.0
+D:from-first
+
+P:from-first
+V:1
+
+[repository]
+C:Q1BBBBBBBBBBBBBBBBBBBBBBBBBBB=
+P:foo
+V:1.0
+D:from-second
+
+P:from-second
+V:1
+
+[request]
+foo
+
+[answer apk-tools 3.0.9-r0]
+install from-first 1
+install foo 1.0

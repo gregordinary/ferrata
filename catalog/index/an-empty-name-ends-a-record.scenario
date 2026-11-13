@@ -1,0 +1,19 @@
+[statement]
+An empty `P:` is a name: it ends its record, which is a package with the
+empty name.
+
+[repository verbatim]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:
+V:1.0-r0
+p:bad=1
+
+C:Q1BBBBBBBBBBBBBBBBBBBBBBBBBBB=
+P:after
+V:2.0-r0
+
+[request]
+bad
+
+[answer apk-tools 3.0.9-r0]
+install  1.0-r0

@@ -1,0 +1,18 @@
+[statement]
+An `install_if` entry is met by a package providing the name it states.
+
+[repository]
+P:p1
+V:1
+p:x=1
+
+P:extra
+V:1.0
+i:x
+
+[request]
+p1
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install extra 1.0

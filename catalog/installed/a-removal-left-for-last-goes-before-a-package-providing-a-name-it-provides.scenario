@@ -1,0 +1,36 @@
+[statement]
+A removal goes, at the latest, just before the walk placing a package
+that provides a name it provides, at no version too: `ax`, which `y`
+needed through `v`, a name `ax` provides at a version, would be removed
+last
+(`a-package-needed-through-a-name-it-provides-at-a-version-is-removed-last`),
+but `n`, requested, provides `nov`, as `ax` does, and apk removes `ax`
+just before installing `n`, after `b`.
+
+[repository]
+P:b
+V:1
+
+P:n
+V:1
+p:nov
+
+[installed]
+P:ax
+V:1
+p:v=1
+p:nov
+
+P:y
+V:1
+D:v
+
+[request]
+b
+n
+
+[answer apk-tools 3.0.9-r0]
+remove y 1
+install b 1
+remove ax 1
+install n 1

@@ -1,0 +1,37 @@
+[statement]
+Placing a package triggers, name by name, the packages whose conditions
+each of its names completes: its own name first, then each name it
+provides in the order stated, each name's packages in the order of apk's
+table. `base` triggers `a` (bucket 12,779) and `b` (18,296), then `v`
+triggers `c` (7,966), then `w` triggers `x` (2,196).
+
+[repository]
+P:base
+V:1
+p:v w
+
+P:a
+V:1
+i:base
+
+P:b
+V:1
+i:base
+
+P:c
+V:1
+i:v
+
+P:x
+V:1
+i:w
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install a 1
+install b 1
+install c 1
+install x 1

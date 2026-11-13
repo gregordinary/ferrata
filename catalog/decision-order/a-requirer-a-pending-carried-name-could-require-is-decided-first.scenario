@@ -1,0 +1,36 @@
+[statement]
+As `a-requirer-another-pending-name-could-require-waits`, with the name
+that could require `w` carried: `ku`, a pending carried name, depends on
+`w`, and is decided first in any case. `w` is still decided before `v`,
+and `kw` answers `v`.
+
+[repository]
+P:app
+V:1
+D:ku v
+
+P:ku
+V:1
+D:v w
+
+P:kw
+V:1
+D:dep
+p:v w=1
+
+P:dep
+V:1
+
+P:gk
+V:1
+k:100
+p:v
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install dep 1
+install kw 1
+install ku 1
+install app 1

@@ -1,0 +1,55 @@
+[statement]
+A package displaced goes, at the latest, just before the walk placing the
+package that displaces it, after the removals still waiting on it: `new`
+takes `v` from the installed `old`, which the kept `k` needs, and `w`,
+removed, needs `old`; `w` itself would go last, since `y` needed it
+through `u`, a name it provides at a version. apk removes `w`, then
+`old`, after `a` and `b`, just before installing `new`.
+
+[repository]
+P:new
+V:1
+p:v=2
+
+P:app
+V:1
+D:a b new
+
+P:a
+V:1
+
+P:b
+V:1
+
+[installed]
+P:old
+V:1
+p:v=1
+
+P:w
+V:1
+p:u=1
+D:old
+
+P:y
+V:1
+D:u
+
+P:k
+V:1
+D:v
+
+[world]
+k
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+remove y 1
+install a 1
+install b 1
+remove w 1
+remove old 1
+install new 1
+install app 1

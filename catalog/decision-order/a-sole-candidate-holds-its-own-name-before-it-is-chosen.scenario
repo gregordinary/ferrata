@@ -1,0 +1,23 @@
+[statement]
+As `a-sole-candidate-holds-its-names-before-it-is-chosen`, through a
+package's own name: `v`'s one candidate is `r` 1, so `r` 2 is passed over
+when `r`, a real name, is decided first.
+
+[repository]
+P:b
+V:1
+D:v r
+
+P:r
+V:1
+p:v=1
+
+P:r
+V:2
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install r 1
+install b 1

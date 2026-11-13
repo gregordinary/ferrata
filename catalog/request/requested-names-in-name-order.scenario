@@ -1,0 +1,33 @@
+[statement]
+As `the-world-is-walked-in-name-order-for-decisions`, with `b` reaching
+`x` and `c` reaching `y`: `x` is decided first, for `p1`, and `y` then
+needs `p2` too.
+
+[repository]
+P:p1
+V:1.0-r0
+p:x
+k:100
+
+P:p2
+V:1.0-r0
+p:x y=1
+k:10
+
+P:b
+V:1
+D:x
+
+P:c
+V:1
+D:y
+
+[request]
+b
+c
+
+[answer apk-tools 3.0.9-r0]
+install p1 1.0-r0
+install b 1
+install p2 1.0-r0
+install c 1

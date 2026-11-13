@@ -1,0 +1,24 @@
+[statement]
+A package installed for its `install_if` follows the package that completes
+its condition, not its place in the order of names: `zz-extra` follows
+`a`, before `zz`.
+
+[repository]
+P:a
+V:1
+
+P:zz-extra
+V:1
+i:a
+
+P:zz
+V:1
+
+[request]
+zz
+a
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install zz-extra 1
+install zz 1

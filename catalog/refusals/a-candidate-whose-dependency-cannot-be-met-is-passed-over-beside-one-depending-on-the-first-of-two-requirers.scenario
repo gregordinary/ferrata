@@ -1,0 +1,42 @@
+[statement]
+As `a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-further-up`,
+where a name up the chain has two requirers: `top` needs `z` and `y`,
+each of which needs `q`, and `q` needs `n`. `n` 2 needs `missing`, and
+`n` 1 needs `z`, the first of the two; apk passes over `n` 2 and installs
+`n` 1. Where `n` 1 needs `y` instead, apk refuses
+(`a-candidate-whose-dependency-cannot-be-met-is-not-passed-over-beside-one-depending-on-the-second-of-two-requirers`).
+
+[repository]
+P:top
+V:1
+D:z y
+
+P:z
+V:1
+D:q
+
+P:y
+V:1
+D:q
+
+P:q
+V:1
+D:n
+
+P:n
+V:2
+D:missing
+
+P:n
+V:1
+D:z
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install q 1
+install z 1
+install y 1
+install top 1

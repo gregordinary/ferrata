@@ -1,0 +1,27 @@
+[statement]
+Observed; the rule is not yet known. `d` 3, the best candidate for `d`,
+needs `c`, whose one candidate holds `v`; every candidate for `d`
+provides `v`, so `c` 2 could stand beside none of them, and apk takes
+`d` 2. Without `d` 2 providing `v`, or with a third candidate for `d`
+that does not provide it, apk takes `d` 3 and refuses; with `c` two
+dependencies down, it refuses too.
+
+[repository]
+P:d
+V:3
+p:v=3
+D:c
+
+P:c
+V:2
+p:v=3
+
+P:d
+V:2
+p:v
+
+[request]
+d
+
+[answer apk-tools 3.0.9-r0]
+install d 2

@@ -1,0 +1,32 @@
+[statement]
+A name packages only provide gives way to a requested name as a name some
+package carries does (`a-later-name-gives-way-to-a-requested-name-its-best-candidate-forbids`):
+`e2`, the best candidate for `E`, which `top` needs, forbids `w`, which
+`b` 2, requested, provides. apk takes `e1` for `E`.
+
+[repository]
+P:b
+V:2
+p:w=2
+
+P:top
+V:1
+D:E
+
+P:e2
+V:1
+p:E=2
+D:!w
+
+P:e1
+V:1
+p:E=1
+
+[request]
+b
+top
+
+[answer apk-tools 3.0.9-r0]
+install b 2
+install e1 1
+install top 1

@@ -1,0 +1,20 @@
+[statement]
+As `an-unreadable-install-if-empties-the-condition`, with a later `i:`
+field naming `docs`: the condition holds again, and `extra` is installed.
+
+[repository]
+P:docs
+V:1.0-r0
+
+P:extra
+V:1.0-r0
+i:docs docs=1.0b1
+i:docs
+
+[request]
+docs
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: The indexes contain broken packages which might not function properly.
+install docs 1.0-r0
+install extra 1.0-r0

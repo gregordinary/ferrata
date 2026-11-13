@@ -1,0 +1,21 @@
+[statement]
+A condition's `!` entry on a name the package provides at no version holds
+while no other package of that name is installed: `b` provides `x` at no
+version, its condition is `!x` and `e`, and apk installs `b` with `e`
+(`a-condition-forbidding-a-name-the-package-provides-at-a-version-never-holds`).
+
+[repository]
+P:b
+V:1
+i:!x e
+p:x
+
+P:e
+V:1
+
+[request]
+e
+
+[answer apk-tools 3.0.9-r0]
+install e 1
+install b 1

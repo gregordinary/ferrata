@@ -1,0 +1,61 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`akonadi-calendar`. Its first dependency leads, through names each provided
+at a version by a single package, to `qtkeychain`, which needs the virtual
+`dbus:org.freedesktop.Secrets`; its second leads the same way to `kwallet`,
+which provides it. apk decides the virtual name when the walk reaches it,
+before following the second dependency, and chooses `gnome-keyring`, of
+higher priority; `kwallet` is installed after for its versioned name. The
+rule of `decision-order/provided-names-are-decided-depth-first-v-reached-first`.
+
+[repository]
+P:akonadi-calendar
+V:26.04.2-r0
+D:so:libKPim6IdentityManagementCore.so.6 so:libKPim6MailTransport.so.6
+
+P:gnome-keyring
+V:50.0-r0
+k:100
+p:dbus:org.freedesktop.Secrets
+
+P:kidentitymanagement
+V:26.04.2-r0
+D:so:libKF6TextCustomEditor.so.1
+p:so:libKPim6IdentityManagementCore.so.6=6.7.2
+
+P:kmailtransport
+V:26.04.2-r0
+D:so:libKPim6GAPICore.so.6
+p:so:libKPim6MailTransport.so.6=6.7.2
+
+P:ktextaddons
+V:2.0.2-r0
+D:so:libqt6keychain.so.1
+p:so:libKF6TextCustomEditor.so.1=2.0.2
+
+P:kwallet
+V:6.26.0-r0
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.26.0
+
+P:libkgapi
+V:26.04.2-r0
+D:so:libKF6Wallet.so.6
+p:so:libKPim6GAPICore.so.6=6.7.2
+
+P:qtkeychain
+V:0.15.0-r0
+D:dbus:org.freedesktop.Secrets
+p:so:libqt6keychain.so.1=0.15.0
+
+[request]
+akonadi-calendar
+
+[answer apk-tools 3.0.9-r0]
+install gnome-keyring 50.0-r0
+install qtkeychain 0.15.0-r0
+install ktextaddons 2.0.2-r0
+install kidentitymanagement 26.04.2-r0
+install kwallet 6.26.0-r0
+install libkgapi 26.04.2-r0
+install kmailtransport 26.04.2-r0
+install akonadi-calendar 26.04.2-r0

@@ -1,0 +1,92 @@
+[statement]
+Reduced from Alpine v3.23 (`main` and `community`, 2026-11-11), asked
+for `plasma-mobile-meta`. `webkit2gtk-6.0`, reached through `bluedevil`,
+`obexd` and `evolution-data-server`, needs
+`dbus:org.freedesktop.Secrets`, which `gnome-keyring`, of priority 100,
+and `kwallet` provide at no version; `plasma-workspace` needs `kwallet`
+through `so:libKF6Wallet.so.6`. apk installs `kwallet` alone. Observed;
+the secrets family of `reduced/kmail-takes-kwallet-alone`, in a shape
+the rules that settled v3.24's do not reach.
+
+[repository]
+P:iso-codes-lang
+V:4.19.0-r0
+
+[repository]
+P:bluedevil
+V:6.5.6-r1
+D:obexd
+
+P:evolution-data-server
+V:3.58.2-r0
+D:so:libwebkitgtk-6.0.so.4
+p:so:libedataserver-1.2.so.27=27.0.0
+
+P:gnome-keyring
+V:48.0-r2
+k:100
+p:dbus:org.freedesktop.Secrets
+
+P:ki18n
+V:6.19.0-r3
+D:iso-codes-lang
+p:so:libKF6I18n.so.6=6.19.0 so:libKF6I18nQml.so.6=6.19.0
+
+P:kirigami
+V:6.19.0-r3
+
+P:kwallet
+V:6.19.0-r0
+D:so:libKF6I18n.so.6
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.19.0
+
+P:libplasma
+V:6.5.6-r1
+D:kirigami so:libKF6I18nQml.so.6
+p:so:libPlasmaQuick.so.6=6.5.6
+
+P:obexd-enhanced
+V:5.85-r0
+D:so:libedataserver-1.2.so.27
+p:obexd=5.85-r0
+
+P:plasma-mobile
+V:6.5.6-r1
+D:plasma-workspace
+
+P:plasma-mobile-meta
+V:6.5.6-r0
+D:bluedevil plasma-mobile
+
+P:plasma-workspace
+V:6.5.6-r1
+D:so:libKF6Wallet.so.6 so:libnotificationmanager.so.1
+p:so:libkrdb.so=0
+
+P:plasma-workspace-libs
+V:6.5.6-r1
+D:so:libPlasmaQuick.so.6 so:libkrdb.so
+p:so:libnotificationmanager.so.1=6.5.6
+
+P:webkit2gtk-6.0
+V:2.48.1-r2
+D:dbus:org.freedesktop.Secrets
+p:so:libwebkitgtk-6.0.so.4=4.11.6
+
+[request]
+plasma-mobile-meta
+
+[answer apk-tools 3.0.9-r0]
+install iso-codes-lang 4.19.0-r0
+install ki18n 6.19.0-r3
+install kwallet 6.19.0-r0
+install webkit2gtk-6.0 2.48.1-r2
+install evolution-data-server 3.58.2-r0
+install obexd-enhanced 5.85-r0
+install bluedevil 6.5.6-r1
+install kirigami 6.19.0-r3
+install libplasma 6.5.6-r1
+install plasma-workspace-libs 6.5.6-r1
+install plasma-workspace 6.5.6-r1
+install plasma-mobile 6.5.6-r1
+install plasma-mobile-meta 6.5.6-r0

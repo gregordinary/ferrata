@@ -1,0 +1,43 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-08): `lua-feedparser`'s closure from v3.23 installed. The world
+is empty and `x`, unrelated, is requested, so every installed package
+goes. `lua5.4` is removed first, and the packages it needed through names
+they provide at a version last: apk removes `readline` before
+`lua5.4-libs` in whichever order the installed database lists them and
+`lua5.4` states its dependencies: both wait on `musl`, and go before it
+in the order of apk's table of names, where `readline`'s own name comes
+first (`installed/the-last-removals-go-in-the-order-of-apk-s-table-of-names`).
+
+[repository]
+P:x
+V:1-r0
+
+[installed]
+P:musl
+V:1.2.5-r24
+p:so:libc.musl-x86_64.so.1=1
+
+P:lua5.4-libs
+V:5.4.8-r0
+D:so:libc.musl-x86_64.so.1
+p:so:liblua-5.4.so.0=0.0.0
+
+P:readline
+V:8.3.1-r0
+D:so:libc.musl-x86_64.so.1
+p:so:libreadline.so.8=8.3
+
+P:lua5.4
+V:5.4.8-r0
+D:so:liblua-5.4.so.0 so:libreadline.so.8
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+remove lua5.4 5.4.8-r0
+install x 1-r0
+remove readline 8.3.1-r0
+remove lua5.4-libs 5.4.8-r0
+remove musl 1.2.5-r24

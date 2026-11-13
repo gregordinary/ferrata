@@ -1,0 +1,42 @@
+[statement]
+A dependency with a single candidate of a package installed for its
+condition is installed at once, before names reached earlier: `lo`, the one
+candidate for `Y`, is installed when `e` is, and answers `X`, which `z`
+needed first, so `hi` is not installed. Contrast `a-dependency-with-two-
+candidates-is-not-installed-at-once`.
+
+[repository]
+P:top
+V:1
+D:z base
+
+P:base
+V:1
+
+P:z
+V:1
+D:X
+
+P:e
+V:1
+i:base
+D:Y
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install lo 1
+install z 1
+install base 1
+install e 1
+install top 1

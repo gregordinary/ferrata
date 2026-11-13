@@ -1,0 +1,24 @@
+[statement]
+`c` depends on `a`, in a cycle with `b`: the cycle is broken where it
+closes, at `b`'s dependency on `a`.
+
+[repository]
+P:a
+V:1
+D:b
+
+P:b
+V:1
+D:a
+
+P:c
+V:1
+D:a
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+install b 1
+install a 1
+install c 1

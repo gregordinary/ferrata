@@ -1,0 +1,26 @@
+[statement]
+A package whose condition is completed while the walk is inside the walk of
+its own dependency is placed before that dependency: `x`, a dependency of
+`kw`, completes `extra`'s condition, and `extra`'s dependency on `kw`, being
+walked, is passed over, as in a cycle.
+
+[repository]
+P:kw
+V:1
+D:x
+
+P:x
+V:1
+
+P:extra
+V:1
+i:x
+D:kw
+
+[request]
+kw
+
+[answer apk-tools 3.0.9-r0]
+install x 1
+install extra 1
+install kw 1

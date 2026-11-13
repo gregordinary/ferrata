@@ -1,0 +1,32 @@
+[statement]
+A name the world names, though not the request, gives way to a requested
+name as any other name does (`conflicts/a-later-name-gives-way-to-a-requested-name-its-best-candidate-forbids`):
+`e` 2, installed for the world, forbids `w`, which `b` 2, requested,
+provides. apk installs `b` 2 and downgrades `e` to 1.
+
+[repository]
+P:b
+V:2
+p:w=2
+
+P:e
+V:2
+D:!w
+
+P:e
+V:1
+
+[installed]
+P:e
+V:2
+D:!w
+
+[world]
+e
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 2
+downgrade e 2 1

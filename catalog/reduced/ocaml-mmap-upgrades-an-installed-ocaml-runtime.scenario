@@ -1,0 +1,54 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `ocaml-mmap`'s closure from v3.23 installed and asked at a
+later version. The later `ocaml-mmap` needs a name only `ocaml` 4.14.4
+provides, and `ocaml` needs `ocaml-runtime` at 4.14.4 exactly; the
+installed `ocaml-runtime` is 4.14.2, in no world. apk upgrades it:
+`ocaml-runtime=4.14.4-r0` is required through `ocaml`, the single
+candidate of the name `ocaml-mmap` needs, before `ocaml` is installed
+(`installed/a-sole-candidate-s-constraint-upgrades-an-installed-package`).
+
+[repository]
+P:merlin
+V:4.14-r3
+D:ocaml4-impl:Unix:6ad958f5fc3606e1ce1a19bb744939cb
+
+P:merlin-emacs
+V:4.14-r3
+i:merlin=4.14-r3 emacs
+
+P:ocaml
+V:4.14.4-r0
+D:ocaml-runtime=4.14.4-r0
+p:ocaml4-impl:Unix:6ad958f5fc3606e1ce1a19bb744939cb=4.14.4-r0
+
+P:ocaml-doc
+V:4.14.4-r0
+i:docs ocaml=4.14.4-r0
+
+P:ocaml-mmap
+V:1.2.0-r6
+D:ocaml4-impl:Unix:6ad958f5fc3606e1ce1a19bb744939cb
+
+P:ocaml-runtime
+V:4.14.4-r0
+
+P:ocp-index-doc
+V:1.4.0-r3
+i:docs ocp-index=1.4.0-r3
+
+P:ocp-index-emacs
+V:1.4.0-r3
+i:ocp-index=1.4.0-r3 emacs
+
+[installed]
+P:ocaml-runtime
+V:4.14.2-r2
+
+[request]
+ocaml-mmap>1.2.0-r3
+
+[answer apk-tools 3.0.9-r0]
+upgrade ocaml-runtime 4.14.2-r2 4.14.4-r0
+install ocaml 4.14.4-r0
+install ocaml-mmap 1.2.0-r6

@@ -1,0 +1,26 @@
+[statement]
+A candidate whose dependency nothing can answer is not passed over for the
+package that requires it as such: `b` needs `a`, `a` 3 needs `missing`,
+which nothing provides, and apk refuses rather than install `a` 1
+(`a-candidate-whose-dependency-cannot-be-met-is-not-passed-over`).
+
+[repository]
+P:a
+V:1
+
+P:a
+V:3
+D:missing
+
+P:b
+V:2
+D:a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   missing (no such package):
+|     required by: a-3[missing]
+refused

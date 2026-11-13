@@ -1,0 +1,28 @@
+[statement]
+A package whose condition names a package placed waits while another
+package its condition names has not been reached: `ssl` follows `crypto`,
+not `bb`, which is placed first.
+
+[repository]
+P:top
+V:1
+D:bb crypto
+
+P:bb
+V:1
+
+P:crypto
+V:1
+
+P:ssl
+V:1
+i:bb crypto
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install bb 1
+install crypto 1
+install ssl 1
+install top 1

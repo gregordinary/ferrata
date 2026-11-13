@@ -1,0 +1,85 @@
+[statement]
+Reduced from postmarketOS v26.06 over Alpine v3.24 (`main` and
+`community`, 2026-11-11), asked for `akonadi-calendar`; the records it
+keeps are all Alpine's. `qtkeychain` needs `dbus:org.freedesktop.Secrets`,
+which `gnome-keyring`, of priority 100, and `kwallet` provide at no
+version; `kaccounts-integration` needs `kwallet` through
+`so:libKF6Wallet.so.6`. apk installs `gnome-keyring` beside `kwallet`.
+Observed; the secrets family, in a shape the rules that settled v3.24's
+names do not reach. Over v3.24 alone, `akonadi-calendar` agrees; over
+postmarketOS's repository and v3.24 it differs only while the index holds
+`b4`, a record no resolution of the request reaches.
+
+[repository]
+P:akonadi-calendar
+V:26.04.2-r0
+D:so:libKPim6MessageCore.so.6
+
+P:gnome-keyring
+V:50.0-r0
+k:100
+p:dbus:org.freedesktop.Secrets
+
+P:kaccounts-integration
+V:26.04.2-r0
+D:so:libKF6Wallet.so.6 so:libQt6Gui.so.6
+p:so:libkaccounts6.so.2=26.04.2
+
+P:kitemmodels
+V:6.26.0-r0
+p:so:libKF6ItemModels.so.6=6.26.0
+
+P:ktextaddons
+V:2.0.2-r0
+D:so:libqt6keychain.so.1
+p:so:libKF6TextUtils.so.1=2.0.2
+
+P:kwallet
+V:6.26.0-r0
+D:so:libQt6Widgets.so.6
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.26.0
+
+P:messagelib
+V:26.04.2-r0
+D:so:libKF6ItemModels.so.6 so:libKF6TextUtils.so.1 so:libKPim6PimCommonAkonadi.so.6 so:libQt6PrintSupport.so.6
+p:so:libKPim6MessageCore.so.6=6.7.2
+
+P:pimcommon
+V:26.04.2-r0
+D:so:libKF6PurposeWidgets.so.6 so:libQt6Widgets.so.6
+p:so:libKPim6PimCommonAkonadi.so.6=6.7.2
+
+P:purpose
+V:6.26.0-r0
+D:kitemmodels so:libQt6Widgets.so.6 so:libkaccounts6.so.2
+p:so:libKF6PurposeWidgets.so.6=6.26.0
+
+P:qt6-qtbase-x11
+V:6.11.1-r0
+D:xdg-utils
+p:so:libQt6Gui.so.6=6.11.1 so:libQt6PrintSupport.so.6=6.11.1 so:libQt6Widgets.so.6=6.11.1
+
+P:qtkeychain
+V:0.15.0-r0
+D:dbus:org.freedesktop.Secrets
+p:so:libqt6keychain.so.1=0.15.0
+
+P:xdg-utils
+V:1.2.1-r1
+
+[request]
+akonadi-calendar
+
+[answer apk-tools 3.0.9-r0]
+install kitemmodels 6.26.0-r0
+install gnome-keyring 50.0-r0
+install qtkeychain 0.15.0-r0
+install ktextaddons 2.0.2-r0
+install xdg-utils 1.2.1-r1
+install qt6-qtbase-x11 6.11.1-r0
+install kwallet 6.26.0-r0
+install kaccounts-integration 26.04.2-r0
+install purpose 6.26.0-r0
+install pimcommon 26.04.2-r0
+install messagelib 26.04.2-r0
+install akonadi-calendar 26.04.2-r0

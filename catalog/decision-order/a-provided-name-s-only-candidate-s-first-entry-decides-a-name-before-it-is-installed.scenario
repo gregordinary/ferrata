@@ -1,0 +1,32 @@
+[statement]
+A provided name's single candidate stating two entries on one name has
+that name decided on the first before the candidate is installed: `v`'s
+one candidate `p1` needs `lib>0` and then `lib<2`; apk installs `lib` 2.0
+and cannot install `p1` beside it, and refuses. Requested by its own name,
+`p1` gets `lib` 1.0. Observed; the rule is not yet known.
+
+[repository]
+P:app
+V:1
+D:v
+
+P:p1
+V:1
+p:v=1
+D:lib>0 lib<2
+
+P:lib
+V:1.0
+
+P:lib
+V:2.0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   lib-2.0:
+|     breaks: p1-1[lib<2]
+|     satisfies: p1-1[lib>0]
+refused

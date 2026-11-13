@@ -1,0 +1,31 @@
+[statement]
+A package whose condition holds, and whose dependency only packages ruled
+out could meet, is passed over: `f`, installed first, holds `K`, so `s1`,
+the one provider of `S`, is ruled out, and so is `e`, which needs `S`.
+Contrast `an-unmet-dependency-refuses-the-request`, where nothing ever
+provides the name.
+
+[repository]
+P:base
+V:1
+
+P:f
+V:1
+p:K=1
+
+P:s1
+V:1
+p:S=1 K=1
+
+P:e
+V:1
+i:base
+D:S
+
+[request]
+base
+f
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install f 1

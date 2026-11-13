@@ -1,0 +1,20 @@
+[statement]
+A package whose condition holds is passed over where its dependency on
+the package completing the condition admits no version of it that could
+be installed: `x`, triggered by `e` 1, needs `e>1`, which nothing offers,
+and `e` is installed alone.
+
+[repository]
+P:x
+V:1
+D:e>1
+i:e
+
+P:e
+V:1
+
+[request]
+e
+
+[answer apk-tools 3.0.9-r0]
+install e 1

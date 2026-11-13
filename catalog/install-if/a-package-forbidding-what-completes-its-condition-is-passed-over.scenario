@@ -1,0 +1,21 @@
+[statement]
+A package whose `!` entry forbids the package completing its condition is
+passed over, not a cause to refuse: `b`, triggered by `d`, conflicts with
+`d`, and `d` is installed alone. A conflict with another requested
+package refuses the request
+(`install-if/a-conflict-with-the-request-refuses-it`).
+
+[repository]
+P:b
+V:1
+D:!d
+i:d
+
+P:d
+V:3
+
+[request]
+d
+
+[answer apk-tools 3.0.9-r0]
+install d 3

@@ -1,0 +1,41 @@
+[statement]
+Names packages only provide are decided in the order of the walk, not from
+the top: `w`, whose candidate `kx` leads down a chain of provided names, is
+still decided after `v`, which `app` lists first, and `v` goes to `gk`.
+
+[repository]
+P:app
+V:1
+D:v w
+
+P:gk
+V:1
+p:v
+k:100
+
+P:kw
+V:1
+p:v w=1
+
+P:kx
+V:1
+p:w=1
+D:s
+
+P:s1
+V:1
+p:s=1
+D:s2
+
+P:s3
+V:1
+p:s2=1
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install gk 1
+install kw 1
+install app 1

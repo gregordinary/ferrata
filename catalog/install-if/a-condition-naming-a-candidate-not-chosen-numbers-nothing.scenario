@@ -1,0 +1,51 @@
+[statement]
+As `a-condition-the-choices-do-not-complete-numbers-nothing`, with `zz` a
+candidate for `Z`, which `top` needs and the walk reaches first: `gz`, of
+a later version, is chosen for `Z`, the choices do not complete `e`'s
+condition, and `W` is still decided before `V`.
+
+[repository]
+P:top
+V:1
+D:Z B W K
+
+P:zz
+V:1
+p:Z=1
+
+P:gz
+V:2
+p:Z=2
+
+P:base
+V:1
+p:B=1
+
+P:e
+V:1
+D:V
+i:base zz
+
+P:gk
+V:1
+k:100
+p:V
+
+P:kw
+V:1
+p:V W=1
+
+P:pk
+V:1
+D:V
+p:K=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install gz 2
+install base 1
+install kw 1
+install pk 1
+install top 1

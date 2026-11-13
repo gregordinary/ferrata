@@ -1,0 +1,35 @@
+[statement]
+A dependency does not give way to the one candidate of a name packages
+only provide, which neither the request nor the world names, as it gives
+way to a provider among others
+(`a-dependency-gives-way-to-one-of-two-providers-needing-it`): `a` needs
+`w`, which only `c` 3 provides; `c` 3 needs `f`, and `f` 3, the best
+candidate for `f`, forbids `w`. apk takes `f` 3 and refuses, though `f`
+2 forbids nothing.
+
+[repository]
+P:f
+V:3
+D:!w
+
+P:a
+V:3
+D:w
+
+P:c
+V:3
+D:f
+p:w=1
+
+P:f
+V:2
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   c-3:
+|     breaks: f-3[!w]
+|     satisfies: a-3[w]
+refused

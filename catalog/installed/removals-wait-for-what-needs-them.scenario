@@ -1,0 +1,27 @@
+[statement]
+A removal waits for the packages needing it: `lib`, listed first, goes
+after `a`, which needs it; `x`, which waits for nothing, goes first.
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:lib
+V:1
+
+P:x
+V:1
+
+P:a
+V:1
+D:lib
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove x 1
+remove a 1
+remove lib 1
+install b 1

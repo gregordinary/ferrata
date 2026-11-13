@@ -1,0 +1,18 @@
+[statement]
+A dependency on a provided name installs its provider first.
+
+[repository]
+P:a
+V:1
+D:v
+
+P:p
+V:1
+p:v=1
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+install p 1
+install a 1

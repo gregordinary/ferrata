@@ -1,0 +1,19 @@
+[statement]
+The world is resolved again with every request: an entry no package
+answers refuses a request that has nothing to do with it.
+
+[repository]
+P:b
+V:1.0-r0
+
+[world]
+missing
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   missing (no such package):
+|     required by: world[missing]
+refused

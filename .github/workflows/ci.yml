@@ -1,0 +1,144 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Started by hand against a chosen ref. A push event is delivered once and is
+  # not redelivered, so a commit whose delivery was dropped otherwise has no way
+  # to be checked short of pushing another commit to trigger one.
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Format, lint, test, docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Rust (pinned)
+        # rust-toolchain.toml pins the toolchain, its components, and the
+        # no_std target, so fmt, clippy, and the builds all run under the same
+        # rustfmt everywhere.
+        run: rustup show
+      - name: Cache the dependency build
+        # Keyed on the lockfile and the job. The library has no dependencies,
+        # so what this holds is the test tooling's.
+        uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - name: Format
+        run: cargo fmt --check
+      - name: Clippy
+        # The panic-freedom lints in src/lib.rs are denied outright; -D warnings
+        # adds everything else clippy warns about.
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+      - name: Test
+        # The workspace includes the scenario tooling, whose tests check the
+        # behavior catalog.
+        run: cargo test --workspace --all-features
+      - name: Documentation (warning-clean)
+        run: cargo doc --workspace --all-features --no-deps
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - name: Build for a target with no standard library
+        # The library is no_std with alloc. A target that has no `std` at all
+        # is what shows it: a stray use of `std` fails to build here, where on
+        # a hosted target it would compile.
+        run: cargo build --lib --target thumbv7em-none-eabihf
+
+  msrv:
+    name: MSRV
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Rust (MSRV)
+        # The `+1.91` override wins over the pinned toolchain, which sits ahead
+        # of the floor, so this checks the version `rust-version` promises
+        # rather than the one contributors use.
+        run: rustup toolchain install 1.91 --profile minimal
+      - name: Cache the dependency build
+        uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - name: Check
+        # Warnings are errors here too. Some arise only at the floor: an
+        # `expect` that a later compiler fulfills can go unfulfilled.
+        run: cargo +1.91 check --workspace --all-targets --all-features
+        env:
+          RUSTFLAGS: -D warnings
+
+  deny:
+    name: License and advisory policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check dependency licenses and advisories
+        # deny.toml pins the permitted licenses, the advisory policy, and the
+        # registries a dependency may come from, dev-dependencies included.
+        uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25 # v2.1.1
+        with:
+          command: check licenses advisories sources
+      - name: Check the fuzzing harness's dependencies
+        # The harness is a workspace of its own, and holds the only
+        # third-party crates; the same deny.toml applies.
+        uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25 # v2.1.1
+        with:
+          manifest-path: fuzz/Cargo.toml
+          command: check licenses advisories sources
+
+  fuzz:
+    name: Fuzz targets build
+    runs-on: ubuntu-latest
+    env:
+      # cargo-fuzz needs a nightly compiler for its sanitizer flags. Pinned, so
+      # this job fails on a change to the targets rather than on a nightly's
+      # regression, and bumped deliberately.
+      FUZZ_NIGHTLY: nightly-2026-07-09
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Rust (pinned nightly) and cargo-fuzz
+        run: |
+          rustup toolchain install "$FUZZ_NIGHTLY" --profile minimal
+          cargo install cargo-fuzz --version 0.13.2 --locked
+      - name: Build every target
+        # Building, not running: a fuzzing run is not a pass or fail a pull
+        # request can wait on. What this catches is a target left behind by a
+        # change to the API it drives.
+        working-directory: fuzz
+        run: cargo "+$FUZZ_NIGHTLY" fuzz build
+
+  api:
+    name: Public API surface
+    runs-on: ubuntu-latest
+    env:
+      # cargo-public-api reads rustdoc's JSON output, whose rendering of paths
+      # changes between nightlies, so a floating nightly would fail this job on
+      # rustdoc drift rather than on an API change. Pinned, and bumped
+      # deliberately: a bump regenerates the snapshot, and that diff is
+      # reviewed like any other.
+      RUSTDOC_JSON_NIGHTLY: nightly-2026-07-09
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Rust (pinned, plus the pinned nightly for rustdoc JSON)
+        run: |
+          rustup show
+          rustup toolchain install "$RUSTDOC_JSON_NIGHTLY" --profile minimal
+      - name: Install cargo-public-api
+        uses: taiki-e/install-action@5488ac5a951645ce95062214902ac4b6bc1a1037 # v2.87.32
+        with:
+          tool: cargo-public-api@0.52.0
+      - name: Regenerate the snapshot
+        # The library's surface alone: the scenario tooling is not published.
+        # Auto-trait impls are kept, so a type that gains or loses Send or Sync
+        # shows up in review. Blanket and auto-derived impls are omitted as
+        # noise.
+        run: |
+          RUSTUP_TOOLCHAIN="$RUSTDOC_JSON_NIGHTLY" cargo public-api -p ferrata --all-features \
+            --omit blanket-impls,auto-derived-impls > public-api.txt
+      - name: Fail on an unreviewed surface change
+        # The snapshot is committed, so any change to the public API arrives as
+        # a reviewable diff rather than passing unnoticed. Regenerate it with
+        # the command above and commit the result.
+        run: git diff --exit-code -- public-api.txt

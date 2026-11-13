@@ -1,0 +1,44 @@
+[statement]
+A package whose condition names a candidate's own name has its turn where
+the walk reaches that candidate, though no dependency names the candidate.
+`e`'s condition names `base`, reached as the candidate for `B`: `X`, which
+`e` needs, is decided before `Y`, which `z` needs, for `hi`, and `lo` is
+installed for `Y`.
+
+[repository]
+P:top
+V:1
+D:B z
+
+P:base
+V:1
+p:B=1
+
+P:z
+V:1
+D:Y
+
+P:e
+V:1
+i:base
+D:X
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install hi 1
+install e 1
+install lo 1
+install z 1
+install top 1

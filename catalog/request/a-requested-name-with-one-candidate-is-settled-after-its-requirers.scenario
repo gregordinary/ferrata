@@ -1,0 +1,34 @@
+[statement]
+A requested name with a single candidate is settled first, but the names
+that would require it are decided before it: `px`, requested, provides
+`x3`, which `kw`, the one candidate for `w`, needs. `w` is decided before
+`px` is installed, and `kw` answers `v`, so `gk` is not installed.
+Contrast `a-requested-name-with-one-candidate-is-settled-first`.
+
+[repository]
+P:app
+V:1
+D:v w
+
+P:kw
+V:1
+D:x3
+p:v w=1
+
+P:px
+V:1
+p:x3=1
+
+P:gk
+V:1
+k:100
+p:v
+
+[request]
+app
+px
+
+[answer apk-tools 3.0.9-r0]
+install px 1
+install kw 1
+install app 1

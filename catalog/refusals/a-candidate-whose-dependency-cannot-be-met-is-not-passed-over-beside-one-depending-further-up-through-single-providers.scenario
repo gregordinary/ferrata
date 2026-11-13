@@ -1,0 +1,41 @@
+[statement]
+As `a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-further-up-through-a-provided-name`,
+with `p2` the only provider of `w`: apk chooses `n` 2, which needs
+`missing`, and refuses. From the only candidate for a name, not yet
+installed, the chain of requirements goes on through the name the
+candidate carries, `p2`, which nothing requires, so `p1` is not up the
+chain.
+
+[repository]
+P:top
+V:1
+D:v
+
+P:p1
+V:1
+k:10
+D:w
+p:v
+
+P:p2
+V:1
+k:10
+D:n
+p:w
+
+P:n
+V:2
+D:missing
+
+P:n
+V:1
+D:p1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   missing (no such package):
+|     required by: n-2[missing]
+refused

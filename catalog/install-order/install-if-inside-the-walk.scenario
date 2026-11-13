@@ -1,0 +1,28 @@
+[statement]
+A package installed for its `install_if` follows the package completing its
+condition even inside another's walk: `d-extra` follows `d`, before `a`'s
+next dependency `e`.
+
+[repository]
+P:a
+V:1
+D:d e
+
+P:d
+V:1
+
+P:e
+V:1
+
+P:d-extra
+V:1
+i:d
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+install d 1
+install d-extra 1
+install e 1
+install a 1

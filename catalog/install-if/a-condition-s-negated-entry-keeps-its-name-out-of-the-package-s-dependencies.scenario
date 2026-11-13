@@ -1,0 +1,29 @@
+[statement]
+A package installed for its condition never has, among its own
+dependencies, a package holding a name a `!` entry of its condition
+names, whatever version the entry admits: `e`'s condition is `base` and
+`!docs`, `e` needs `docs`, and only `docs` answers it; apk does not
+install `e`. The same holds for `!docs>1`, which `docs` 1 escapes.
+
+[repository]
+P:top
+V:1
+D:base
+
+P:base
+V:1
+
+P:docs
+V:1
+
+P:e
+V:1
+D:docs
+i:base !docs
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install top 1

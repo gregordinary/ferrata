@@ -1,0 +1,29 @@
+[statement]
+A requested name does not give way to another requested name its best
+candidate forbids, as a name the request does not name does
+(`a-later-name-gives-way-to-a-requested-name-its-best-candidate-forbids`):
+`a` and `e` are requested, and `e` 3, the best candidate for `e`, forbids
+`a` 1, the one candidate for `a`. apk takes `e` 3 and refuses, though `e`
+2 forbids nothing.
+
+[repository]
+P:a
+V:1
+
+P:e
+V:3
+D:!a
+
+P:e
+V:2
+
+[request]
+a
+e
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-1:
+|     breaks: e-3[!a]
+|     satisfies: world[a]
+refused

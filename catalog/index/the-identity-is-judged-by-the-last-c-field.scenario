@@ -1,0 +1,15 @@
+[statement]
+A record's identity checksum is judged when the record ends, by its last
+`C:`: an earlier one that does not decode is no error.
+
+[repository verbatim]
+C:xyz
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:app
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install app 1.0-r0

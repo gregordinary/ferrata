@@ -1,0 +1,36 @@
+[statement]
+As `carried-names-are-decided-the-last-numbered-first`, with one package
+depending on both names: `a` states `x` before `y`, so the walk numbers
+`y` last, and `y` is decided first, for 2, which holds `K`.
+
+[repository]
+P:a
+V:1
+D:x y
+
+P:c
+V:1
+
+P:x
+V:2
+p:K=1
+
+P:x
+V:1
+
+P:y
+V:2
+p:K=1
+
+P:y
+V:1
+
+[request]
+a
+c
+
+[answer apk-tools 3.0.9-r0]
+install x 1
+install y 2
+install a 1
+install c 1

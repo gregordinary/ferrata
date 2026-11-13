@@ -1,0 +1,23 @@
+[statement]
+A package installed that no repository offers stays: `a` 1.0, which only a
+later version replaces in the repository, is kept.
+
+[repository]
+P:a
+V:2.0-r0
+
+P:b
+V:1.0-r0
+
+[installed]
+P:a
+V:1.0-r0
+
+[world]
+a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 1.0-r0

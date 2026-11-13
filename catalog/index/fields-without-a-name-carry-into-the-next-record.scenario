@@ -1,0 +1,25 @@
+[statement]
+A blank line ends a record only once it has a name. The fields of a part
+without `P:` carry into the record after it: here `after` provides `bad`
+and depends on `dep`, so a request for `bad` installs `after`.
+
+[repository verbatim]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+V:1.0-r0
+p:bad=1
+D:dep
+
+C:Q1BBBBBBBBBBBBBBBBBBBBBBBBBBB=
+P:after
+V:2.0-r0
+
+C:Q1DDDDDDDDDDDDDDDDDDDDDDDDDDD=
+P:dep
+V:1.0-r0
+
+[request]
+bad
+
+[answer apk-tools 3.0.9-r0]
+install dep 1.0-r0
+install after 2.0-r0

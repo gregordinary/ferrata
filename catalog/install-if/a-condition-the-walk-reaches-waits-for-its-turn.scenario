@@ -1,0 +1,56 @@
+[statement]
+Observed; the rule is not yet known. As
+`conditions-a-name-completes-are-taken-in-apk-s-table-order`, with `sa` in
+place of `ra`, which apk's name table holds after `rb`: installing `n`
+completes both conditions, yet apk installs `rb`, then decides `X`, which
+`rb` needs, for `hi`, before it installs `sa`, whose dependency `Y` has
+`lo` alone. ferrata installs both packages at once, and `lo` with `sa`,
+before deciding `X`.
+
+[repository]
+P:top
+V:1
+D:n w v
+
+P:n
+V:1
+
+P:rb
+V:1
+i:n
+D:X
+
+P:sa
+V:1
+i:n
+D:Y
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+P:w
+V:1
+D:X
+
+P:v
+V:1
+D:Y
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install hi 1
+install rb 1
+install lo 1
+install sa 1
+install w 1
+install v 1
+install top 1

@@ -1,0 +1,19 @@
+[statement]
+A package that conflicts with itself competes for a name as any other, and
+is installed only where it ranks first: `e` provides `c` at 2, below `c` 3,
+and apk installs `c` 3
+(`a-package-conflicting-with-itself-is-still-chosen`).
+
+[repository]
+P:c
+V:3
+
+P:e
+V:2
+p:e c=2
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+install c 3

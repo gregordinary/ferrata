@@ -1,0 +1,38 @@
+[statement]
+Observed where the preliminary choices do not settle: `d` 2, the best
+candidate for `d`, needs `f`, whose best candidate `f` 3 forbids `a` and
+needs `v=1`, which nothing provides, and `so:x<2`, which `d` 1 provides,
+beside which `d` 2 cannot be installed, and `c` 3, which needs `a`. apk
+takes `f` 2.
+
+[repository]
+P:f
+V:2
+
+P:d
+V:1
+p:so:x
+
+P:c
+V:3
+k:100
+D:a
+p:so:x
+
+P:a
+V:2
+
+P:f
+V:3
+D:!a v=1 so:x<2
+
+P:d
+V:2
+D:f
+
+[request]
+d
+
+[answer apk-tools 3.0.9-r0]
+install f 2
+install d 2

@@ -1,0 +1,28 @@
+[statement]
+In a package's dependencies, a name with a single candidate is not settled
+before the others: `b` lists `x` first, `x` is decided first, for `p1`,
+though `y`, provided by `p2` alone, then needs `p2` too. Contrast
+`request/a-requested-name-with-one-candidate-is-settled-first`.
+
+[repository]
+P:p1
+V:1
+p:x
+k:100
+
+P:p2
+V:1
+p:x y
+k:10
+
+P:b
+V:1
+D:x y
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install p2 1
+install b 1

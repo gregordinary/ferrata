@@ -1,0 +1,19 @@
+[statement]
+Providers are ranked by the version they provide the name at, not by their
+own: `p1` and `p2` both provide `x` at 1, and `p1`, listed first, is chosen
+though `p2` is version 2.
+
+[repository]
+P:p1
+V:1
+p:x=1
+
+P:p2
+V:2
+p:x=1
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p1 1

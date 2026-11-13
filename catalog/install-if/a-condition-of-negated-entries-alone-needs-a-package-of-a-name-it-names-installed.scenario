@@ -1,0 +1,25 @@
+[statement]
+As `a-condition-of-negated-entries-alone-needs-a-package-it-names`, where
+a package of the name could be installed and is not: `f`'s condition is
+`!a<2`; `a` 3, which provides `d` at no version, is a candidate for `d`
+and passed over for `d` 1, and apk installs `d` alone. Installed at a
+version the entry does not forbid, `a` would complete the condition
+(`install-order/install-if-a-negated-entry-the-package-placed-escapes-triggers`).
+
+[repository]
+P:f
+V:3
+i:!a<2
+
+P:a
+V:3
+p:d
+
+P:d
+V:1
+
+[request]
+d
+
+[answer apk-tools 3.0.9-r0]
+install d 1

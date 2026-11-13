@@ -1,0 +1,20 @@
+[statement]
+A dependency cycle is broken where it closes: the walk from `a` reaches
+the other package, whose dependency on `a`, already being walked, is
+passed over, so the other package is installed first.
+
+[repository]
+P:a
+V:1
+D:b
+
+P:b
+V:1
+D:a
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+install b 1
+install a 1

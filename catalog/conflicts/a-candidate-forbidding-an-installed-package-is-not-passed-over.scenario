@@ -1,0 +1,39 @@
+[statement]
+A candidate whose `!` dependency forbids a package installed already is not
+passed over: `f1`, the one provider of `F`, is installed first, `base` is
+still chosen for `B` over `base2`, and apk refuses.
+
+[repository]
+P:top
+V:1
+D:z B
+
+P:base
+V:1
+k:9
+p:B
+D:!f1
+
+P:base2
+V:1
+k:5
+p:B
+
+P:z
+V:1
+D:F
+
+P:f1
+V:1
+k:100
+p:F
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   f1-1:
+|     breaks: base-1[!f1]
+|     satisfies: z-1[F]
+refused

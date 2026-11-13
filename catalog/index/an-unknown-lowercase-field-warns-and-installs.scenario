@@ -1,0 +1,17 @@
+[statement]
+A field whose lowercase letter apk does not know draws a warning that the
+package might not function properly, and apk installs the package. apk
+knows `a c f g i k m o p q r s t`.
+
+[repository]
+P:app
+V:1.0-r0
+x:1
+g:1
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: This apk-tools is OLD! Some packages might not function properly.
+install app 1.0-r0

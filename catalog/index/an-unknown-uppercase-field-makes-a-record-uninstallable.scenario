@@ -1,0 +1,20 @@
+[statement]
+A field whose letter apk does not know and is not free to pass over, an
+uppercase letter outside `A C D F I L M P R S T U V Z`, a digit, or a symbol,
+makes its record one apk loads and cannot install.
+
+[repository]
+P:app
+V:1.0-r0
+X:1
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: This apk-tools is OLD! Some packages are not installable.
+| ERROR: unable to select packages:
+|   app-1.0-r0:
+|     error: uninstallable
+|     satisfies: world[app]
+refused

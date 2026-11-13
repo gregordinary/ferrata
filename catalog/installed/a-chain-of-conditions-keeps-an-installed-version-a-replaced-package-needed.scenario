@@ -1,0 +1,46 @@
+[statement]
+apk keeps the installed `py` 3.12, and refuses, where the request's `lt` 22
+needs `l22`, which states `py` and then `py~3.14`: the replaced `lt` 21
+needed `py`, the installed `pypyc`'s condition names `py=3.12`, and
+`l22pyc`'s condition names `l22=22` and `pypyc`. Without any one of these,
+or with `l22` stating `py~3.14` alone, apk upgrades `py`. The shape of
+`reduced/llvm-test-utils-is-refused-over-an-installed-python3-pyc`.
+Observed; the rule is not yet known.
+
+[repository]
+P:lt
+V:22
+D:l22
+
+P:l22
+V:22
+D:py py~3.14
+
+P:l22pyc
+V:22
+i:l22=22 pypyc
+
+P:py
+V:3.14
+
+[installed]
+P:py
+V:3.12
+
+P:pypyc
+V:3.12
+i:py=3.12
+
+P:lt
+V:21
+D:py
+
+[request]
+lt>21
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   py-3.12:
+|     breaks: l22-22[py~3.14]
+|     satisfies: l22-22[py]
+refused

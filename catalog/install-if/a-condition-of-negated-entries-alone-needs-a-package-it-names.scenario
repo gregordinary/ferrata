@@ -1,0 +1,38 @@
+[statement]
+A package whose condition is `!` entries alone is not installed where no
+package its condition names is installed: `q` states `!y`, and `y`, which
+`p2` would need, is never installed, since `v` takes `p1`; apk does not
+install `q`. Contrast
+`install-order/install-if-a-negated-entry-the-package-placed-escapes-triggers`,
+where a package of the name is installed at a version the entry does not
+forbid.
+
+[repository]
+P:app
+V:1
+D:v
+
+P:p1
+V:1
+p:v
+k:20
+
+P:p2
+V:1
+p:v
+k:10
+D:y
+
+P:y
+V:1
+
+P:q
+V:1
+i:!y
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install app 1

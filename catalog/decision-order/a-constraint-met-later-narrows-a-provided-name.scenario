@@ -1,0 +1,34 @@
+[statement]
+Requirements are collected before a provided name is decided too: `a`
+requires `v`, `b` requires `v<2`, and `p1`, providing `v` at 1, is installed
+rather than `p2` at 2.
+
+[repository]
+P:app
+V:1
+D:a b
+
+P:a
+V:1
+D:v
+
+P:b
+V:1
+D:v<2
+
+P:p1
+V:1
+p:v=1
+
+P:p2
+V:1
+p:v=2
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install a 1
+install b 1
+install app 1

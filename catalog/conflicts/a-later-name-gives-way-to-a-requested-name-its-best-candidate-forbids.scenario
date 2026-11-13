@@ -1,0 +1,36 @@
+[statement]
+A `!` entry of a later name's best candidate does not steer the choice for
+a name the request names, which that name's entry admits; the later name
+takes its next candidate instead: `b`, requested, takes `b` 2, which
+provides `w`, and `e` 2, the best candidate for `e`, which `top` needs,
+forbids `w`. apk keeps `b` 2 and takes `e` 1. Contrast
+`a-conflict-of-a-later-name-steers-an-earlier-choice`, where the earlier
+name is not requested.
+
+[repository]
+P:b
+V:2
+p:w=2
+
+P:b
+V:1
+
+P:top
+V:1
+D:e
+
+P:e
+V:2
+D:!w
+
+P:e
+V:1
+
+[request]
+b
+top
+
+[answer apk-tools 3.0.9-r0]
+install b 2
+install e 1
+install top 1

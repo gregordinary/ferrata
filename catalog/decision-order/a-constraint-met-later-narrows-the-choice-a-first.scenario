@@ -1,0 +1,32 @@
+[statement]
+apk collects the requirements on a name before deciding it: `a` reaches `lib`
+first, with no constraint, and `b` then requires `lib<2`, and `lib` 1.0 is
+installed, though 2.0 is offered.
+
+[repository]
+P:app
+V:1
+D:a b
+
+P:a
+V:1
+D:lib
+
+P:b
+V:1
+D:lib<2
+
+P:lib
+V:1.0
+
+P:lib
+V:2.0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install lib 1.0
+install a 1
+install b 1
+install app 1

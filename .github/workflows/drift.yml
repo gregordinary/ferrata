@@ -1,0 +1,337 @@
+name: Drift
+
+# What the apk the pinned Alpine release ships answers today, against the apk
+# the dialect was measured against.
+#
+# Its own workflow rather than a job in CI, because it reaches the network on
+# purpose and runs apk.static tens of thousands of times. apk changes when
+# Alpine updates apk-tools inside a stable release, not when a pull request
+# changes this code, so it runs on a schedule and never on a pull request.
+on:
+  schedule:
+    # Weekly, early on a Monday. The cadence is apk's, not the project's.
+    - cron: "41 4 * * 1"
+    # Early on a Thursday, the detect job alone, which restores the cached
+    # pinned keys (see the detect job). GitHub evicts a cache entry not
+    # accessed for seven days, and a weekly run alone leaves it unaccessed
+    # for about as long; a second run in the week keeps it.
+    - cron: "41 4 * * 4"
+  # Started by hand, with `force` to sweep even where the release still ships
+  # the pinned apk: the sweep then measures ferrata against it over today's
+  # indexes.
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Sweep even where the release ships the pinned apk.static
+        type: boolean
+        default: false
+
+env:
+  CARGO_TERM_COLOR: always
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    # Bash with `-eo pipefail`: a step fails where any command of a pipeline
+    # fails, not only its last.
+    shell: bash
+
+jobs:
+  detect:
+    name: The release's apk against the pinned one
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.compare.outputs.changed }}
+      pins: ${{ steps.pins.outputs.key }}
+      pins-path: ${{ steps.pins.outputs.path }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Rust (pinned)
+        run: rustup show
+      - name: Cache the dependency build
+        uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - name: Build the tooling
+        run: cargo build --release -p ferrata-scenario
+      - name: Name the pinned keys' cache entry
+        # Keyed by the pinned keys package's SHA-256, so the entry changes
+        # when that pin moves, and never otherwise.
+        id: pins
+        run: |
+          read -r file digest _ < <(target/release/scenario pins | grep '^alpine-keys-')
+          echo "path=work/packages/$file" >> "$GITHUB_OUTPUT"
+          echo "key=pinned-keys-$digest" >> "$GITHUB_OUTPUT"
+      - name: Restore the pinned keys
+        # A stable release drops a package from its mirror once it moves to a
+        # newer build. The cached keys package keeps the indexes verifiable
+        # where only the keys have moved. apk-tools is GPL-2.0-only, so the
+        # pinned apk-tools-static is never cached: a cache of the default
+        # branch is one a fork's pull request can restore. fetch takes a
+        # package in work/packages only where its SHA-256 is the pin's, and
+        # refuses any other, so a cache entry with other bytes fails closed.
+        id: cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ steps.pins.outputs.path }}
+          key: ${{ steps.pins.outputs.key }}
+      - name: Fetch apk.static, the keys, and the release's indexes
+        # The pinned apk.static and keys are checked against their SHA-256
+        # pins, and the pinned apk verifies each index with the keys as it
+        # loads it. Where the release offers another apk.static, the pinned
+        # apk installs it from the release, which checks it against the
+        # signed index. Where the mirror no longer serves the pinned
+        # apk-tools-static, the release has moved past it: fetch says so, the
+        # job summary repeats it, and the run fails. The two apks are then
+        # compared from a fetched directory that still holds the pinned
+        # package.
+        env:
+          CACHE_HIT: ${{ steps.cache.outputs.cache-hit }}
+        run: |
+          if ! target/release/scenario fetch work --release-apk > fetched.txt 2> fetch-errors.txt; then
+            {
+              echo "## Fetching failed"
+              echo
+              if [ "$CACHE_HIT" != true ]; then
+                echo "The cache held no copy of the pinned keys."
+                echo
+              fi
+              echo '```'
+              cat fetch-errors.txt
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            cat fetch-errors.txt >&2
+            exit 1
+          fi
+          cat fetched.txt
+      - name: Keep the pinned keys
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ steps.pins.outputs.path }}
+          key: ${{ steps.pins.outputs.key }}
+      - name: Compare the apk.static the release offers with the pinned one
+        id: compare
+        run: |
+          {
+            echo "## The release's apk.static"
+            echo
+            echo '```'
+            cat fetched.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ -f work/release/apk.static ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  catalog:
+    name: The catalog's answers under the release's apk
+    needs: detect
+    if: >-
+      github.event.schedule != '41 4 * * 4'
+      && (needs.detect.outputs.changed == 'true' || inputs.force)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Rust (pinned)
+        run: rustup show
+      - name: Cache the dependency build
+        uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - name: Build the tooling
+        run: cargo build --release -p ferrata-scenario
+      - name: Restore the pinned keys
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ needs.detect.outputs.pins-path }}
+          key: ${{ needs.detect.outputs.pins }}
+      - name: Fetch apk.static, the keys, and the release's indexes
+        # Each job fetches for itself: apk-tools is GPL-2.0-only, and neither
+        # apk.static nor its package is published as an artifact. A mirror
+        # updated between two jobs' fetches stamps their results with other
+        # indexes or another apk, which the summary refuses to merge.
+        run: target/release/scenario fetch work --release-apk
+      - name: Choose the apk to ask
+        run: |
+          if [ -f work/release/apk.static ]; then
+            echo "APK=$PWD/work/release/apk.static" >> "$GITHUB_ENV"
+          else
+            echo "APK=$PWD/work/apk.static" >> "$GITHUB_ENV"
+          fi
+      - name: Report each scenario whose answer has changed
+        # `check` fails where any answer changed. That is the finding, not a
+        # reason to stop: the answers are regenerated next.
+        continue-on-error: true
+        run: target/release/scenario check --apk "$APK" catalog > catalog-changes.txt 2>&1
+      - name: Regenerate the catalog's answers
+        # `record` writes every answer apk gives, and names each file it
+        # gave none for; what it says goes into the artifact. The step fails
+        # where a file was not recorded, once the diff is written.
+        run: |
+          status=0
+          find catalog -name '*.scenario' -print0 \
+            | xargs -0 target/release/scenario record --apk "$APK" 2> catalog-record.txt \
+            || status=$?
+          git diff > catalog-answers.diff
+          git diff --stat | tail -n 1
+          exit "$status"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: catalog
+          path: |
+            catalog-changes.txt
+            catalog-record.txt
+            catalog-answers.diff
+
+  sweep:
+    name: Sweep, shard ${{ matrix.shard }} of 8
+    needs: detect
+    if: >-
+      github.event.schedule != '41 4 * * 4'
+      && (needs.detect.outputs.changed == 'true' || inputs.force)
+    runs-on: ubuntu-latest
+    # A shard is an eighth of the release's names, each resolved by both
+    # apks and by ferrata; well inside a hosted job's limit.
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Rust (pinned)
+        run: rustup show
+      - name: Cache the dependency build
+        uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - name: Build the tooling
+        run: cargo build --release -p ferrata-scenario
+      - name: Restore the pinned keys
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ needs.detect.outputs.pins-path }}
+          key: ${{ needs.detect.outputs.pins }}
+      - name: Fetch apk.static, the keys, and the release's indexes
+        # Each job fetches for itself: apk-tools is GPL-2.0-only, and neither
+        # apk.static nor its package is published as an artifact. A mirror
+        # updated between two jobs' fetches stamps their results with other
+        # indexes or another apk, which the summary refuses to merge.
+        run: target/release/scenario fetch work --release-apk
+      - name: Sweep with the pinned apk.static
+        run: |
+          mkdir results
+          target/release/scenario sweep work --shard ${{ matrix.shard }}/8 \
+            -o results/pinned-${{ matrix.shard }}.txt
+      - name: Sweep with the release's apk.static
+        if: hashFiles('work/release/apk.static') != ''
+        run: >-
+          target/release/scenario sweep work --apk work/release/apk.static
+          --shard ${{ matrix.shard }}/8 -o results/release-${{ matrix.shard }}.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        # A sweep that failed leaves no results file, or one cut short, which
+        # the summary names.
+        if: always()
+        with:
+          name: sweep-${{ matrix.shard }}
+          path: results/
+
+  report:
+    name: What changed
+    needs: [detect, catalog, sweep]
+    if: >-
+      always() && github.event.schedule != '41 4 * * 4'
+      && (needs.detect.outputs.changed == 'true' || inputs.force)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Rust (pinned)
+        run: rustup show
+      - name: Cache the dependency build
+        uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      # A job that failed may have left no artifact: the report says which
+      # part is missing rather than stop.
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        continue-on-error: true
+        with:
+          pattern: sweep-*
+          merge-multiple: true
+          path: results
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        continue-on-error: true
+        with:
+          name: catalog
+          path: catalog-report
+      - name: Build the tooling
+        run: cargo build --release -p ferrata-scenario
+      - name: Write the report
+        # The catalog's changed answers; ferrata against the release's apk,
+        # every request whose answers differ; and the requests whose answer
+        # the release's apk gives otherwise than the pinned one, which is the
+        # sweep delta a release of ferrata following it records. A part that
+        # is missing is named, as is a shard missing from a sweep, which the
+        # summary refuses to count without.
+        run: |
+          shopt -s nullglob
+          pinned=(results/pinned-*.txt)
+          release=(results/release-*.txt)
+          after=pinned
+          if [ ${#release[@]} -gt 0 ]; then after=release; fi
+          if [ "$after" = release ]; then afters=("${release[@]}"); else afters=("${pinned[@]}"); fi
+          {
+            echo "# The catalog"
+            if [ -f catalog-report/catalog-changes.txt ]; then
+              cat catalog-report/catalog-changes.txt
+            else
+              echo "Missing: the catalog job left no report of the answers that changed."
+            fi
+            if [ -f catalog-report/catalog-record.txt ]; then
+              grep -v ': recorded$' catalog-report/catalog-record.txt || true
+            else
+              echo "Missing: the catalog job left no record of regenerating the answers."
+            fi
+            echo
+            echo "# Results present"
+            if [ $(( ${#pinned[@]} + ${#release[@]} )) -eq 0 ]; then
+              echo "none"
+            else
+              echo "${pinned[@]}" "${release[@]}"
+            fi
+            echo
+            echo "# ferrata against the $after apk.static"
+            if [ ${#afters[@]} -eq 0 ]; then
+              echo "Missing: no sweep shard left results."
+            else
+              target/release/scenario summary "${afters[@]}" 2>&1 || true
+            fi
+            echo
+            echo "# The $after apk.static against the pinned one"
+            if [ ${#pinned[@]} -eq 0 ] || [ ${#afters[@]} -eq 0 ]; then
+              echo "Missing: no sweep shard left results."
+            else
+              target/release/scenario compare --before "${pinned[@]}" --after "${afters[@]}" 2>&1 || true
+            fi
+          } > report.txt
+          head -c 100000 report.txt >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: report
+          path: report.txt
+      - name: Fail where the release ships another apk
+        # Gates nothing: a failed scheduled run is what tells a maintainer the
+        # release has moved past the dialect's apk, and the report says how
+        # far. The answer is a measurement of the new apk and, where it
+        # resolves otherwise, a release of ferrata that follows it.
+        if: needs.detect.outputs.changed == 'true'
+        run: |
+          echo "The release ships another apk.static than the pinned one; see the report."
+          exit 1

@@ -1,0 +1,98 @@
+[statement]
+Reduced from postmarketOS v26.06 over Alpine v3.24 (`main` and
+`community`, 2026-11-11), asked for `plasma-mobile-meta`; the records it
+keeps are all Alpine's. `webkit2gtk-6.0`, reached through `bluedevil`,
+`obexd` and `evolution-data-server`, needs
+`dbus:org.freedesktop.Secrets`, which `kwallet` and `oo7-server`, of no
+priority, provide at no version; `plasma-workspace` needs `kwallet`
+through `so:libKF6Wallet.so.6`. apk installs `kwallet` alone, where
+ferrata adds `oo7-server`. Observed; the secrets family.
+
+[repository]
+P:iso-codes-lang
+V:4.20.1-r0
+i:lang
+
+[repository]
+P:bluedevil
+V:6.6.6-r0
+D:kded obexd
+
+P:evolution-data-server
+V:3.60.2-r2
+D:so:libwebkitgtk-6.0.so.4
+p:so:libedataserver-1.2.so.27=27.0.0
+
+P:kaccounts-integration
+V:26.04.2-r0
+D:so:libKF6Wallet.so.6
+
+P:kaccounts-integration-lang
+V:26.04.2-r0
+i:kaccounts-integration=26.04.2-r0 lang
+
+P:kded
+V:6.26.0-r0
+D:so:libKF6Service.so.6
+
+P:ki18n
+V:6.26.0-r0
+D:iso-codes-lang
+p:so:libKF6I18n.so.6=6.26.0
+
+P:kservice
+V:6.26.0-r0
+D:so:libKF6I18n.so.6
+p:so:libKF6Service.so.6=6.26.0
+
+P:kwallet
+V:6.26.0-r0
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.26.0
+
+P:obexd-enhanced
+V:5.86-r1
+D:so:libedataserver-1.2.so.27
+p:obexd=5.86-r1
+
+P:oo7-server
+V:0.6.0-r4
+p:dbus:org.freedesktop.Secrets
+
+P:oo7-server-openrc
+V:0.6.0-r4
+D:oo7-server
+i:oo7-server=0.6.0-r4
+
+P:plasma-mobile
+V:6.6.6-r0
+D:plasma-workspace
+
+P:plasma-mobile-meta
+V:6.6.6-r0
+D:bluedevil plasma-mobile
+
+P:plasma-workspace
+V:6.6.6-r0
+D:so:libKF6Wallet.so.6
+
+P:webkit2gtk-6.0
+V:2.48.1-r4
+D:dbus:org.freedesktop.Secrets
+p:so:libwebkitgtk-6.0.so.4=4.11.6
+
+[request]
+plasma-mobile-meta
+
+[answer apk-tools 3.0.9-r0]
+install iso-codes-lang 4.20.1-r0
+install ki18n 6.26.0-r0
+install kservice 6.26.0-r0
+install kded 6.26.0-r0
+install kwallet 6.26.0-r0
+install webkit2gtk-6.0 2.48.1-r4
+install evolution-data-server 3.60.2-r2
+install obexd-enhanced 5.86-r1
+install bluedevil 6.6.6-r0
+install plasma-workspace 6.6.6-r0
+install plasma-mobile 6.6.6-r0
+install plasma-mobile-meta 6.6.6-r0

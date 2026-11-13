@@ -1,0 +1,17 @@
+[statement]
+At one version and one priority, the real `x` and a provider of `x` tie,
+and the record listed first is chosen. Here `p1` is listed first.
+
+[repository]
+P:p1
+V:1
+p:x=1.0
+
+P:x
+V:1.0
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p1 1

@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose something ferrata does not do.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you are trying to resolve, and where ferrata stops you.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you have in mind
+      description: >
+        An API, an apk command or option ferrata does not follow, a series
+        of apk-tools: whatever shape you imagine. A sketch is enough; the
+        shape is discussable.
+  - type: textarea
+    id: material
+    attributes:
+      label: Where it is needed
+      description: >
+        The repositories or releases that need it, and what apk does with
+        them.

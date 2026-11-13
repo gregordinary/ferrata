@@ -1,0 +1,20 @@
+[statement]
+The request is walked in the order of its entries' names, not of the
+packages answering them: the entry `v`, which `aaa` answers, comes after
+the entry `b`.
+
+[repository]
+P:aaa
+V:1
+p:v=1
+
+P:b
+V:1
+
+[request]
+b
+v
+
+[answer apk-tools 3.0.9-r0]
+install b 1
+install aaa 1

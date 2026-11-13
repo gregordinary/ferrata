@@ -1,0 +1,31 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`opencv-dev`. `opencv-dev` depends on `blas-dev` and on `openblas-dev`,
+which provides `blas-dev` at no version; `openblas-dev` is decided first and
+answers `blas-dev`, whose own package is not installed. The rule of
+`decision-order/a-name-a-candidate-carries-is-decided-first`.
+
+[repository]
+C:Q1G2r2fs8sctWpuCAolZEoAMKbBFs=
+P:blas-dev
+V:3.12.1-r1
+A:x86_64
+
+C:Q1ESTZYrE8byHKgnKK+9kKaEkSKPM=
+P:openblas-dev
+V:0.3.30-r2
+A:x86_64
+p:blas-dev
+
+C:Q18fegdux38AcAV3XCGFFvCaEm324=
+P:opencv-dev
+V:4.12.0-r7
+A:x86_64
+D:blas-dev openblas-dev
+
+[request]
+opencv-dev
+
+[answer apk-tools 3.0.9-r0]
+install openblas-dev 0.3.30-r2
+install opencv-dev 4.12.0-r7

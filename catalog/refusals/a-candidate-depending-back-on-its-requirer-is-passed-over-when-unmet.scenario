@@ -1,0 +1,26 @@
+[statement]
+A candidate whose dependency cannot be met is passed over where it also
+depends on the package that requires it: `c` needs `e`, `e` 2 needs `c`
+and `a`, which nothing provides, and apk installs `e` 1. Without the
+dependency on `c`, apk refuses
+(`refusals/a-candidate-whose-dependency-cannot-be-met-is-not-passed-over`)
+.
+
+[repository]
+P:c
+V:3
+D:e
+
+P:e
+V:2
+D:c a
+
+P:e
+V:1
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+install e 1
+install c 3

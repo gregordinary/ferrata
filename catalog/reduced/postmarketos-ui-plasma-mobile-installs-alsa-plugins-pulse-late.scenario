@@ -1,0 +1,85 @@
+[statement]
+Reduced from postmarketOS v26.06 over Alpine v3.24 (`main` and
+`community`, 2026-11-11), asked for `postmarketos-ui-plasma-mobile`;
+postmarketOS's repository first. `alsa-plugins-pulse` is needed by
+`postmarketos-base-ui-audio-backend-pulseaudio`, and its condition,
+`pulseaudio-alsa !pipewire`, does not hold, `pipewire` being installed.
+apk installs it just before the package needing it, after `plasma-mobile`,
+where ferrata installs it with `libpulse`, before `libcanberra-pulse`,
+whose condition holds: placing `pulseaudio-alsa` does not trigger it,
+since its condition's `!pipewire` forbids `pipewire`, placed already
+(`install-order/a-condition-a-package-reached-forbids-is-not-walked-there`).
+
+[repository]
+P:postmarketos-base-ui-audio-backend-pulseaudio
+V:51-r0
+D:alsa-plugins-pulse
+p:postmarketos-base-ui-audio-backend=51-r0
+
+P:postmarketos-base-ui-plasma
+V:2-r24
+D:postmarketos-base-ui-audio
+
+P:postmarketos-base-ui-audio
+V:51-r0
+D:postmarketos-base-ui-audio-backend
+
+P:postmarketos-ui-plasma-mobile
+V:6-r11
+D:plasma-mobile postmarketos-base-ui-plasma
+
+[repository]
+P:alsa-plugins-pulse
+V:1.2.12-r2
+D:so:libpulse.so.0
+i:pulseaudio-alsa !pipewire
+
+P:kpipewire
+V:6.6.6.1-r0
+D:pipewire
+
+P:libcanberra-pulse
+V:0.30-r12
+D:so:libpulse.so.0
+i:pulseaudio
+
+P:libpulse
+V:17.0-r7
+p:so:libpulse.so.0=0.24.3
+
+P:pipewire
+V:1.6.8-r4
+
+P:plasma-mobile
+V:6.6.6-r0
+D:kpipewire plasma-pa
+
+P:plasma-pa
+V:6.6.6-r0
+D:pulseaudio
+
+P:pulseaudio
+V:17.0-r7
+
+P:pulseaudio-alsa
+V:17.0-r7
+p:so:module-alsa-sink.so=0
+i:pulseaudio=17.0-r7
+
+[request]
+postmarketos-ui-plasma-mobile
+
+[answer apk-tools 3.0.9-r0]
+install pipewire 1.6.8-r4
+install kpipewire 6.6.6.1-r0
+install pulseaudio 17.0-r7
+install pulseaudio-alsa 17.0-r7
+install libpulse 17.0-r7
+install libcanberra-pulse 0.30-r12
+install plasma-pa 6.6.6-r0
+install plasma-mobile 6.6.6-r0
+install alsa-plugins-pulse 1.2.12-r2
+install postmarketos-base-ui-audio-backend-pulseaudio 51-r0
+install postmarketos-base-ui-audio 51-r0
+install postmarketos-base-ui-plasma 2-r24
+install postmarketos-ui-plasma-mobile 6-r11

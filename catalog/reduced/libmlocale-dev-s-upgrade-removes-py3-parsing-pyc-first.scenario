@@ -1,0 +1,40 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `libmlocale-dev`'s closure from v3.23 installed and asked at
+a later version. Nothing installed is in the world. apk removes
+`py3-parsing-pyc`, installed for its condition on `pyc`, and `pyc` before
+`at-spi2-core`, which the installed database lists before
+`py3-parsing-pyc`, and `libxtst`, which `at-spi2-core` needs through a
+name it provides at a version, last: `pyc`, first in the database, pulls
+`py3-parsing-pyc`, which needs it through its condition
+(`installed/a-removal-waiting-on-removals-pulls-them-first`).
+
+[repository]
+P:libmlocale-dev
+V:0.8.3-r0
+
+[installed]
+P:pyc
+V:3.12.16-r0
+
+P:libxtst
+V:1.2.5-r0
+p:so:libXtst.so.6=6.1.0
+
+P:at-spi2-core
+V:2.58.3-r0
+D:so:libXtst.so.6
+
+P:py3-parsing-pyc
+V:3.2.5-r0
+i:pyc
+
+[request]
+libmlocale-dev>0.7.4-r10
+
+[answer apk-tools 3.0.9-r0]
+remove py3-parsing-pyc 3.2.5-r0
+remove pyc 3.12.16-r0
+remove at-spi2-core 2.58.3-r0
+install libmlocale-dev 0.8.3-r0
+remove libxtst 1.2.5-r0

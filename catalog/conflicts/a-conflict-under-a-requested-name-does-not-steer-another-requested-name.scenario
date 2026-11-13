@@ -1,0 +1,33 @@
+[statement]
+Observed; the rule is not yet known. `f` and `b` are requested; `f` 3
+needs `d`, whose one candidate, `d` 2, forbids `v`, which `b` 3, the best
+candidate for `b`, provides. apk takes `b` 3 for `b` and refuses, where a
+conflict of a later name steers an earlier choice for a name packages
+only provide (`a-conflict-of-a-later-name-steers-an-earlier-choice`).
+
+[repository]
+P:f
+V:3
+D:d
+
+P:d
+V:2
+D:!v
+
+P:b
+V:1
+
+P:b
+V:3
+p:v
+
+[request]
+f
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   b-3:
+|     breaks: d-2[!v]
+|     satisfies: world[b]
+refused

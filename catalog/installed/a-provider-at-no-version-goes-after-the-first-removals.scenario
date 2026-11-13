@@ -1,0 +1,30 @@
+[statement]
+A package needed through a name it provides at no version does not follow
+the package that needed it at once: `w`, which `y` needs by its own name,
+follows `y`; `x`, which provides `v`, goes after the first removals, before
+the packages installed.
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:x
+V:1
+p:v
+
+P:w
+V:1
+
+P:y
+V:1
+D:v w
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove y 1
+remove w 1
+remove x 1
+install b 1

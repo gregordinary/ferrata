@@ -1,0 +1,17 @@
+[statement]
+An `install_if` entry with a version constraint is met only by a package
+at a version it admits: `base` is 2.0, and `extra` asks for `base=1.0`.
+
+[repository]
+P:base
+V:2.0
+
+P:extra
+V:1.0
+i:base=1.0
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 2.0

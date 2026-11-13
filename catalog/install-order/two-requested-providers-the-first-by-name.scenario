@@ -1,0 +1,27 @@
+[statement]
+Where several packages requested provide a name a dependency states, the
+walk follows the first of them in the order of names: `bp` before `a`,
+`zp` after it.
+
+[repository]
+P:a
+V:1
+D:v
+
+P:zp
+V:1
+p:v
+
+P:bp
+V:1
+p:v
+
+[request]
+a
+bp
+zp
+
+[answer apk-tools 3.0.9-r0]
+install bp 1
+install a 1
+install zp 1

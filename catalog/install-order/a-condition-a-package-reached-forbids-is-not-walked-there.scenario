@@ -1,0 +1,49 @@
+[statement]
+A package whose condition's `!` entry forbids a package the walk has
+reached, placed or still being walked, is not walked where the placement
+of a package its condition names triggers it: placing `pa` would trigger
+`plug`, whose condition is `pa !pw`, but `pw`, which needs `pa`, is being
+walked. `plug` is placed where `need` reaches it, after `x` and `y`.
+
+[repository]
+P:app
+V:1
+D:pw x y need
+
+P:pw
+V:1
+D:pa
+
+P:pa
+V:1
+
+P:x
+V:1
+
+P:y
+V:1
+
+P:plug
+V:1
+D:lib
+i:pa !pw
+
+P:lib
+V:1
+
+P:need
+V:1
+D:plug
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install pa 1
+install pw 1
+install x 1
+install y 1
+install lib 1
+install plug 1
+install need 1
+install app 1

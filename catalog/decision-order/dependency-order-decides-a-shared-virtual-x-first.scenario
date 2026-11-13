@@ -1,0 +1,27 @@
+[statement]
+The same repository as `dependency-order-decides-a-shared-virtual-y-first`, with
+`b` listing `x` before `y`. Now `x` is decided first, by priority, for `p1`,
+and `y` still needs `p2`: both are installed.
+
+[repository]
+P:b
+V:1.0-r0
+D:x y
+
+P:p1
+V:1.0-r0
+p:x
+k:100
+
+P:p2
+V:1.0-r0
+p:x y=1
+k:10
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install p1 1.0-r0
+install p2 1.0-r0
+install b 1.0-r0

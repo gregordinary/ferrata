@@ -1,0 +1,29 @@
+[statement]
+A world entry naming a package's identity holds that package: `foo`, which
+needs `a>=2`, is refused.
+
+[repository]
+P:a
+V:2.0-r0
+
+P:foo
+V:1.0-r0
+D:a>=2
+
+[installed]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:a
+V:1.0-r0
+
+[world]
+a><Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+
+[request]
+foo
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-1.0-r0:
+|     breaks: foo-1.0-r0[a>=2]
+|     satisfies: world[a><Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=]
+refused

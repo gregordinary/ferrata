@@ -1,0 +1,38 @@
+[statement]
+As `a-condition-forbidding-a-name-the-package-provides-at-no-version-holds`,
+the condition holds only once nothing else is left to decide: the `!`
+entry admits the package itself, which could still be installed, and
+waits for it as for any package it names
+(`a-negated-entry-waits-for-the-package-it-names`). `c` needs `e`, and
+`e` needs `w`; `s` provides `pv` and `w` at no version, its condition is
+`c` and `!pv`, and `wb` provides `w` with a priority. apk decides `w`
+first, installing `wb`, and installs `s` after it. Without the `!` entry,
+`s` is installed for its condition at once, and answers `w`.
+
+[repository]
+P:c
+V:2
+D:e
+
+P:e
+V:2
+D:w
+
+P:s
+V:1
+p:pv w
+i:c !pv
+
+P:wb
+V:1
+k:1
+p:w
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+install wb 1
+install e 2
+install c 2
+install s 1

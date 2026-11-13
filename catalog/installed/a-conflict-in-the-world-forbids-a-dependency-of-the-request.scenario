@@ -1,0 +1,33 @@
+[statement]
+A `!` entry in the world forbids what a requested package depends on, as
+one in the request does: the world states `!lib`, `app` needs `lib`, and
+apk refuses.
+
+[repository]
+P:app
+V:1
+D:lib
+
+P:lib
+V:1
+
+P:base
+V:1
+
+[installed]
+P:base
+V:1
+
+[world]
+base
+!lib
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   lib-1:
+|     breaks: world[!lib]
+|     satisfies: app-1[lib]
+refused

@@ -1,0 +1,57 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`lua-resty-dns`. `nginx-mod-http-lua` needs `nginx=1.30.6-r0` and
+`nginx-mod-devel-kit`. `openresty-mod-devel-kit` provides
+`nginx-mod-devel-kit` at a later version than the real package, but needs
+`openresty`, which provides `nginx` at no version: the requirement on `nginx`
+binds it, so `openresty` is ruled out, and with it `openresty-mod-devel-kit`.
+The rules of `providers/a-requirement-binds-a-provider-at-no-version` and
+`decision-order/a-candidate-needing-only-ruled-out-packages-is-passed-over`.
+(`so:libz.so.1`, which nothing here provides, is kept from the reduction.)
+
+[repository]
+C:Q1jZNX/9SwPHZpnL9hEkE12+VZjOs=
+P:nginx
+V:1.30.6-r0
+A:x86_64
+
+C:Q1K+pd9+174ot5QFJpb4I28lSwMaw=
+P:nginx-mod-devel-kit
+V:1.30.6-r0
+A:x86_64
+
+C:Q1P5fnBagWXAtz1pRKn76coFMFoM0=
+P:nginx-mod-http-lua
+V:1.30.6-r0
+A:x86_64
+D:nginx=1.30.6-r0 nginx-mod-devel-kit
+
+[repository]
+C:Q1nEikp+Rrx+omdovrXAkRn0Uqu9Q=
+P:lua-resty-dns
+V:0.18-r3
+A:x86_64
+D:nginx-mod-http-lua
+
+C:Q1dG5f5VQFF+n/3shNANrfMrfLRps=
+P:openresty
+V:1.31.1.1-r0
+A:x86_64
+D:so:libz.so.1
+p:nginx
+
+C:Q1aOM2dDxUpmM4nxaw225oaN2/qUQ=
+P:openresty-mod-devel-kit
+V:1.31.1.1-r0
+A:x86_64
+D:openresty
+p:nginx-mod-devel-kit=1.31.1.1-r0
+
+[request]
+lua-resty-dns
+
+[answer apk-tools 3.0.9-r0]
+install nginx 1.30.6-r0
+install nginx-mod-devel-kit 1.30.6-r0
+install nginx-mod-http-lua 1.30.6-r0
+install lua-resty-dns 0.18-r3

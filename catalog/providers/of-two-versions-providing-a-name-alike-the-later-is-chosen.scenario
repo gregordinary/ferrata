@@ -1,0 +1,20 @@
+[statement]
+Of two versions of one package providing a name at one version, apk
+installs the later, whatever their priorities: `c` 3 provides `w` at 3 as
+`c` 1 does with a priority of 100, and `c` 3 is installed for `w`.
+
+[repository]
+P:c
+V:3
+p:w=3
+
+P:c
+V:1
+k:100
+p:w=3
+
+[request]
+w
+
+[answer apk-tools 3.0.9-r0]
+install c 3

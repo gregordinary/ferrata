@@ -1,0 +1,55 @@
+[statement]
+Observed; the rule is not yet known. Reduced from Alpine v3.24 (`main` and
+`community`, 2026-11-08), asked for `mpv-dev`. `so:libjack.so.0`, which
+`mpv-libs` needs, is reached before `pc:jack`, and `jack` provides it at the
+later version, yet apk installs `pipewire-jack` for it: `pipewire-jack-dev`,
+the best candidate for `pc:jack`, needs `pipewire-jack`. The shape of
+`decision-order/a-later-name-whose-best-candidate-needs-a-candidate-steers-
+an-earlier-one`.
+
+[repository]
+C:Q19zwN+je70M4rfsA23hIMGkR4+Bs=
+P:jack
+V:1.9.22-r4
+A:x86_64
+p:so:libjack.so.0=0.999.0
+
+C:Q1cdeSrLS4OKL650VNWf6qbJEdCLA=
+P:jack-dev
+V:1.9.22-r4
+A:x86_64
+p:pc:jack=1.9.22
+
+C:Q1txC19LPiZMMQtiyfXvZmjIciYcM=
+P:mpv-dev
+V:0.41.0-r2
+A:x86_64
+D:mpv-libs=0.41.0-r2 pc:jack
+
+C:Q1s/KHw/T3Ej/1JrGFi6RN07VXJys=
+P:mpv-libs
+V:0.41.0-r2
+A:x86_64
+D:so:libjack.so.0
+
+C:Q1VwqRcYIK68+t1SIwBRNEAS/fM6c=
+P:pipewire-jack
+V:1.6.8-r4
+A:x86_64
+p:so:libjack.so.0=0.3.1608
+
+C:Q16F3p4HUNuAhbCtXy8uFTdEQCS58=
+P:pipewire-jack-dev
+V:1.6.8-r4
+A:x86_64
+D:pipewire-jack=1.6.8-r4
+p:pc:jack=3.1608.0
+
+[request]
+mpv-dev
+
+[answer apk-tools 3.0.9-r0]
+install pipewire-jack 1.6.8-r4
+install mpv-libs 0.41.0-r2
+install pipewire-jack-dev 1.6.8-r4
+install mpv-dev 0.41.0-r2

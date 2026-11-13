@@ -1,0 +1,29 @@
+[statement]
+A package whose condition names its own name is not chosen for its turn
+by being chosen for that name: `b` 3, the best candidate for `b`, has the
+condition `b` and needs `v`, which only `b` 2 provides. Its condition
+steers nothing, `b` takes `b` 3, and apk refuses, as it does without the
+condition.
+
+[repository]
+P:b
+V:2
+p:v=2
+
+P:b
+V:3
+D:v
+i:b
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   b-2:
+|     conflicts: b-3
+|     satisfies: world[b] b-3[v]
+|   b-3:
+|     conflicts: b-2
+|     satisfies: world[b]
+refused

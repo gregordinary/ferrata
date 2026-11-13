@@ -1,0 +1,17 @@
+[statement]
+The later version is installed whichever repository offers it: here the
+second.
+
+[repository]
+P:foo
+V:1.0
+
+[repository]
+P:foo
+V:2.0
+
+[request]
+foo
+
+[answer apk-tools 3.0.9-r0]
+install foo 2.0

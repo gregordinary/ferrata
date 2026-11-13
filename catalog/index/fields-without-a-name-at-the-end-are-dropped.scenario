@@ -1,0 +1,22 @@
+[statement]
+As `fields-without-a-name-carry-into-the-next-record`, with the part
+without `P:` last: there is no record for it to carry into, and it is
+dropped.
+
+[repository verbatim]
+C:Q1BBBBBBBBBBBBBBBBBBBBBBBBBBB=
+P:before
+V:2.0-r0
+
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+V:1.0-r0
+p:bad=1
+
+[request]
+bad
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   bad (no such package):
+|     required by: world[bad]
+refused

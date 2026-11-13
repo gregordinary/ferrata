@@ -1,0 +1,36 @@
+[statement]
+A dependency's best candidate that forbids the choice needing it does not
+steer that choice: the dependency takes its next candidate instead.
+`top` needs `b`, whose best candidate `b` 2 needs `e` and provides `w`,
+and `e` 2, the best candidate for `e`, forbids `w`. apk keeps `b` 2 and
+takes `e` 1. Contrast `a-conflict-of-a-later-name-steers-an-earlier-choice`,
+where the forbidden choice does not need the later name.
+
+[repository]
+P:top
+V:1
+D:b
+
+P:b
+V:2
+D:e
+p:w=2
+
+P:b
+V:1
+D:e
+
+P:e
+V:2
+D:!w
+
+P:e
+V:1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install e 1
+install b 2
+install top 1

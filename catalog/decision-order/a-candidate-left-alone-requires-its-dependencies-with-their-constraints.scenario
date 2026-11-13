@@ -1,0 +1,44 @@
+[statement]
+A name whose other candidates are ruled out requires what the one left
+depends on with the constraints it states, as a name with a single
+candidate from the start does
+(`a-sole-candidate-s-dependency-is-required-with-its-constraint`): `pc:g`
+has two candidates, which share `g`, and `sv`, whose one candidate needs
+`pc:g>=4`, rules out `gd` 3. `gd` 4 is then the only one, and its
+`g=4` is required before `g` is decided; apk installs `g` 4, though `g` 5
+is offered.
+
+[repository]
+P:g
+V:4
+
+P:g
+V:5
+
+P:gd
+V:3
+D:g
+p:pc:g=3
+
+P:gd
+V:4
+D:g=4
+p:pc:g=4
+
+P:sv
+V:7
+D:pc:g>=4
+p:pc:sv=7
+
+P:t
+V:1
+D:sv pc:g>=3 pc:sv>=6
+
+[request]
+t
+
+[answer apk-tools 3.0.9-r0]
+install g 4
+install gd 4
+install sv 7
+install t 1

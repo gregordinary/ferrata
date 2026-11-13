@@ -1,0 +1,35 @@
+[statement]
+Observed where the preliminary choices do not settle: `e` 3, the one
+candidate for `so:x`, needs `a`, whose best candidate `a` 3 provides `w`
+and needs `d`, whose one candidate `d` 3 forbids `w`. apk takes `a` 2.
+
+[repository]
+P:a
+V:3
+D:d
+p:w
+
+P:a
+V:2
+p:v
+
+P:e
+V:3
+D:a
+p:so:x=2
+
+P:d
+V:3
+D:!w
+
+P:b
+V:2
+p:v
+
+[request]
+v
+so:x
+
+[answer apk-tools 3.0.9-r0]
+install a 2
+install e 3

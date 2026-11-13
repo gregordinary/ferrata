@@ -1,0 +1,32 @@
+[statement]
+A package installed providing a name at no version, without a priority, is
+not chosen for it any more than one in a repository: the world's `v` is
+refused.
+
+[repository]
+P:r
+V:1
+p:w
+
+P:b
+V:1
+
+[installed]
+P:q
+V:1
+p:v
+
+[world]
+v
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   v (virtual):
+|     note: please select one of the 'provided by'
+|           packages explicitly
+|     provided by: q
+|     required by: world[v]
+refused

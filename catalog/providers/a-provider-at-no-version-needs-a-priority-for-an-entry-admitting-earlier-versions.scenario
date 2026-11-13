@@ -1,0 +1,22 @@
+[statement]
+A provider at no version answers an entry admitting earlier versions only
+as it answers the name alone: with a priority. `a` provides `v` at no
+version and states none, and apk refuses `v<3`, as it refuses `v`
+(`a-provider-at-no-version-answers-an-entry-admitting-earlier-versions`).
+
+[repository]
+P:a
+V:1
+p:v
+
+[request]
+v<3
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   v (virtual):
+|     note: please select one of the 'provided by'
+|           packages explicitly
+|     provided by: a
+|     required by: world[v<3]
+refused

@@ -1,0 +1,16 @@
+[statement]
+A carriage return before the line feed is part of the value: this record
+is named `app<CR>`, and nothing named `app` is offered.
+
+[repository]
+P:app
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   app (no such package):
+|     required by: world[app]
+refused

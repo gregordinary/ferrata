@@ -1,0 +1,21 @@
+[statement]
+A versioned `!` dependency rules out the versions it admits, and an older
+one answers the dependency instead: `app` needs `x` and forbids `x>=2`.
+
+[repository]
+P:app
+V:1
+D:!x>=2 x
+
+P:x
+V:1.0
+
+P:x
+V:2.0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install x 1.0
+install app 1

@@ -1,0 +1,615 @@
+pub mod ferrata
+pub mod ferrata::dependency
+#[non_exhaustive] pub enum ferrata::dependency::DependencyErrorKind
+pub ferrata::dependency::DependencyErrorKind::NoName
+pub ferrata::dependency::DependencyErrorKind::Separator
+pub ferrata::dependency::DependencyErrorKind::Tag
+pub ferrata::dependency::DependencyErrorKind::Truncated
+pub ferrata::dependency::DependencyErrorKind::Version(ferrata::version::VersionErrorKind)
+impl core::fmt::Display for ferrata::dependency::DependencyErrorKind
+pub fn ferrata::dependency::DependencyErrorKind::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::dependency::DependencyErrorKind
+impl core::marker::Send for ferrata::dependency::DependencyErrorKind
+impl core::marker::Sync for ferrata::dependency::DependencyErrorKind
+impl core::marker::Unpin for ferrata::dependency::DependencyErrorKind
+impl core::marker::UnsafeUnpin for ferrata::dependency::DependencyErrorKind
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dependency::DependencyErrorKind
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dependency::DependencyErrorKind
+pub struct ferrata::dependency::Dependency
+impl ferrata::dependency::Dependency
+pub fn ferrata::dependency::Dependency::admits(&self, &ferrata::version::Version) -> bool
+pub fn ferrata::dependency::Dependency::admits_no_version(&self) -> bool
+pub fn ferrata::dependency::Dependency::dialect(&self) -> ferrata::dialect::Dialect
+pub fn ferrata::dependency::Dependency::identity(&self) -> core::option::Option<&[u8]>
+pub fn ferrata::dependency::Dependency::is_conflict(&self) -> bool
+pub fn ferrata::dependency::Dependency::name(&self) -> &ferrata::Name
+pub fn ferrata::dependency::Dependency::to_bytes(&self) -> alloc::vec::Vec<u8>
+impl core::fmt::Display for ferrata::dependency::Dependency
+pub fn ferrata::dependency::Dependency::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::iter::traits::collect::Extend<ferrata::dependency::Dependency> for ferrata::resolve::Request
+pub fn ferrata::resolve::Request::extend<I: core::iter::traits::collect::IntoIterator<Item = ferrata::dependency::Dependency>>(&mut self, I)
+impl core::iter::traits::collect::FromIterator<ferrata::dependency::Dependency> for ferrata::resolve::Request
+pub fn ferrata::resolve::Request::from_iter<I: core::iter::traits::collect::IntoIterator<Item = ferrata::dependency::Dependency>>(I) -> ferrata::resolve::Request
+impl core::marker::Freeze for ferrata::dependency::Dependency
+impl core::marker::Send for ferrata::dependency::Dependency
+impl core::marker::Sync for ferrata::dependency::Dependency
+impl core::marker::Unpin for ferrata::dependency::Dependency
+impl core::marker::UnsafeUnpin for ferrata::dependency::Dependency
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dependency::Dependency
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dependency::Dependency
+pub struct ferrata::dependency::DependencyError
+impl ferrata::dependency::DependencyError
+pub fn ferrata::dependency::DependencyError::kind(&self) -> ferrata::dependency::DependencyErrorKind
+pub fn ferrata::dependency::DependencyError::offset(&self) -> usize
+impl core::error::Error for ferrata::dependency::DependencyError
+impl core::fmt::Display for ferrata::dependency::DependencyError
+pub fn ferrata::dependency::DependencyError::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::dependency::DependencyError
+impl core::marker::Send for ferrata::dependency::DependencyError
+impl core::marker::Sync for ferrata::dependency::DependencyError
+impl core::marker::Unpin for ferrata::dependency::DependencyError
+impl core::marker::UnsafeUnpin for ferrata::dependency::DependencyError
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dependency::DependencyError
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dependency::DependencyError
+pub mod ferrata::dialect
+#[non_exhaustive] pub enum ferrata::dialect::Dialect
+pub ferrata::dialect::Dialect::V3_0
+impl ferrata::dialect::Dialect
+pub fn ferrata::dialect::Dialect::dependency(self, impl core::convert::AsRef<[u8]>) -> core::result::Result<ferrata::dependency::Dependency, ferrata::dependency::DependencyError>
+pub fn ferrata::dialect::Dialect::for_release<'r>(impl core::iter::traits::collect::IntoIterator<Item = &'r ferrata::record::Record>) -> core::result::Result<ferrata::dialect::Selection, ferrata::dialect::DialectError>
+pub const fn ferrata::dialect::Dialect::measured_against(self) -> &'static str
+pub fn ferrata::dialect::Dialect::recorded_version(self, impl core::convert::AsRef<[u8]>) -> ferrata::version::Version
+pub fn ferrata::dialect::Dialect::version(self, impl core::convert::AsRef<[u8]>) -> core::result::Result<ferrata::version::Version, ferrata::version::VersionError>
+impl core::marker::Freeze for ferrata::dialect::Dialect
+impl core::marker::Send for ferrata::dialect::Dialect
+impl core::marker::Sync for ferrata::dialect::Dialect
+impl core::marker::Unpin for ferrata::dialect::Dialect
+impl core::marker::UnsafeUnpin for ferrata::dialect::Dialect
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dialect::Dialect
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dialect::Dialect
+#[non_exhaustive] pub enum ferrata::dialect::DialectErrorKind
+pub ferrata::dialect::DialectErrorKind::NoApkTools
+pub ferrata::dialect::DialectErrorKind::NoDialect
+impl core::fmt::Display for ferrata::dialect::DialectErrorKind
+pub fn ferrata::dialect::DialectErrorKind::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::dialect::DialectErrorKind
+impl core::marker::Send for ferrata::dialect::DialectErrorKind
+impl core::marker::Sync for ferrata::dialect::DialectErrorKind
+impl core::marker::Unpin for ferrata::dialect::DialectErrorKind
+impl core::marker::UnsafeUnpin for ferrata::dialect::DialectErrorKind
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dialect::DialectErrorKind
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dialect::DialectErrorKind
+pub struct ferrata::dialect::DialectError
+impl ferrata::dialect::DialectError
+pub fn ferrata::dialect::DialectError::apk_tools(&self) -> core::option::Option<&ferrata::version::Version>
+pub fn ferrata::dialect::DialectError::kind(&self) -> ferrata::dialect::DialectErrorKind
+impl core::error::Error for ferrata::dialect::DialectError
+impl core::fmt::Display for ferrata::dialect::DialectError
+pub fn ferrata::dialect::DialectError::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::dialect::DialectError
+impl core::marker::Send for ferrata::dialect::DialectError
+impl core::marker::Sync for ferrata::dialect::DialectError
+impl core::marker::Unpin for ferrata::dialect::DialectError
+impl core::marker::UnsafeUnpin for ferrata::dialect::DialectError
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dialect::DialectError
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dialect::DialectError
+pub struct ferrata::dialect::Selection
+impl ferrata::dialect::Selection
+pub fn ferrata::dialect::Selection::apk_tools(&self) -> &ferrata::version::Version
+pub fn ferrata::dialect::Selection::dialect(&self) -> ferrata::dialect::Dialect
+pub fn ferrata::dialect::Selection::is_measured(&self) -> bool
+impl core::marker::Freeze for ferrata::dialect::Selection
+impl core::marker::Send for ferrata::dialect::Selection
+impl core::marker::Sync for ferrata::dialect::Selection
+impl core::marker::Unpin for ferrata::dialect::Selection
+impl core::marker::UnsafeUnpin for ferrata::dialect::Selection
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dialect::Selection
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dialect::Selection
+pub mod ferrata::index
+#[non_exhaustive] pub enum ferrata::index::ReadErrorKind
+pub ferrata::index::ReadErrorKind::Identity
+pub ferrata::index::ReadErrorKind::NoIdentity
+pub ferrata::index::ReadErrorKind::NoName
+pub ferrata::index::ReadErrorKind::NoVersion
+pub ferrata::index::ReadErrorKind::NotAField
+impl core::fmt::Display for ferrata::index::ReadErrorKind
+pub fn ferrata::index::ReadErrorKind::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::index::ReadErrorKind
+impl core::marker::Send for ferrata::index::ReadErrorKind
+impl core::marker::Sync for ferrata::index::ReadErrorKind
+impl core::marker::Unpin for ferrata::index::ReadErrorKind
+impl core::marker::UnsafeUnpin for ferrata::index::ReadErrorKind
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::index::ReadErrorKind
+impl core::panic::unwind_safe::UnwindSafe for ferrata::index::ReadErrorKind
+pub struct ferrata::index::Located
+impl ferrata::index::Located
+pub fn ferrata::index::Located::into_record(self) -> ferrata::record::Record
+pub fn ferrata::index::Located::line(&self) -> usize
+pub fn ferrata::index::Located::record(&self) -> &ferrata::record::Record
+pub fn ferrata::index::Located::span(&self) -> core::ops::range::Range<usize>
+impl core::marker::Freeze for ferrata::index::Located
+impl core::marker::Send for ferrata::index::Located
+impl core::marker::Sync for ferrata::index::Located
+impl core::marker::Unpin for ferrata::index::Located
+impl core::marker::UnsafeUnpin for ferrata::index::Located
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::index::Located
+impl core::panic::unwind_safe::UnwindSafe for ferrata::index::Located
+pub struct ferrata::index::ReadError
+impl ferrata::index::ReadError
+pub fn ferrata::index::ReadError::kind(&self) -> ferrata::index::ReadErrorKind
+pub fn ferrata::index::ReadError::line(&self) -> usize
+pub fn ferrata::index::ReadError::record_line(&self) -> usize
+impl core::error::Error for ferrata::index::ReadError
+impl core::fmt::Display for ferrata::index::ReadError
+pub fn ferrata::index::ReadError::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::index::ReadError
+impl core::marker::Send for ferrata::index::ReadError
+impl core::marker::Sync for ferrata::index::ReadError
+impl core::marker::Unpin for ferrata::index::ReadError
+impl core::marker::UnsafeUnpin for ferrata::index::ReadError
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::index::ReadError
+impl core::panic::unwind_safe::UnwindSafe for ferrata::index::ReadError
+pub struct ferrata::index::Records<'a>
+impl core::iter::traits::iterator::Iterator for ferrata::index::Records<'_>
+pub type ferrata::index::Records<'_>::Item = core::result::Result<ferrata::index::Located, ferrata::index::ReadError>
+pub fn ferrata::index::Records<'_>::next(&mut self) -> core::option::Option<Self::Item>
+impl core::iter::traits::marker::FusedIterator for ferrata::index::Records<'_>
+impl<'a> core::marker::Freeze for ferrata::index::Records<'a>
+impl<'a> core::marker::Send for ferrata::index::Records<'a>
+impl<'a> core::marker::Sync for ferrata::index::Records<'a>
+impl<'a> core::marker::Unpin for ferrata::index::Records<'a>
+impl<'a> core::marker::UnsafeUnpin for ferrata::index::Records<'a>
+impl<'a> core::panic::unwind_safe::RefUnwindSafe for ferrata::index::Records<'a>
+impl<'a> core::panic::unwind_safe::UnwindSafe for ferrata::index::Records<'a>
+pub fn ferrata::index::read(ferrata::dialect::Dialect, &impl core::convert::AsRef<[u8]> + ?core::marker::Sized) -> ferrata::index::Records<'_>
+pub fn ferrata::index::read_installed(ferrata::dialect::Dialect, &impl core::convert::AsRef<[u8]> + ?core::marker::Sized) -> ferrata::index::Records<'_>
+pub mod ferrata::record
+#[non_exhaustive] pub enum ferrata::record::Flaw
+pub ferrata::record::Flaw::Depends(ferrata::dependency::DependencyError)
+pub ferrata::record::Flaw::InstallIf(ferrata::dependency::DependencyError)
+pub ferrata::record::Flaw::Provides
+pub ferrata::record::Flaw::UnknownField(u8)
+impl core::fmt::Display for ferrata::record::Flaw
+pub fn ferrata::record::Flaw::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::record::Flaw
+impl core::marker::Send for ferrata::record::Flaw
+impl core::marker::Sync for ferrata::record::Flaw
+impl core::marker::Unpin for ferrata::record::Flaw
+impl core::marker::UnsafeUnpin for ferrata::record::Flaw
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::record::Flaw
+impl core::panic::unwind_safe::UnwindSafe for ferrata::record::Flaw
+pub struct ferrata::record::Identity
+impl ferrata::record::Identity
+pub fn ferrata::record::Identity::digest(&self) -> &[u8]
+pub fn ferrata::record::Identity::read(impl core::convert::AsRef<[u8]>) -> core::option::Option<ferrata::record::Identity>
+impl core::fmt::Debug for ferrata::record::Identity
+pub fn ferrata::record::Identity::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::fmt::Display for ferrata::record::Identity
+pub fn ferrata::record::Identity::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::record::Identity
+impl core::marker::Send for ferrata::record::Identity
+impl core::marker::Sync for ferrata::record::Identity
+impl core::marker::Unpin for ferrata::record::Identity
+impl core::marker::UnsafeUnpin for ferrata::record::Identity
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::record::Identity
+impl core::panic::unwind_safe::UnwindSafe for ferrata::record::Identity
+pub struct ferrata::record::Provide
+impl ferrata::record::Provide
+pub fn ferrata::record::Provide::name(&self) -> &ferrata::Name
+pub fn ferrata::record::Provide::version(&self) -> core::option::Option<&ferrata::version::Version>
+impl core::fmt::Display for ferrata::record::Provide
+pub fn ferrata::record::Provide::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::record::Provide
+impl core::marker::Send for ferrata::record::Provide
+impl core::marker::Sync for ferrata::record::Provide
+impl core::marker::Unpin for ferrata::record::Provide
+impl core::marker::UnsafeUnpin for ferrata::record::Provide
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::record::Provide
+impl core::panic::unwind_safe::UnwindSafe for ferrata::record::Provide
+pub struct ferrata::record::Record
+impl ferrata::record::Record
+pub fn ferrata::record::Record::answers(&self, &ferrata::dependency::Dependency) -> bool
+pub fn ferrata::record::Record::architecture(&self) -> core::option::Option<&[u8]>
+pub fn ferrata::record::Record::as_bytes(&self) -> &[u8]
+pub fn ferrata::record::Record::conflicts_with_itself(&self) -> bool
+pub fn ferrata::record::Record::depends(&self) -> &[ferrata::dependency::Dependency]
+pub fn ferrata::record::Record::field(&self, u8) -> core::option::Option<&[u8]>
+pub fn ferrata::record::Record::fields(&self) -> impl core::iter::traits::iterator::Iterator<Item = (u8, &[u8])>
+pub fn ferrata::record::Record::flaws(&self) -> &[ferrata::record::Flaw]
+pub fn ferrata::record::Record::from_fields<V: core::convert::AsRef<[u8]>>(ferrata::dialect::Dialect, impl core::iter::traits::collect::IntoIterator<Item = (u8, V)>) -> core::result::Result<ferrata::record::Record, ferrata::index::ReadError>
+pub fn ferrata::record::Record::identity(&self) -> &ferrata::record::Identity
+pub fn ferrata::record::Record::install_if(&self) -> &[ferrata::dependency::Dependency]
+pub fn ferrata::record::Record::is_installable(&self) -> bool
+pub fn ferrata::record::Record::name(&self) -> &ferrata::Name
+pub fn ferrata::record::Record::origin(&self) -> core::option::Option<&[u8]>
+pub fn ferrata::record::Record::priority(&self) -> u16
+pub fn ferrata::record::Record::provides(&self) -> &[ferrata::record::Provide]
+pub fn ferrata::record::Record::version(&self) -> &ferrata::version::Version
+impl core::fmt::Display for ferrata::record::Record
+pub fn ferrata::record::Record::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::record::Record
+impl core::marker::Send for ferrata::record::Record
+impl core::marker::Sync for ferrata::record::Record
+impl core::marker::Unpin for ferrata::record::Record
+impl core::marker::UnsafeUnpin for ferrata::record::Record
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::record::Record
+impl core::panic::unwind_safe::UnwindSafe for ferrata::record::Record
+pub mod ferrata::resolve
+pub enum ferrata::resolve::Change<'a>
+pub ferrata::resolve::Change::Downgrade
+pub ferrata::resolve::Change::Downgrade::from: &'a ferrata::record::Record
+pub ferrata::resolve::Change::Downgrade::repository: usize
+pub ferrata::resolve::Change::Downgrade::to: &'a ferrata::record::Record
+pub ferrata::resolve::Change::Install
+pub ferrata::resolve::Change::Install::package: &'a ferrata::record::Record
+pub ferrata::resolve::Change::Install::repository: usize
+pub ferrata::resolve::Change::Remove(&'a ferrata::record::Record)
+pub ferrata::resolve::Change::Replace
+pub ferrata::resolve::Change::Replace::from: &'a ferrata::record::Record
+pub ferrata::resolve::Change::Replace::repository: usize
+pub ferrata::resolve::Change::Replace::to: &'a ferrata::record::Record
+pub ferrata::resolve::Change::Upgrade
+pub ferrata::resolve::Change::Upgrade::from: &'a ferrata::record::Record
+pub ferrata::resolve::Change::Upgrade::repository: usize
+pub ferrata::resolve::Change::Upgrade::to: &'a ferrata::record::Record
+impl<'a> core::marker::Freeze for ferrata::resolve::Change<'a>
+impl<'a> core::marker::Send for ferrata::resolve::Change<'a>
+impl<'a> core::marker::Sync for ferrata::resolve::Change<'a>
+impl<'a> core::marker::Unpin for ferrata::resolve::Change<'a>
+impl<'a> core::marker::UnsafeUnpin for ferrata::resolve::Change<'a>
+impl<'a> core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Change<'a>
+impl<'a> core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Change<'a>
+pub enum ferrata::resolve::Exclusion
+pub ferrata::resolve::Exclusion::Blocked
+pub ferrata::resolve::Exclusion::Blocked::entry: ferrata::dependency::Dependency
+pub ferrata::resolve::Exclusion::Blocked::holder: ferrata::resolve::Package
+pub ferrata::resolve::Exclusion::Condition
+pub ferrata::resolve::Exclusion::Forbidden(ferrata::resolve::Requirement)
+pub ferrata::resolve::Exclusion::Held
+pub ferrata::resolve::Exclusion::Held::holder: ferrata::resolve::Package
+pub ferrata::resolve::Exclusion::Held::name: ferrata::Name
+pub ferrata::resolve::Exclusion::Negated(ferrata::dependency::Dependency)
+pub ferrata::resolve::Exclusion::NotAdmitted(ferrata::resolve::Requirement)
+pub ferrata::resolve::Exclusion::Passed
+pub ferrata::resolve::Exclusion::Passed::completing: ferrata::resolve::Package
+pub ferrata::resolve::Exclusion::Passed::entry: ferrata::dependency::Dependency
+pub ferrata::resolve::Exclusion::Stranded(ferrata::dependency::Dependency)
+pub ferrata::resolve::Exclusion::Uninstallable
+pub ferrata::resolve::Exclusion::Unmeetable(ferrata::dependency::Dependency)
+pub ferrata::resolve::Exclusion::Unrequired
+impl core::fmt::Display for ferrata::resolve::Exclusion
+pub fn ferrata::resolve::Exclusion::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::Exclusion
+impl core::marker::Send for ferrata::resolve::Exclusion
+impl core::marker::Sync for ferrata::resolve::Exclusion
+impl core::marker::Unpin for ferrata::resolve::Exclusion
+impl core::marker::UnsafeUnpin for ferrata::resolve::Exclusion
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Exclusion
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Exclusion
+pub enum ferrata::resolve::Reason
+pub ferrata::resolve::Reason::Condition(alloc::vec::Vec<ferrata::resolve::Package>)
+pub ferrata::resolve::Reason::Required(ferrata::resolve::Requirement)
+impl core::fmt::Display for ferrata::resolve::Reason
+pub fn ferrata::resolve::Reason::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::Reason
+impl core::marker::Send for ferrata::resolve::Reason
+impl core::marker::Sync for ferrata::resolve::Reason
+impl core::marker::Unpin for ferrata::resolve::Reason
+impl core::marker::UnsafeUnpin for ferrata::resolve::Reason
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Reason
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Reason
+pub enum ferrata::resolve::RefusalKind
+pub ferrata::resolve::RefusalKind::Conflict
+pub ferrata::resolve::RefusalKind::ConflictsWithItself
+pub ferrata::resolve::RefusalKind::Forbidden
+pub ferrata::resolve::RefusalKind::NoPriority
+pub ferrata::resolve::RefusalKind::Unmet
+impl core::fmt::Display for ferrata::resolve::RefusalKind
+pub fn ferrata::resolve::RefusalKind::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::RefusalKind
+impl core::marker::Send for ferrata::resolve::RefusalKind
+impl core::marker::Sync for ferrata::resolve::RefusalKind
+impl core::marker::Unpin for ferrata::resolve::RefusalKind
+impl core::marker::UnsafeUnpin for ferrata::resolve::RefusalKind
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::RefusalKind
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::RefusalKind
+pub enum ferrata::resolve::RequiredBy
+pub ferrata::resolve::RequiredBy::Candidates(ferrata::Name)
+pub ferrata::resolve::RequiredBy::Package(ferrata::resolve::Package)
+pub ferrata::resolve::RequiredBy::Request
+pub ferrata::resolve::RequiredBy::World
+impl core::fmt::Display for ferrata::resolve::RequiredBy
+pub fn ferrata::resolve::RequiredBy::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::RequiredBy
+impl core::marker::Send for ferrata::resolve::RequiredBy
+impl core::marker::Sync for ferrata::resolve::RequiredBy
+impl core::marker::Unpin for ferrata::resolve::RequiredBy
+impl core::marker::UnsafeUnpin for ferrata::resolve::RequiredBy
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::RequiredBy
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::RequiredBy
+pub enum ferrata::resolve::Source
+pub ferrata::resolve::Source::Installed
+pub ferrata::resolve::Source::Repository(usize)
+impl core::marker::Freeze for ferrata::resolve::Source
+impl core::marker::Send for ferrata::resolve::Source
+impl core::marker::Sync for ferrata::resolve::Source
+impl core::marker::Unpin for ferrata::resolve::Source
+impl core::marker::UnsafeUnpin for ferrata::resolve::Source
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Source
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Source
+pub enum ferrata::resolve::Step
+pub ferrata::resolve::Step::Dropped
+pub ferrata::resolve::Step::Dropped::exclusion: ferrata::resolve::Exclusion
+pub ferrata::resolve::Step::Dropped::package: ferrata::resolve::Package
+pub ferrata::resolve::Step::Installed
+pub ferrata::resolve::Step::Installed::package: ferrata::resolve::Package
+pub ferrata::resolve::Step::Installed::reason: ferrata::resolve::Reason
+pub ferrata::resolve::Step::Kept
+pub ferrata::resolve::Step::Kept::package: ferrata::resolve::Package
+pub ferrata::resolve::Step::Kept::reason: ferrata::resolve::Reason
+pub ferrata::resolve::Step::Required(ferrata::resolve::Requirement)
+pub ferrata::resolve::Step::RuledOut
+pub ferrata::resolve::Step::RuledOut::exclusion: ferrata::resolve::Exclusion
+pub ferrata::resolve::Step::RuledOut::package: ferrata::resolve::Package
+pub ferrata::resolve::Step::Sole
+pub ferrata::resolve::Step::Sole::package: ferrata::resolve::Package
+pub ferrata::resolve::Step::Sole::requirement: ferrata::resolve::Requirement
+impl core::fmt::Display for ferrata::resolve::Step
+pub fn ferrata::resolve::Step::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::Step
+impl core::marker::Send for ferrata::resolve::Step
+impl core::marker::Sync for ferrata::resolve::Step
+impl core::marker::Unpin for ferrata::resolve::Step
+impl core::marker::UnsafeUnpin for ferrata::resolve::Step
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Step
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Step
+pub struct ferrata::resolve::Explanation
+impl ferrata::resolve::Explanation
+pub fn ferrata::resolve::Explanation::is_empty(&self) -> bool
+pub fn ferrata::resolve::Explanation::steps(&self) -> &[ferrata::resolve::Step]
+impl core::fmt::Display for ferrata::resolve::Explanation
+pub fn ferrata::resolve::Explanation::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::Explanation
+impl core::marker::Send for ferrata::resolve::Explanation
+impl core::marker::Sync for ferrata::resolve::Explanation
+impl core::marker::Unpin for ferrata::resolve::Explanation
+impl core::marker::UnsafeUnpin for ferrata::resolve::Explanation
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Explanation
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Explanation
+pub struct ferrata::resolve::Package
+impl ferrata::resolve::Package
+pub fn ferrata::resolve::Package::name(&self) -> &ferrata::Name
+pub fn ferrata::resolve::Package::version(&self) -> &ferrata::version::Version
+impl core::fmt::Display for ferrata::resolve::Package
+pub fn ferrata::resolve::Package::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::Package
+impl core::marker::Send for ferrata::resolve::Package
+impl core::marker::Sync for ferrata::resolve::Package
+impl core::marker::Unpin for ferrata::resolve::Package
+impl core::marker::UnsafeUnpin for ferrata::resolve::Package
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Package
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Package
+pub struct ferrata::resolve::Refusal(_)
+impl ferrata::resolve::Refusal
+pub fn ferrata::resolve::Refusal::explanation(&self) -> &ferrata::resolve::Explanation
+pub fn ferrata::resolve::Refusal::holder(&self) -> core::option::Option<&ferrata::resolve::Package>
+pub fn ferrata::resolve::Refusal::kind(&self) -> ferrata::resolve::RefusalKind
+pub fn ferrata::resolve::Refusal::requirement(&self) -> &ferrata::resolve::Requirement
+impl core::error::Error for ferrata::resolve::Refusal
+impl core::fmt::Display for ferrata::resolve::Refusal
+pub fn ferrata::resolve::Refusal::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::Refusal
+impl core::marker::Send for ferrata::resolve::Refusal
+impl core::marker::Sync for ferrata::resolve::Refusal
+impl core::marker::Unpin for ferrata::resolve::Refusal
+impl core::marker::UnsafeUnpin for ferrata::resolve::Refusal
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Refusal
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Refusal
+pub struct ferrata::resolve::Request
+impl ferrata::resolve::Request
+pub fn ferrata::resolve::Request::entries(&self) -> impl core::iter::traits::iterator::Iterator<Item = &ferrata::dependency::Dependency>
+pub fn ferrata::resolve::Request::get(&self, impl core::convert::AsRef<[u8]>) -> core::option::Option<&ferrata::dependency::Dependency>
+pub fn ferrata::resolve::Request::is_empty(&self) -> bool
+pub fn ferrata::resolve::Request::new() -> ferrata::resolve::Request
+pub fn ferrata::resolve::Request::push(&mut self, ferrata::dependency::Dependency)
+impl core::iter::traits::collect::Extend<ferrata::dependency::Dependency> for ferrata::resolve::Request
+pub fn ferrata::resolve::Request::extend<I: core::iter::traits::collect::IntoIterator<Item = ferrata::dependency::Dependency>>(&mut self, I)
+impl core::iter::traits::collect::FromIterator<ferrata::dependency::Dependency> for ferrata::resolve::Request
+pub fn ferrata::resolve::Request::from_iter<I: core::iter::traits::collect::IntoIterator<Item = ferrata::dependency::Dependency>>(I) -> ferrata::resolve::Request
+impl core::marker::Freeze for ferrata::resolve::Request
+impl core::marker::Send for ferrata::resolve::Request
+impl core::marker::Sync for ferrata::resolve::Request
+impl core::marker::Unpin for ferrata::resolve::Request
+impl core::marker::UnsafeUnpin for ferrata::resolve::Request
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Request
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Request
+pub struct ferrata::resolve::Requirement
+impl ferrata::resolve::Requirement
+pub fn ferrata::resolve::Requirement::answered_by(&self, &ferrata::record::Record) -> bool
+pub fn ferrata::resolve::Requirement::by(&self) -> &ferrata::resolve::RequiredBy
+pub fn ferrata::resolve::Requirement::entry(&self) -> core::option::Option<&ferrata::dependency::Dependency>
+pub fn ferrata::resolve::Requirement::name(&self) -> &ferrata::Name
+impl core::fmt::Display for ferrata::resolve::Requirement
+pub fn ferrata::resolve::Requirement::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::resolve::Requirement
+impl core::marker::Send for ferrata::resolve::Requirement
+impl core::marker::Sync for ferrata::resolve::Requirement
+impl core::marker::Unpin for ferrata::resolve::Requirement
+impl core::marker::UnsafeUnpin for ferrata::resolve::Requirement
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Requirement
+impl core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Requirement
+pub struct ferrata::resolve::Resolution<'a>
+impl<'a> ferrata::resolve::Resolution<'a>
+pub fn ferrata::resolve::Resolution<'a>::changes(&self) -> &[ferrata::resolve::Change<'a>]
+pub fn ferrata::resolve::Resolution<'a>::exclusion(&self, &ferrata::record::Record) -> core::option::Option<&ferrata::resolve::Exclusion>
+pub fn ferrata::resolve::Resolution<'a>::explain(&self, &ferrata::record::Record) -> core::option::Option<ferrata::resolve::Explanation>
+pub fn ferrata::resolve::Resolution<'a>::packages(&self) -> &[&'a ferrata::record::Record]
+pub fn ferrata::resolve::Resolution<'a>::reason(&self, &ferrata::record::Record) -> core::option::Option<&ferrata::resolve::Reason>
+pub fn ferrata::resolve::Resolution<'a>::source(&self, &ferrata::record::Record) -> core::option::Option<ferrata::resolve::Source>
+impl<'a> core::marker::Freeze for ferrata::resolve::Resolution<'a>
+impl<'a> core::marker::Send for ferrata::resolve::Resolution<'a>
+impl<'a> core::marker::Sync for ferrata::resolve::Resolution<'a>
+impl<'a> core::marker::Unpin for ferrata::resolve::Resolution<'a>
+impl<'a> core::marker::UnsafeUnpin for ferrata::resolve::Resolution<'a>
+impl<'a> core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Resolution<'a>
+impl<'a> core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Resolution<'a>
+pub struct ferrata::resolve::Resolver<'a>
+impl<'a> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::dialect(&self) -> ferrata::dialect::Dialect
+pub fn ferrata::resolve::Resolver<'a>::installed(self, impl core::iter::traits::collect::IntoIterator<Item = &'a ferrata::record::Record>, impl core::iter::traits::collect::IntoIterator<Item = &'a ferrata::dependency::Dependency>) -> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::new(ferrata::dialect::Dialect) -> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::repository(self, impl core::iter::traits::collect::IntoIterator<Item = &'a ferrata::record::Record>) -> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::resolve(&self, &ferrata::resolve::Request) -> core::result::Result<ferrata::resolve::Resolution<'a>, ferrata::resolve::Refusal>
+impl<'a> core::marker::Freeze for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::Send for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::Sync for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::Unpin for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::UnsafeUnpin for ferrata::resolve::Resolver<'a>
+impl<'a> core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Resolver<'a>
+impl<'a> core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::order<'a>(impl core::iter::traits::collect::IntoIterator<Item = &'a ferrata::record::Record>, &ferrata::resolve::Request) -> alloc::vec::Vec<usize>
+pub mod ferrata::version
+#[non_exhaustive] pub enum ferrata::version::VersionErrorKind
+pub ferrata::version::VersionErrorKind::Empty
+pub ferrata::version::VersionErrorKind::TooLarge
+pub ferrata::version::VersionErrorKind::Unexpected
+pub ferrata::version::VersionErrorKind::UnknownSuffix
+impl core::fmt::Display for ferrata::version::VersionErrorKind
+pub fn ferrata::version::VersionErrorKind::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::version::VersionErrorKind
+impl core::marker::Send for ferrata::version::VersionErrorKind
+impl core::marker::Sync for ferrata::version::VersionErrorKind
+impl core::marker::Unpin for ferrata::version::VersionErrorKind
+impl core::marker::UnsafeUnpin for ferrata::version::VersionErrorKind
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::version::VersionErrorKind
+impl core::panic::unwind_safe::UnwindSafe for ferrata::version::VersionErrorKind
+pub struct ferrata::version::Version
+impl ferrata::version::Version
+pub fn ferrata::version::Version::as_bytes(&self) -> &[u8]
+pub fn ferrata::version::Version::dialect(&self) -> ferrata::dialect::Dialect
+pub fn ferrata::version::Version::is_valid(&self) -> bool
+pub fn ferrata::version::Version::to_str(&self) -> core::option::Option<&str>
+impl core::cmp::Eq for ferrata::version::Version
+impl core::cmp::Ord for ferrata::version::Version
+pub fn ferrata::version::Version::cmp(&self, &ferrata::version::Version) -> core::cmp::Ordering
+impl core::cmp::PartialEq for ferrata::version::Version
+pub fn ferrata::version::Version::eq(&self, &ferrata::version::Version) -> bool
+impl core::cmp::PartialOrd for ferrata::version::Version
+pub fn ferrata::version::Version::partial_cmp(&self, &ferrata::version::Version) -> core::option::Option<core::cmp::Ordering>
+impl core::fmt::Debug for ferrata::version::Version
+pub fn ferrata::version::Version::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::fmt::Display for ferrata::version::Version
+pub fn ferrata::version::Version::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::version::Version
+impl core::marker::Send for ferrata::version::Version
+impl core::marker::Sync for ferrata::version::Version
+impl core::marker::Unpin for ferrata::version::Version
+impl core::marker::UnsafeUnpin for ferrata::version::Version
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::version::Version
+impl core::panic::unwind_safe::UnwindSafe for ferrata::version::Version
+pub struct ferrata::version::VersionError
+impl ferrata::version::VersionError
+pub fn ferrata::version::VersionError::kind(&self) -> ferrata::version::VersionErrorKind
+pub fn ferrata::version::VersionError::offset(&self) -> usize
+impl core::error::Error for ferrata::version::VersionError
+impl core::fmt::Display for ferrata::version::VersionError
+pub fn ferrata::version::VersionError::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::marker::Freeze for ferrata::version::VersionError
+impl core::marker::Send for ferrata::version::VersionError
+impl core::marker::Sync for ferrata::version::VersionError
+impl core::marker::Unpin for ferrata::version::VersionError
+impl core::marker::UnsafeUnpin for ferrata::version::VersionError
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::version::VersionError
+impl core::panic::unwind_safe::UnwindSafe for ferrata::version::VersionError
+#[non_exhaustive] pub enum ferrata::Dialect
+pub ferrata::Dialect::V3_0
+impl ferrata::dialect::Dialect
+pub fn ferrata::dialect::Dialect::dependency(self, impl core::convert::AsRef<[u8]>) -> core::result::Result<ferrata::dependency::Dependency, ferrata::dependency::DependencyError>
+pub fn ferrata::dialect::Dialect::for_release<'r>(impl core::iter::traits::collect::IntoIterator<Item = &'r ferrata::record::Record>) -> core::result::Result<ferrata::dialect::Selection, ferrata::dialect::DialectError>
+pub const fn ferrata::dialect::Dialect::measured_against(self) -> &'static str
+pub fn ferrata::dialect::Dialect::recorded_version(self, impl core::convert::AsRef<[u8]>) -> ferrata::version::Version
+pub fn ferrata::dialect::Dialect::version(self, impl core::convert::AsRef<[u8]>) -> core::result::Result<ferrata::version::Version, ferrata::version::VersionError>
+impl core::marker::Freeze for ferrata::dialect::Dialect
+impl core::marker::Send for ferrata::dialect::Dialect
+impl core::marker::Sync for ferrata::dialect::Dialect
+impl core::marker::Unpin for ferrata::dialect::Dialect
+impl core::marker::UnsafeUnpin for ferrata::dialect::Dialect
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::dialect::Dialect
+impl core::panic::unwind_safe::UnwindSafe for ferrata::dialect::Dialect
+pub struct ferrata::Name(_)
+impl ferrata::Name
+pub fn ferrata::Name::as_bytes(&self) -> &[u8]
+pub fn ferrata::Name::to_str(&self) -> core::option::Option<&str>
+impl core::borrow::Borrow<[u8]> for ferrata::Name
+pub fn ferrata::Name::borrow(&self) -> &[u8]
+impl core::cmp::PartialEq<&[u8]> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &&[u8]) -> bool
+impl core::cmp::PartialEq<&ferrata::Name> for alloc::string::String
+pub fn alloc::string::String::eq(&self, &&ferrata::Name) -> bool
+impl core::cmp::PartialEq<&ferrata::Name> for alloc::vec::Vec<u8>
+pub fn alloc::vec::Vec<u8>::eq(&self, &&ferrata::Name) -> bool
+impl core::cmp::PartialEq<&str> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &&str) -> bool
+impl core::cmp::PartialEq<[u8]> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &[u8]) -> bool
+impl core::cmp::PartialEq<alloc::string::String> for &ferrata::Name
+pub fn &ferrata::Name::eq(&self, &alloc::string::String) -> bool
+impl core::cmp::PartialEq<alloc::string::String> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &alloc::string::String) -> bool
+impl core::cmp::PartialEq<alloc::vec::Vec<u8>> for &ferrata::Name
+pub fn &ferrata::Name::eq(&self, &alloc::vec::Vec<u8>) -> bool
+impl core::cmp::PartialEq<alloc::vec::Vec<u8>> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &alloc::vec::Vec<u8>) -> bool
+impl core::cmp::PartialEq<ferrata::Name> for &[u8]
+pub fn &[u8]::eq(&self, &ferrata::Name) -> bool
+impl core::cmp::PartialEq<ferrata::Name> for &str
+pub fn &str::eq(&self, &ferrata::Name) -> bool
+impl core::cmp::PartialEq<ferrata::Name> for [u8]
+pub fn [u8]::eq(&self, &ferrata::Name) -> bool
+impl core::cmp::PartialEq<ferrata::Name> for alloc::string::String
+pub fn alloc::string::String::eq(&self, &ferrata::Name) -> bool
+impl core::cmp::PartialEq<ferrata::Name> for alloc::vec::Vec<u8>
+pub fn alloc::vec::Vec<u8>::eq(&self, &ferrata::Name) -> bool
+impl core::cmp::PartialEq<ferrata::Name> for str
+pub fn str::eq(&self, &ferrata::Name) -> bool
+impl core::cmp::PartialEq<str> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &str) -> bool
+impl core::convert::AsRef<[u8]> for ferrata::Name
+pub fn ferrata::Name::as_ref(&self) -> &[u8]
+impl core::convert::From<&[u8]> for ferrata::Name
+pub fn ferrata::Name::from(&[u8]) -> ferrata::Name
+impl core::convert::From<&str> for ferrata::Name
+pub fn ferrata::Name::from(&str) -> ferrata::Name
+impl core::fmt::Debug for ferrata::Name
+pub fn ferrata::Name::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl core::fmt::Display for ferrata::Name
+pub fn ferrata::Name::fmt(&self, &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl<const N: usize> core::cmp::PartialEq<&[u8; N]> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &&[u8; N]) -> bool
+impl<const N: usize> core::cmp::PartialEq<[u8; N]> for ferrata::Name
+pub fn ferrata::Name::eq(&self, &[u8; N]) -> bool
+impl<const N: usize> core::cmp::PartialEq<ferrata::Name> for &[u8; N]
+pub fn &[u8; N]::eq(&self, &ferrata::Name) -> bool
+impl<const N: usize> core::cmp::PartialEq<ferrata::Name> for [u8; N]
+pub fn [u8; N]::eq(&self, &ferrata::Name) -> bool
+impl core::marker::Freeze for ferrata::Name
+impl core::marker::Send for ferrata::Name
+impl core::marker::Sync for ferrata::Name
+impl core::marker::Unpin for ferrata::Name
+impl core::marker::UnsafeUnpin for ferrata::Name
+impl core::panic::unwind_safe::RefUnwindSafe for ferrata::Name
+impl core::panic::unwind_safe::UnwindSafe for ferrata::Name
+pub struct ferrata::Resolver<'a>
+impl<'a> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::dialect(&self) -> ferrata::dialect::Dialect
+pub fn ferrata::resolve::Resolver<'a>::installed(self, impl core::iter::traits::collect::IntoIterator<Item = &'a ferrata::record::Record>, impl core::iter::traits::collect::IntoIterator<Item = &'a ferrata::dependency::Dependency>) -> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::new(ferrata::dialect::Dialect) -> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::repository(self, impl core::iter::traits::collect::IntoIterator<Item = &'a ferrata::record::Record>) -> ferrata::resolve::Resolver<'a>
+pub fn ferrata::resolve::Resolver<'a>::resolve(&self, &ferrata::resolve::Request) -> core::result::Result<ferrata::resolve::Resolution<'a>, ferrata::resolve::Refusal>
+impl<'a> core::marker::Freeze for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::Send for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::Sync for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::Unpin for ferrata::resolve::Resolver<'a>
+impl<'a> core::marker::UnsafeUnpin for ferrata::resolve::Resolver<'a>
+impl<'a> core::panic::unwind_safe::RefUnwindSafe for ferrata::resolve::Resolver<'a>
+impl<'a> core::panic::unwind_safe::UnwindSafe for ferrata::resolve::Resolver<'a>

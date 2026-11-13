@@ -1,0 +1,16 @@
+[statement]
+The real `x` at 2.0 is chosen over a provider of `x` at 1.
+
+[repository]
+P:p1
+V:1
+p:x=1
+
+P:x
+V:2.0
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install x 2.0

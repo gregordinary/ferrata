@@ -1,0 +1,28 @@
+[statement]
+A dependency entry apk cannot read, here a constraint on an invalid version,
+makes its record one apk loads and cannot install.
+
+[repository]
+P:app
+V:1.0-r0
+D:a b=1.0b1 c
+
+P:a
+V:1.0-r0
+
+P:c
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: The indexes contain broken packages which are not installable.
+| ERROR: unable to select packages:
+|   app-1.0-r0:
+|     error: uninstallable
+|     depends: b=1.0b1
+|     satisfies: world[app]
+|   b (no such package):
+|     required by: app-1.0-r0[b=1.0b1]
+refused

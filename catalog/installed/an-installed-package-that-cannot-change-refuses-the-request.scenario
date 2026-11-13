@@ -1,0 +1,40 @@
+[statement]
+As `an-upgrade-the-request-needs-reaches-an-installed-dependent`, without
+`app` 2.0: the installed `app` cannot stay beside `lib` 2.0 and nothing
+replaces it, so the request is refused.
+
+[repository]
+P:app
+V:1.0-r0
+D:lib<2
+
+P:lib
+V:1.0-r0
+
+P:lib
+V:2.0-r0
+
+P:foo
+V:1.0-r0
+D:lib>=2
+
+[installed]
+P:lib
+V:1.0-r0
+
+P:app
+V:1.0-r0
+D:lib<2
+
+[world]
+app
+
+[request]
+foo
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   lib-1.0-r0:
+|     breaks: foo-1.0-r0[lib>=2]
+|     satisfies: app-1.0-r0[lib<2]
+refused

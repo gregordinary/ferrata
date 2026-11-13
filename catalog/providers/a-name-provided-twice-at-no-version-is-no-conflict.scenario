@@ -1,0 +1,17 @@
+[statement]
+As `a-package-providing-a-name-twice-conflicts-with-itself`, with both
+mentions of `x` at no version: `p1` does not conflict with itself, and is
+installed.
+
+[repository]
+P:p1
+V:1
+p:x x
+k:1
+
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p1 1

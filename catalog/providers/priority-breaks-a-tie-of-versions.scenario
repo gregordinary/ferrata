@@ -1,0 +1,19 @@
+[statement]
+Of providers of a name at one version, the one of higher priority is
+chosen, here listed second.
+
+[repository]
+P:p1
+V:1
+p:x=1
+
+P:p2
+V:1
+p:x=1
+k:5
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p2 1

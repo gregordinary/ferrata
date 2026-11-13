@@ -1,0 +1,23 @@
+[statement]
+A record that conflicts with itself is a package all the same: a later
+repository offering the same package again, without the provide, adds
+nothing, and apk, asked for `f`, chooses the first record and refuses.
+
+[repository]
+P:f
+V:3
+p:f
+
+[repository]
+P:f
+V:3
+
+[request]
+f
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   f-3:
+|     conflicts: f-3[f]
+|     satisfies: world[f]
+refused

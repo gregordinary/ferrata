@@ -1,0 +1,45 @@
+[statement]
+Observed; the rule is not yet known. `F` is decided before `B`, yet `f1`,
+its best candidate, is passed over: `base`, the best candidate for `B`,
+forbids it. Contrast `a-conflict-of-a-later-name-steers-an-earlier-choice-
+not-from-another-candidate`, and `a-candidate-forbidding-an-installed-
+package-is-not-passed-over`, where `F` has no other candidate.
+
+[repository]
+P:top
+V:1
+D:z B
+
+P:base
+V:1
+k:9
+p:B
+D:!f1
+
+P:base2
+V:1
+k:5
+p:B
+
+P:z
+V:1
+D:F
+
+P:f1
+V:1
+k:100
+p:F
+
+P:f2
+V:1
+k:10
+p:F
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install f2 1
+install z 1
+install base 1
+install top 1

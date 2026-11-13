@@ -1,0 +1,23 @@
+[statement]
+A package installed that the world, with the request, no longer reaches is
+removed, and so is what only it needed: `a` and `lib` are in no world.
+
+[repository]
+P:b
+V:1.0-r0
+
+[installed]
+P:lib
+V:1.0-r0
+
+P:a
+V:1.0-r0
+D:lib
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove a 1.0-r0
+remove lib 1.0-r0
+install b 1.0-r0

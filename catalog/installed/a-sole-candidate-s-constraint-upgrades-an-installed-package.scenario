@@ -1,0 +1,37 @@
+[statement]
+The constraint a name's single candidate states moves a package installed
+already: `so:r`'s one candidate `r` needs `so:n`, whose one candidate `n`
+needs `base=2`, and `base` 1 is installed. `base` is required with
+`base=2` before `n` is installed, and apk upgrades it. The shape of
+`reduced/lua5-4-luautf8-upgrades-an-installed-ncurses-terminfo-base`.
+
+[repository]
+P:app
+V:1
+D:so:r
+
+P:r
+V:1
+p:so:r=1
+D:so:n
+
+P:n
+V:1
+p:so:n=1
+D:base=2
+
+P:base
+V:2
+
+[installed]
+P:base
+V:1
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+upgrade base 1 2
+install n 1
+install r 1
+install app 1

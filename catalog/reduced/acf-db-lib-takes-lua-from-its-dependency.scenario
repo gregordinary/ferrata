@@ -1,0 +1,33 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`acf-db-lib`. `acf-db-lib` depends on `acf-core` and on `lua`, which only
+`lua5.4` and `lua5.5` provide, at no version. `acf-core` is a real name and
+is decided first; its dependency installs `lua5.4`, which answers `lua`, and
+`lua5.5`, of higher priority, is not installed. The rule of
+`a-real-name-before-a-virtual-one-virtual-first`.
+
+[repository]
+P:acf-core
+V:0.24.1-r0
+D:lua5.4
+
+P:acf-db-lib
+V:0.2.1-r4
+D:acf-core lua
+
+P:lua5.4
+V:5.4.8-r0
+p:lua
+
+P:lua5.5
+V:5.5.0-r1
+k:500
+p:lua
+
+[request]
+acf-db-lib
+
+[answer apk-tools 3.0.9-r0]
+install lua5.4 5.4.8-r0
+install acf-core 0.24.1-r0
+install acf-db-lib 0.2.1-r4

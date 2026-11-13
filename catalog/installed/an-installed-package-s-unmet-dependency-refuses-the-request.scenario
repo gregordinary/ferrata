@@ -1,0 +1,25 @@
+[statement]
+An installed package whose dependency nothing answers refuses a request
+that has nothing to do with it: the world needs `a`, and `a` needs
+`missing`.
+
+[repository]
+P:b
+V:1.0-r0
+
+[installed]
+P:a
+V:1.0-r0
+D:missing
+
+[world]
+a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   missing (no such package):
+|     required by: a-1.0-r0[missing]
+refused

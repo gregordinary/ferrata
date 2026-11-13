@@ -1,0 +1,26 @@
+[statement]
+A package whose `install_if` holds and which conflicts with a requested
+package is not passed over: apk refuses the request.
+
+[repository]
+P:base
+V:1.0
+
+P:docs
+V:1.0
+
+P:extra
+V:1.0
+i:base
+D:!docs
+
+[request]
+base
+docs
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   docs-1.0:
+|     breaks: extra-1.0[!docs]
+|     satisfies: world[docs]
+refused

@@ -1,0 +1,27 @@
+[statement]
+A candidate whose dependency nothing can answer is passed over where
+another candidate for the name depends on the package that requires it:
+`b` needs `a`; `a` 3, the best candidate, needs `missing`, which nothing
+provides, and `a` 1 needs `b`; apk installs `a` 1. Without the dependency
+of `a` 1 on `b`, apk refuses
+(`a-candidate-whose-dependency-cannot-be-met-is-not-passed-over-below-a-package`).
+
+[repository]
+P:a
+V:1
+D:b
+
+P:a
+V:3
+D:missing
+
+P:b
+V:2
+D:a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install b 2

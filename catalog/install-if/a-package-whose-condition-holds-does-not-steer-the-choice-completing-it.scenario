@@ -1,0 +1,31 @@
+[statement]
+A package whose condition the preliminary choices complete does not
+steer the choice that completes it: `d` 3, the best candidate for `d`,
+completes `a`'s condition, and `a` needs `w`, which only `d` 1
+provides. apk takes `d` 3 and passes `a` over. Contrast
+`a-condition-that-will-hold-steers-an-earlier-choice`, where the choice
+steered is another name's.
+
+[repository]
+P:top
+V:1
+D:d
+
+P:a
+V:1
+D:w
+i:d
+
+P:d
+V:3
+
+P:d
+V:1
+p:w=2
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install d 3
+install top 1

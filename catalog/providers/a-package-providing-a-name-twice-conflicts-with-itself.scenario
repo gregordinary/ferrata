@@ -1,0 +1,20 @@
+[statement]
+A package providing one name twice, at a version at least once, conflicts
+with itself, and apk never installs it: `p1` provides `x` and `x=1`, and
+asked for `x=1`, apk refuses.
+
+[repository]
+P:p1
+V:1
+p:x x=1
+
+
+[request]
+x=1
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   p1-1:
+|     conflicts: p1-1[x] p1-1[x=1]
+|     breaks: world[x=1]
+refused

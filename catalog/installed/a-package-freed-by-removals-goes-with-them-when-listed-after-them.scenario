@@ -1,0 +1,78 @@
+[statement]
+A package freed by removals goes with them when the installed database
+lists it after them: `lua5.5` outranks the installed `lua5.4` for `lua`,
+so `lua5.4` and `lua5.4-expat`, installed for its condition on `lua5.4`,
+are removed, and `libexpat`, needed only by `lua5.4-expat`, through a
+name it provides at a version, is removed right after them, before the
+installs. Listed before `lua5.4`, apk removes it last: `lua5.4`, at its
+place in the database, pulls `lua5.4-expat`, which needs it through its
+condition (`a-removal-waiting-on-removals-pulls-them-first`), and
+`libexpat`, needed through a name it provides at a version, pulls nothing
+and goes at its own place only where nothing waits on it by then. Reduced by hand from a layered request over Alpine
+v3.24 (`lua-feedparser`'s closure from v3.23 installed, `gvpe-openrc`
+asked).
+
+[repository]
+P:libexpat
+V:2-r0
+p:so:libexpat.so.1=1
+
+P:lua5.4
+V:5.4-r0
+k:400
+p:lua
+
+P:lua5.5
+V:5.5-r0
+k:500
+p:lua
+
+P:lua-expat
+V:1-r0
+
+P:lua5.4-expat
+V:1-r0
+D:so:libexpat.so.1
+i:lua5.4 lua-expat
+
+P:feed
+V:1-r0
+D:lua lua-expat
+
+P:z
+V:1-r0
+
+[installed]
+P:lua5.4
+V:5.4-r0
+k:400
+p:lua
+
+P:lua-expat
+V:1-r0
+
+P:libexpat
+V:2-r0
+p:so:libexpat.so.1=1
+
+P:lua5.4-expat
+V:1-r0
+D:so:libexpat.so.1
+i:lua5.4 lua-expat
+
+P:feed
+V:1-r0
+D:lua lua-expat
+
+[world]
+feed
+
+[request]
+z
+
+[answer apk-tools 3.0.9-r0]
+remove lua5.4-expat 1-r0
+remove lua5.4 5.4-r0
+remove libexpat 2-r0
+install lua5.5 5.5-r0
+install z 1-r0

@@ -1,0 +1,29 @@
+[statement]
+A package is triggered when a package its condition names is placed, if
+the condition holds in what is installed, though another package it names
+is still being walked: `ext` follows `a`, before `top`, which it also
+names.
+
+[repository]
+P:top
+V:1
+D:a b
+
+P:a
+V:1
+
+P:b
+V:1
+
+P:ext
+V:1
+i:a top
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install ext 1
+install b 1
+install top 1

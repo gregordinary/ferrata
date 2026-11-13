@@ -1,0 +1,31 @@
+[statement]
+A name required from outside the package installed for its condition is
+unaffected by the condition's `!` entry: `top` needs `docs` and `base`,
+`e`, with the condition `base` and `!docs<1`, needs `docs`, and apk
+installs all four
+(`a-condition-s-negated-entry-keeps-its-name-out-of-the-package-s-dependencies`).
+
+[repository]
+P:top
+V:1
+D:base docs
+
+P:base
+V:1
+
+P:docs
+V:1
+
+P:e
+V:1
+D:docs
+i:base !docs<1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install docs 1
+install e 1
+install top 1

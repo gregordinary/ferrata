@@ -1,0 +1,23 @@
+[statement]
+A package installed for its `install_if` comes after its condition, and its
+own dependencies before it.
+
+[repository]
+P:base
+V:1
+
+P:extra
+V:1
+i:base
+D:dep
+
+P:dep
+V:1
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install dep 1
+install extra 1

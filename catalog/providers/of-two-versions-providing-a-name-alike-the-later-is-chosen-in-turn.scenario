@@ -1,0 +1,26 @@
+[statement]
+apk takes a name's candidates in turn, keeping the better of each pair,
+and two versions of one package go by version where other candidates tie:
+`c` 1, `d` 1 and `c` 2 provide `w` at 3, `d` 1 ties with `c` 1, and `c` 2
+outranks `c` 1, so apk installs `c` 2. Listed `d` 1 first, `d` 1 is kept
+against both, and apk installs it
+(`of-two-versions-providing-a-name-alike-the-later-is-chosen-in-turn-another-first`).
+
+[repository]
+P:c
+V:1
+p:w=3
+
+P:d
+V:1
+p:w=3
+
+P:c
+V:2
+p:w=3
+
+[request]
+w
+
+[answer apk-tools 3.0.9-r0]
+install c 2

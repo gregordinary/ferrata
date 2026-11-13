@@ -1,0 +1,19 @@
+[statement]
+Of providers tied on version and priority, the one in the repository
+configured first is chosen, here `p2`.
+
+[repository]
+P:p2
+V:1
+p:x=1
+
+[repository]
+P:p1
+V:1
+p:x=1
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p2 1

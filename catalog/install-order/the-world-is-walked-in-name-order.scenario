@@ -1,0 +1,28 @@
+[statement]
+The world is walked in the order of its names, whatever the order of the
+request: `a` and its dependency before `z` and its.
+
+[repository]
+P:a
+V:1
+D:m
+
+P:m
+V:1
+
+P:z
+V:1
+D:n
+
+P:n
+V:1
+
+[request]
+z
+a
+
+[answer apk-tools 3.0.9-r0]
+install m 1
+install a 1
+install n 1
+install z 1

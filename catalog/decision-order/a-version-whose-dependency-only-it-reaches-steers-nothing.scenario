@@ -1,0 +1,28 @@
+[statement]
+As `a-choice-reached-only-through-the-package-it-favors-steers-nothing`,
+for a name some package carries: `app` needs `h`, whose best candidate
+is `h` 5; `h` 1 needs `dav`, whose one candidate needs `h=1`. `dav` is
+reached only through `h` 1, and apk installs `h` 5.
+
+[repository]
+P:app
+V:1
+D:h
+
+P:h
+V:5
+
+P:h
+V:1
+D:dav
+
+P:dav
+V:7
+D:h=1
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install h 5
+install app 1

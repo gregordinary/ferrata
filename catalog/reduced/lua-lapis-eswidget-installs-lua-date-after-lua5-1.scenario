@@ -1,0 +1,39 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-11), asked for
+`lua-lapis-eswidget`, which needs `lua5.1`, `lua5.1-lapis` and `lua5.2`.
+`lua-date`, under `lua5.1-lapis`, needs `lua`, which `lua5.1` and `lua5.2`
+both provide at no version, and both are installed. apk installs
+`lua-date` right after `lua5.1`, the provider of `lua` it installed first,
+and `lua5.2` after `lua5.1-lapis`. Observed; the rule is not yet known.
+
+[repository]
+P:lua5.1
+V:5.1.5-r13
+p:lua
+
+P:lua5.2
+V:5.2.4-r13
+p:lua
+
+[repository]
+P:lua-date
+V:2.2.1-r0
+D:lua
+
+P:lua-lapis-eswidget
+V:1.5.0-r0
+D:lua5.1 lua5.1-lapis lua5.2
+
+P:lua5.1-lapis
+V:1.18.0-r0
+D:lua-date
+
+[request]
+lua-lapis-eswidget
+
+[answer apk-tools 3.0.9-r0]
+install lua5.1 5.1.5-r13
+install lua-date 2.2.1-r0
+install lua5.1-lapis 1.18.0-r0
+install lua5.2 5.2.4-r13
+install lua-lapis-eswidget 1.5.0-r0

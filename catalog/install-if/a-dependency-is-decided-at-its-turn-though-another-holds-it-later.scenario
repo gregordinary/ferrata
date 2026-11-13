@@ -1,0 +1,52 @@
+[statement]
+The walk reaches `r`, whose condition holds, before `z`: `F`, which `r`
+needs, is decided at once, for `f1`, though `z` names `S` before `F` and
+`f2` would answer both. `s1` is then passed over, since `f1` holds `K`.
+
+[repository]
+P:top
+V:1
+D:n z
+
+P:n
+V:1
+
+P:z
+V:1
+D:S F
+
+P:r
+V:1
+i:n
+D:F
+
+P:f1
+V:1
+k:100
+p:F K=1
+
+P:f2
+V:1
+k:10
+p:F S
+
+P:s1
+V:1
+k:100
+p:S K=1
+
+P:s2
+V:1
+k:10
+p:S
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install f1 1
+install r 1
+install f2 1
+install z 1
+install top 1

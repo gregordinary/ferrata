@@ -1,0 +1,38 @@
+[statement]
+Observed; the rule is not yet known. `c` needs `b`; `b` 3, the best
+candidate, provides `w` and `so:x`, with a priority of 1, and has the
+condition `a<2`; `b` 2 needs `so:x`. `a` 3, in the second repository,
+forbids `so:x` and needs `w`; `a` 2 needs `a` and provides `so:x` at
+version 1. apk installs `b` 3.
+
+[repository]
+P:c
+V:2
+D:b
+
+P:b
+V:3
+k:1
+p:w so:x
+i:a<2
+
+P:b
+V:2
+D:so:x
+
+P:a
+V:2
+D:a
+p:so:x=1
+
+[repository]
+P:a
+V:3
+D:!so:x w
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+install b 3
+install c 2

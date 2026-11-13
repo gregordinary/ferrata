@@ -1,0 +1,25 @@
+[statement]
+A package installed by its `install_if` can complete another's condition.
+
+[repository]
+P:base
+V:1.0
+
+P:docs
+V:1.0
+
+P:extra
+V:1.0
+i:base
+
+P:extra2
+V:1.0
+i:extra
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1.0
+install extra 1.0
+install extra2 1.0

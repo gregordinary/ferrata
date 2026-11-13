@@ -1,0 +1,42 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`rofi-blocks`. Both providers of `cmd:rofi` provide it at one version and
+depend on `rofi`, which is required, and so installed, first;
+`rofi-x11-wayland`, whose condition names `rofi`, is installed with it, and
+answers `cmd:rofi`. `rofi-wayland`, listed first, is not installed. The rule
+of `install-if/installed-as-soon-as-its-condition-holds`.
+
+[repository]
+C:Q1L+UqiRuzbBQ/hHuBUDMcStL1HoU=
+P:rofi
+V:2.0.0-r0
+A:x86_64
+
+C:Q1XkzcjmD+odLKLzPFF27IsUnuUoY=
+P:rofi-blocks
+V:0.1.0-r0
+A:x86_64
+D:cmd:rofi
+
+C:Q1EFepOxHuevkTBCQUh5xe/VoXwkU=
+P:rofi-wayland
+V:2.0.0-r0
+A:x86_64
+D:rofi=2.0.0-r0
+p:cmd:rofi=2.0.0-r0
+
+C:Q1SvhH9kemU36F0HWo42ymxcgIcpQ=
+P:rofi-x11-wayland
+V:2.0.0-r0
+A:x86_64
+D:rofi=2.0.0-r0
+p:cmd:rofi=2.0.0-r0
+i:rofi
+
+[request]
+rofi-blocks
+
+[answer apk-tools 3.0.9-r0]
+install rofi 2.0.0-r0
+install rofi-x11-wayland 2.0.0-r0
+install rofi-blocks 0.1.0-r0

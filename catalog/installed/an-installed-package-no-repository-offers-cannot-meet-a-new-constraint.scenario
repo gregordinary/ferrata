@@ -1,0 +1,24 @@
+[statement]
+A constraint the package installed does not meet, with nothing else to
+answer it, refuses the request: `x` 1.0 is installed, no repository offers
+`x`, and the request asks for `x>=2`.
+
+[repository]
+P:b
+V:1.0-r0
+
+[installed]
+P:x
+V:1.0-r0
+
+[world]
+x
+
+[request]
+x>=2
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   x-1.0-r0:
+|     breaks: world[x>=2]
+refused

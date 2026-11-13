@@ -1,0 +1,19 @@
+[statement]
+A provider's priority (`k:`) is read from the digits it begins with, so 20x is 20: `p1` at `k:20x` against `p2` at `k:10`.
+
+[repository]
+P:p1
+V:1.0-r0
+p:v
+k:20x
+
+P:p2
+V:1.0-r0
+p:v
+k:10
+
+[request]
+v
+
+[answer apk-tools 3.0.9-r0]
+install p1 1.0-r0

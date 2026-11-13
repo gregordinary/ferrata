@@ -1,0 +1,45 @@
+[statement]
+The names a condition states give nothing a place in the decision order.
+`iso`'s condition names `q`, which needs `X`, and the walk reaches `iso`
+first; yet `Y`, which `top` states before `X`, is decided first, for `lo`,
+which answers `X` too.
+
+[repository]
+P:top
+V:1
+D:iso v w
+
+P:iso
+V:1
+i:q zz
+
+P:q
+V:1
+D:X
+
+P:w
+V:1
+D:X
+
+P:v
+V:1
+D:Y
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install iso 1
+install lo 1
+install v 1
+install w 1
+install top 1

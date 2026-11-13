@@ -1,0 +1,22 @@
+[statement]
+Of the providers an entry admitting earlier versions admits, one at a
+version outranks one at no version, whatever their priorities: for `v<3`,
+apk installs `b`, which provides `v` at 2, over `a`, which provides it at
+no version with a priority of 10.
+
+[repository]
+P:a
+V:1
+k:10
+p:v
+
+P:b
+V:2
+k:1
+p:v=2
+
+[request]
+v<3
+
+[answer apk-tools 3.0.9-r0]
+install b 2

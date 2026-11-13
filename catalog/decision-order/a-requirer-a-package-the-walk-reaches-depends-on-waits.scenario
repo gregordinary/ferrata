@@ -1,0 +1,41 @@
+[statement]
+As `a-requirer-another-pending-name-could-require-waits`, with `kb`, which
+nothing requires, depending on `w`: the walk for the preliminary choices
+reaches `kb` through the condition of `kt`, and `w` waits its turn after
+`v`, which goes to `gk`. Without `kt`, `kw` is installed first and
+answers `v`.
+
+[repository]
+P:app
+V:1
+D:v w
+
+P:kw
+V:1
+D:dep
+p:v w=1
+
+P:dep
+V:1
+
+P:kb
+V:1
+D:w
+
+P:kt
+V:1
+i:app kb
+
+P:gk
+V:1
+k:100
+p:v
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install gk 1
+install dep 1
+install kw 1
+install app 1

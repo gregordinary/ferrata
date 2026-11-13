@@ -1,0 +1,16 @@
+[statement]
+A request whose constraint no version offered meets is refused: `a>5`, with
+only `a` 1 offered.
+
+[repository]
+P:a
+V:1
+
+[request]
+a>5
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-1:
+|     breaks: world[a>5]
+refused

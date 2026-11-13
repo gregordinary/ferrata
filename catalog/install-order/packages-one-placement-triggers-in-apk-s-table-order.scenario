@@ -1,0 +1,31 @@
+[statement]
+Packages whose `install_if` conditions one package completes are walked
+after it in the order apk's table of names holds their names, not the
+order of names or records: the table's buckets in ascending order, a
+name's bucket being its 32-bit MurmurHash3 with seed 5381, modulo 20,000.
+`c` is in bucket 7,966, `a` in 12,779, and `b` in 18,296.
+
+[repository]
+P:base
+V:1
+
+P:a
+V:1
+i:base
+
+P:b
+V:1
+i:base
+
+P:c
+V:1
+i:base
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install c 1
+install a 1
+install b 1

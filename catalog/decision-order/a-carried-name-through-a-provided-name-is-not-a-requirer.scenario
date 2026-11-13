@@ -1,0 +1,30 @@
+[statement]
+A carried name whose candidate depends on a name a candidate of another
+carried name provides is not decided before that one: `p1`, which `app`
+lists last, is decided first, though `b` needs `x`, which `p1` provides.
+`b`'s requirement on `x` at 1.0 then breaks `p1`, and apk refuses.
+Contrast `a-requirer-reaches-through-the-names-a-candidate-provides`.
+
+[repository]
+P:app
+V:1
+D:b p1
+
+P:p1
+V:1
+k:5
+p:x
+
+P:b
+V:1
+D:x=1.0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   p1-1:
+|     breaks: b-1[x=1.0]
+|     satisfies: app-1[p1]
+refused

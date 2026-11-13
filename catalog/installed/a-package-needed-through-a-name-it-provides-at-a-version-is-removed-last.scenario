@@ -1,0 +1,30 @@
+[statement]
+A package needed through a name it provides at a version waits for what
+needed it, but is not freed by it: `x`, which `y` needed through `v`, is
+removed after everything else, `b`'s install included. One providing the
+name at no version would follow `y` at once.
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:x
+V:1
+p:v=1
+
+P:y
+V:1
+D:v
+
+P:z
+V:1
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove y 1
+remove z 1
+install b 1
+remove x 1

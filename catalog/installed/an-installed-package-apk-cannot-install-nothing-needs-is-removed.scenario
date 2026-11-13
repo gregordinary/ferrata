@@ -1,0 +1,27 @@
+[statement]
+As `an-installed-package-apk-cannot-install-is-replaced`, with nothing
+needing it: the installed `a`, which apk could not install for a field it
+does not know, is removed, though the request does not touch it.
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:a
+V:1
+X:strange
+
+P:c
+V:1
+
+[world]
+c
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: This apk-tools is OLD! Some packages are not installable.
+remove a 1
+install b 1

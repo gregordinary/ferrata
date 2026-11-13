@@ -1,0 +1,37 @@
+[statement]
+At equal priority, the walk takes the candidate at the later version first:
+`pa`, providing `v` at 2 and listed second, so `q2` is decided first.
+
+[repository]
+P:app
+V:1
+D:v
+
+P:pz
+V:1
+p:v=1
+D:q1 q2
+
+P:pa
+V:1
+p:v=2
+D:q2 q1
+
+P:c1
+V:1
+p:q1
+k:100
+
+P:c2
+V:1
+p:q1 q2=1
+k:10
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install c2 1
+install pa 1
+install app 1

@@ -1,0 +1,37 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`rmlmapper`. The real names decided first reach `so:openjdk21:libjli.so`,
+provided at a version by `openjdk21-jre-headless` alone, which also provides
+`java-jre-headless`; `openjdk25-jre-headless`, the only other provider and
+of higher priority, is not installed.
+
+[repository]
+P:openjdk21
+V:21.0.13.0.3_p1-r0
+D:openjdk21-jdk
+
+P:openjdk21-jdk
+V:21.0.13.0.3_p1-r0
+D:so:openjdk21:libjli.so
+
+P:openjdk21-jre-headless
+V:21.0.13.0.3_p1-r0
+p:java-jre-headless so:openjdk21:libjli.so=0
+
+P:openjdk25-jre-headless
+V:25.0.5.0.3_p1-r0
+k:25
+p:java-jre-headless
+
+P:rmlmapper
+V:8.1.0-r0
+D:openjdk21 java-jre-headless
+
+[request]
+rmlmapper
+
+[answer apk-tools 3.0.9-r0]
+install openjdk21-jre-headless 21.0.13.0.3_p1-r0
+install openjdk21-jdk 21.0.13.0.3_p1-r0
+install openjdk21 21.0.13.0.3_p1-r0
+install rmlmapper 8.1.0-r0

@@ -1,0 +1,36 @@
+[statement]
+Every candidate for `v` needs `lib`, whose one record apk cannot install
+(an unknown uppercase field): apk refuses, whichever candidate it would
+choose.
+
+[repository]
+P:app
+V:1
+D:v
+
+P:p1
+V:1
+p:v
+k:10
+D:lib
+
+P:p2
+V:1
+p:v
+k:20
+D:lib
+
+P:lib
+V:1
+X:1
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: This apk-tools is OLD! Some packages are not installable.
+| ERROR: unable to select packages:
+|   lib-1:
+|     error: uninstallable
+|     satisfies: p2-1[lib]
+refused

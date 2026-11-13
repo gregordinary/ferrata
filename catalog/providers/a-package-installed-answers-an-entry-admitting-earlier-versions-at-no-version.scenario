@@ -1,0 +1,21 @@
+[statement]
+A package installed for its own name answers, through a name it provides
+at no version, an entry admitting earlier versions, though it states no
+priority: `a` is requested, and answers `app`'s `v<3`.
+
+[repository]
+P:a
+V:1
+p:v
+
+P:app
+V:1
+D:v<3
+
+[request]
+a
+app
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install app 1

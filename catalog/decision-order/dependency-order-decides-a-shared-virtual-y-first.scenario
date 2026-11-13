@@ -1,0 +1,27 @@
+[statement]
+Which provider answers a name provided at no version depends on the order a
+package lists its dependencies in. Here `b` lists `y` first: `y` has one
+provider, `p2`, which also provides `x`, and `x` is then met by `p2` alone,
+though `p1` ranks higher for it.
+
+[repository]
+P:b
+V:1.0-r0
+D:y x
+
+P:p1
+V:1.0-r0
+p:x
+k:100
+
+P:p2
+V:1.0-r0
+p:x y=1
+k:10
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install p2 1.0-r0
+install b 1.0-r0

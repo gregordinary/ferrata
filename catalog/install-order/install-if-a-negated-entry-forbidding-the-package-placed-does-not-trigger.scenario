@@ -1,0 +1,30 @@
+[statement]
+A `!` entry of a condition that forbids the package placed does not
+trigger its package: `q`, requested, whose condition is `!a=1`, is not
+walked when `a` 1 is placed, but where the request reaches it, after `m`.
+
+[repository]
+P:q
+V:1
+D:e
+i:!a=1
+
+P:a
+V:1
+
+P:e
+V:3
+
+P:m
+V:1
+
+[request]
+a
+m
+q
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install m 1
+install e 3
+install q 1

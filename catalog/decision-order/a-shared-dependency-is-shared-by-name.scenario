@@ -1,0 +1,39 @@
+[statement]
+As `a-dependency-every-candidate-shares-is-taken-first`, with `p2` depending
+on `kw>=1` rather than `kw`: candidates share a dependency on a name whatever
+constraints they state.
+
+[repository]
+P:app
+V:1
+D:w v
+
+P:p1
+V:1
+p:v
+k:100
+D:kw
+
+P:p2
+V:1
+p:v
+k:10
+D:kw>=1
+
+P:kw
+V:1
+p:w
+
+P:gk
+V:1
+p:w
+k:100
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install kw 1
+install p1 1
+install app 1

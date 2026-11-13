@@ -1,0 +1,35 @@
+[statement]
+A name that only a package installed for its condition requires does not
+narrow a decision: `a`, whose condition `d` 3 completes, needs `W`, and
+both candidates for `W` are versions of `x`. apk does not take `x` 2 for
+`x` and refuses, its report naming no broken constraint. Contrast
+`decision-order/a-name-every-candidate-of-which-holds-another-narrows-its-choice`.
+
+[repository]
+P:a
+V:1
+D:W
+i:d
+
+P:d
+V:3
+
+P:x
+V:3
+
+P:x
+V:2
+p:W
+
+P:x
+V:1
+p:W
+
+[request]
+x
+d
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+| Huh? Error reporter did not find the broken constraints.
+refused

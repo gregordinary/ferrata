@@ -1,0 +1,22 @@
+[statement]
+A repeated `D:` adds to the one before it.
+
+[repository]
+P:app
+V:1.0-r0
+D:a
+D:b
+
+P:a
+V:1.0-r0
+
+P:b
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install a 1.0-r0
+install b 1.0-r0
+install app 1.0-r0

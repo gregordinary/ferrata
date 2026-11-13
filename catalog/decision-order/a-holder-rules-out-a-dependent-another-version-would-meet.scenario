@@ -1,0 +1,33 @@
+[statement]
+A package installed rules out a candidate whose dependency on its name it
+does not meet, where another package could: `python3` 3.14, installed for
+`a`, rules out `py` r10, which needs `python3~3.12`, since `python3` 3.12
+is offered too, and `py` r9 is installed. Contrast
+`refusals/a-holder-does-not-rule-out-a-dependent-nothing-could-meet`.
+
+[repository]
+P:python3
+V:3.14.10-r1
+
+P:python3
+V:3.12.1-r0
+
+P:a
+V:1
+D:python3~3.14
+
+P:py
+V:1.1-r9
+
+P:py
+V:1.1-r10
+D:python3~3.12
+
+[request]
+a
+py
+
+[answer apk-tools 3.0.9-r0]
+install python3 3.14.10-r1
+install a 1
+install py 1.1-r9

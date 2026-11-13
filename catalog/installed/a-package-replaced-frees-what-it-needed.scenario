@@ -1,0 +1,48 @@
+[statement]
+A package removed waits for the packages needing it to change: `oldlib`,
+which `app` 1.0 needed, is removed right after `app` is upgraded, before
+`zz` is installed; `orph`, which nothing needed, goes first.
+
+[repository]
+P:app
+V:2.0-r0
+D:newlib
+
+P:newlib
+V:1
+
+P:oldlib
+V:1
+
+P:zz
+V:1
+
+P:aa
+V:1
+
+[installed]
+P:oldlib
+V:1
+
+P:app
+V:1.0-r0
+D:oldlib
+
+P:orph
+V:1
+
+[world]
+app
+
+[request]
+app>=2
+aa
+zz
+
+[answer apk-tools 3.0.9-r0]
+remove orph 1
+install aa 1
+install newlib 1
+upgrade app 1.0-r0 2.0-r0
+remove oldlib 1
+install zz 1

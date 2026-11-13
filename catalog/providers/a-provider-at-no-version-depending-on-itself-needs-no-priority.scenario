@@ -1,0 +1,16 @@
+[statement]
+A package that depends on its own name is chosen for a name it provides
+at no version, though it states no priority: `a`, which provides `v` and
+depends on `a`, is installed for `v`. Without the dependency, apk refuses.
+
+[repository]
+P:a
+V:1
+D:a
+p:v
+
+[request]
+v
+
+[answer apk-tools 3.0.9-r0]
+install a 1

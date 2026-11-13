@@ -1,0 +1,24 @@
+[statement]
+As `a-holder-excludes-a-provider-at-no-version`, with `a` providing `X` at
+no version: both are installed.
+
+[repository]
+P:top
+V:1
+D:A B
+
+P:a
+V:1
+p:A=1 X
+
+P:b
+V:1
+p:B=1 X
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install b 1
+install top 1

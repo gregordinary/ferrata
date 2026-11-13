@@ -1,0 +1,31 @@
+[statement]
+A package holding a name, by providing it at a version, excludes every other
+package providing it, at no version too: `a` provides `X` at 1 and `b` at no
+version, and apk refuses. Contrast `a-provider-at-no-version-shares-the-
+name`.
+
+[repository]
+P:top
+V:1
+D:A B
+
+P:a
+V:1
+p:A=1 X=1
+
+P:b
+V:1
+p:B=1 X
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-1:
+|     conflicts: b-1[X=1]
+|     satisfies: top-1[A]
+|   b-1:
+|     conflicts: a-1[X]
+|     satisfies: top-1[B]
+refused

@@ -1,0 +1,35 @@
+[statement]
+An installed package gives way as a dependency as any other candidate
+does (`conflicts/a-dependency-gives-way-to-a-choice-needing-it`): `top`
+needs `e`, whose one candidate `e` 1 needs `a` and provides `w`, and `a`
+3, installed, forbids `w`. apk downgrades `a` to 2.
+
+[repository]
+P:a
+V:3
+D:!w
+
+P:a
+V:2
+
+P:e
+V:1
+D:a
+p:w=1
+
+P:top
+V:1
+D:e
+
+[installed]
+P:a
+V:3
+D:!w
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+downgrade a 3 2
+install e 1
+install top 1

@@ -1,0 +1,19 @@
+[statement]
+An `install_if` entry apk cannot read empties the condition read so far,
+including the readable entries before it: `extra` is not installed with
+`docs`, though `docs` is the condition's other entry.
+
+[repository]
+P:docs
+V:1.0-r0
+
+P:extra
+V:1.0-r0
+i:docs docs=1.0b1
+
+[request]
+docs
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: The indexes contain broken packages which might not function properly.
+install docs 1.0-r0

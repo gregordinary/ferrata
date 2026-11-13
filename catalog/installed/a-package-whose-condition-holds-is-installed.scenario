@@ -1,0 +1,35 @@
+[statement]
+A package whose `install_if` condition the installed packages complete is
+installed with any request, though it was not before.
+
+[repository]
+P:a
+V:1
+
+P:docs
+V:1
+
+P:a-doc
+V:1
+i:a docs
+
+P:b
+V:1
+
+[installed]
+P:a
+V:1
+
+P:docs
+V:1
+
+[world]
+a
+docs
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 1
+install a-doc 1

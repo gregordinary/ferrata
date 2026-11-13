@@ -1,0 +1,36 @@
+[statement]
+A package whose condition names a name packages only provide does not
+steer the choice of the provider that completes it: `top` needs `D`,
+which `d3` provides with a priority of 10 and `d1` with none; `a`'s
+condition is `D`, and `a` needs `w`, which only `d1` provides. apk takes
+`d3` for `D`, and `d1` for `a` beside it. Contrast
+`a-package-whose-condition-holds-does-not-steer-the-choice-completing-it`,
+where the provider of `w` cannot be installed beside the choice.
+
+[repository]
+P:top
+V:1
+D:D
+
+P:a
+V:1
+D:w
+i:D
+
+P:d3
+V:1
+k:10
+p:D
+
+P:d1
+V:1
+p:D w=2
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install d3 1
+install d1 1
+install a 1
+install top 1

@@ -1,0 +1,39 @@
+[statement]
+A name decided before a carried name, because its one candidate needs it,
+has the names that would require it decided first in turn, through the
+names that candidate provides: `dep` is carried, `x1` is decided before
+it, for `px`, and before `x1`, `w`, whose one candidate `kw` needs `x3`,
+which `px` provides too. `kw` answers `v`, so `gk` is not installed. The
+rule of `reduced/kmail-takes-kwallet-alone`.
+
+[repository]
+P:app
+V:1
+D:v w x1
+
+P:kw
+V:1
+D:x3
+p:v w=1
+
+P:px
+V:1
+D:dep
+p:x3=1 x1=1
+
+P:dep
+V:1
+
+P:gk
+V:1
+k:100
+p:v
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install dep 1
+install px 1
+install kw 1
+install app 1

@@ -1,0 +1,25 @@
+[statement]
+A `!` entry of the request leads the walk at its name's place in the
+order of names: `!a<1` places `a` before `m`, though only `q`, after `m`,
+depends on it.
+
+[repository]
+P:a
+V:2
+
+P:m
+V:1
+
+P:q
+V:1
+D:a
+
+[request]
+!a<1
+m
+q
+
+[answer apk-tools 3.0.9-r0]
+install a 2
+install m 1
+install q 1

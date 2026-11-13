@@ -1,0 +1,35 @@
+[statement]
+Of two providers at no version, the higher priority is installed, and the
+installed one removed: priority goes before what is installed. Contrast
+`an-installed-provider-at-no-version-keeps-a-tie-of-priority`.
+
+[repository]
+P:q
+V:1
+p:v
+k:10
+
+P:r
+V:1
+p:v
+k:20
+
+P:b
+V:1
+
+[installed]
+P:q
+V:1
+p:v
+k:10
+
+[world]
+v
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove q 1
+install b 1
+install r 1

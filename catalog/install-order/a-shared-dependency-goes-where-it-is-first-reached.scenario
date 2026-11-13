@@ -1,0 +1,28 @@
+[statement]
+A dependency two packages share is installed where the walk first reaches
+it: under `b`, the first of `a`'s dependencies.
+
+[repository]
+P:a
+V:1
+D:b c
+
+P:b
+V:1
+D:d
+
+P:c
+V:1
+D:d
+
+P:d
+V:1
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+install d 1
+install b 1
+install c 1
+install a 1

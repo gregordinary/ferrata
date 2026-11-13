@@ -1,0 +1,28 @@
+[statement]
+A choice made for a name some package carries still steers a name the
+request names: `y` 2, the best candidate for `y`, needs `w`, which only
+`x` 1 provides, and apk takes `x` 1 for `x` over `x` 3. Contrast
+`a-requested-name-some-package-carries-keeps-its-choice-against-a-provided-name`.
+
+[repository]
+P:x
+V:3
+
+P:x
+V:1
+p:w=2
+
+P:y
+V:2
+D:w
+
+P:y
+V:1
+
+[request]
+x
+y
+
+[answer apk-tools 3.0.9-r0]
+install x 1
+install y 2

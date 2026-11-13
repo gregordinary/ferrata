@@ -1,0 +1,74 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `nextcloud32-files_pdfviewer`'s closure from v3.23
+installed, `qvidcap` asked. The request needs `icu-libs` 78, and the
+installed `php83-intl`, which the world needs, needs `so:libicuuc.so.76`
+from the installed `icu-libs` 76. The repository offers another build of
+the same `php83-intl` version that does not. apk replaces the installed
+build with it, and upgrades `icu-libs`: `icu-data=78.1-r0` is required
+through names each with a single candidate before `icu-libs` is installed
+(`installed/a-sole-candidate-s-constraint-upgrades-an-installed-package`).
+It replaces `php83-intl` first, and removes `icu-data-en`, whose
+`icu-data` `icu-data-full` takes, just before installing `icu-data-full`
+(`installed/a-package-losing-a-name-it-provides-is-removed-at-the-turn-of-its-successor`).
+
+[repository]
+P:icu-data-full
+V:78.1-r0
+p:icu-data=78.1-r0
+
+P:icu-libs
+V:78.1-r0
+D:icu-data=78.1-r0
+p:so:libicuuc.so.78=78.1
+
+[repository]
+C:Q1r6ayYHR1EZX8igLFfyycE+A8/Nw=
+P:php83-intl
+V:8.3.36-r0
+
+P:qt6-qtbase
+V:6.11.1-r0
+D:so:libicuuc.so.78
+p:so:libQt6Core.so.6=6.11.1
+
+P:qvidcap
+V:1.32.0-r1
+D:so:libQt6Core.so.6
+
+[installed]
+P:icu-data-en
+V:76.1-r1
+p:icu-data=76.1-r1
+
+P:icu-libs
+V:76.1-r1
+D:icu-data=76.1-r1
+p:so:libicuuc.so.76=76.1
+
+C:Q1E04x3ugVWeVKW4T0+l+WRhbOE3Q=
+P:php83-intl
+V:8.3.36-r0
+D:so:libicuuc.so.76
+
+P:nextcloud32
+V:32.0.9-r0
+D:php83-intl
+
+P:nextcloud32-files_pdfviewer
+V:32.0.9-r0
+D:nextcloud32
+
+[world]
+nextcloud32-files_pdfviewer
+
+[request]
+qvidcap
+
+[answer apk-tools 3.0.9-r0]
+replace php83-intl 8.3.36-r0 8.3.36-r0
+remove icu-data-en 76.1-r1
+install icu-data-full 78.1-r0
+upgrade icu-libs 76.1-r1 78.1-r0
+install qt6-qtbase 6.11.1-r0
+install qvidcap 1.32.0-r1

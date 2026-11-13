@@ -1,0 +1,37 @@
+[statement]
+As `a-condition-s-negated-entry-keeps-its-name-out-of-the-package-s-dependencies`,
+one package further down: `e` needs `z`, `z` needs `docs`, and `e`'s
+condition forbids `docs`. No candidate is left for `docs` below `e`, and
+apk refuses the request.
+
+[repository]
+P:top
+V:1
+D:base
+
+P:base
+V:1
+
+P:docs
+V:1
+
+P:z
+V:1
+D:docs
+
+P:e
+V:1
+D:z
+i:base !docs
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   docs (virtual):
+|     note: please select one of the 'provided by'
+|           packages explicitly
+|     provided by: docs
+|     required by: z-1[docs]
+refused

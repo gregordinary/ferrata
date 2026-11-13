@@ -1,0 +1,26 @@
+[statement]
+As `a-name-a-candidate-carries-is-decided-first`, with `openblas` offered at
+two versions, only the later providing `blas`: `openblas` is still decided
+first, for 0.4, which answers `blas`.
+
+[repository]
+P:app
+V:1
+D:blas openblas
+
+P:blas
+V:3.12
+
+P:openblas
+V:0.3
+
+P:openblas
+V:0.4
+p:blas
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install openblas 0.4
+install app 1

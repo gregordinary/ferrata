@@ -1,0 +1,48 @@
+[statement]
+As `a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-further-up`,
+where a package up the chain of requirements was chosen for a name it only
+provides: `top` needs `v`, which `p1` provides; `p1` needs `w`, which `p2`
+and `p2b` provide, and `p2`, of the higher priority, is chosen for it;
+`p2` needs `n`. `n` 2 needs `missing`, and `n` 1 needs `p1`; apk passes
+over `n` 2 and installs `n` 1. The chain runs through `w`, the name `p2`
+was chosen for, not `p2`, the name it carries. Where `p2` is the only
+provider of `w`, apk refuses
+(`a-candidate-whose-dependency-cannot-be-met-is-not-passed-over-beside-one-depending-further-up-through-single-providers`).
+
+[repository]
+P:top
+V:1
+D:v
+
+P:p1
+V:1
+k:10
+D:w
+p:v
+
+P:p2
+V:1
+k:10
+D:n
+p:w
+
+P:p2b
+V:1
+p:w
+
+P:n
+V:2
+D:missing
+
+P:n
+V:1
+D:p1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install p2 1
+install p1 1
+install top 1

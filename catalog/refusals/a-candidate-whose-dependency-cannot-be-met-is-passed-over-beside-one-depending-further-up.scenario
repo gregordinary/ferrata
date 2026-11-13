@@ -1,0 +1,32 @@
+[statement]
+As `a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-on-its-requirer`,
+through a package further up the chain of requirements: `top` needs `b`,
+`b` needs `a`, and `a` 1 needs `top`; apk passes over `a` 3, which needs
+`missing`, and installs `a` 1. A dependency on a package `top` needs
+beside `b`, or one reached only through another package, does not do this
+(`a-candidate-whose-dependency-cannot-be-met-is-not-passed-over-for-a-package-beside-the-chain`).
+
+[repository]
+P:top
+V:1
+D:b
+
+P:a
+V:1
+D:top
+
+P:a
+V:3
+D:missing
+
+P:b
+V:2
+D:a
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install b 2
+install top 1

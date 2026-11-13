@@ -1,0 +1,26 @@
+[statement]
+As `a-requested-name-with-two-candidates-is-not-settled-first`, with `y>=2`
+requested and `p3` providing `y` at 1: the constraint leaves `y` one
+candidate, `p2`, which is settled first and provides `x` too.
+
+[repository]
+P:p1
+V:1
+p:x
+k:100
+
+P:p2
+V:1
+p:x y=2
+k:10
+
+P:p3
+V:1
+p:y=1
+
+[request]
+x
+y>=2
+
+[answer apk-tools 3.0.9-r0]
+install p2 1

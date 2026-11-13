@@ -1,0 +1,33 @@
+[statement]
+A later name whose one candidate is reached only through the package an
+override would choose does not steer an earlier name to it: `so:h` goes to
+`p`, which provides it at version 5; `l` 7, the other candidate, needs
+`dav`, whose one candidate needs `l=7`, which would hold `so:h` beside
+`p`. apk installs `p` alone. With `dav` required by `app` too, it installs
+`dav` and `l` instead. The shape of `reduced/octave-keeps-an-installed-libheif`.
+Observed; the rule is not yet known in full.
+
+[repository]
+P:app
+V:1
+D:so:h
+
+P:p
+V:1
+p:so:h=5
+
+P:l
+V:7
+p:so:h=1
+D:dav
+
+P:dav
+V:7
+D:l=7
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install p 1
+install app 1

@@ -1,0 +1,25 @@
+[statement]
+A `!` entry whose operator admits earlier versions forbids a package
+providing the name at no version: `app` states `!v<3`, `a` provides `v`
+at no version, and asked for both, apk refuses. With `!v>1`, apk installs
+both.
+
+[repository]
+P:app
+V:1
+D:!v<3
+
+P:a
+V:1
+p:v
+
+[request]
+app
+a
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-1:
+|     breaks: app-1[!v<3]
+|     satisfies: world[a]
+refused

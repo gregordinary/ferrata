@@ -1,0 +1,21 @@
+[statement]
+A dependency whose operator admits earlier versions is met by a provider
+at no version, as the request's entry is: `app` needs `v<3`, and apk
+installs `a`, which provides `v` at no version with a priority.
+
+[repository]
+P:app
+V:1
+D:v<3
+
+P:a
+V:1
+k:10
+p:v
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install app 1

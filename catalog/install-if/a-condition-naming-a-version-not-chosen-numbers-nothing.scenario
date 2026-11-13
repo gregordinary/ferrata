@@ -1,0 +1,48 @@
+[statement]
+As `a-condition-the-choices-do-not-complete-numbers-nothing`, with `e`'s
+condition naming `y` 1, a version of a name `top` needs: `y` 2 is chosen,
+the choices do not complete the condition, and `W` is decided before `V`.
+
+[repository]
+P:top
+V:1
+D:y B W K
+
+P:y
+V:1
+
+P:y
+V:2
+
+P:base
+V:1
+p:B=1
+
+P:e
+V:1
+D:V
+i:base y=1
+
+P:gk
+V:1
+k:100
+p:V
+
+P:kw
+V:1
+p:V W=1
+
+P:pk
+V:1
+D:V
+p:K=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install y 2
+install base 1
+install kw 1
+install pk 1
+install top 1

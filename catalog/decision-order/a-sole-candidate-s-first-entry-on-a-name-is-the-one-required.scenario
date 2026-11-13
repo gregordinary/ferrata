@@ -1,0 +1,38 @@
+[statement]
+Where a name's single candidate states two entries on one name, the first
+is the one required: as
+`a-sole-candidate-s-dependency-is-required-with-its-constraint`, with `n`
+needing `lib>0` before `lib<2`. `lib` is required with `lib>0` and gets
+2.0, and `n` cannot be installed beside it; apk refuses. With the entries
+the other way round, it installs `lib` 1.0.
+
+[repository]
+P:app
+V:1
+D:so:r
+
+P:r
+V:1
+p:so:r=1
+D:so:n
+
+P:n
+V:1
+p:so:n=1
+D:lib>0 lib<2
+
+P:lib
+V:1.0
+
+P:lib
+V:2.0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   lib-2.0:
+|     breaks: n-1[lib<2]
+|     satisfies: n-1[lib>0]
+refused

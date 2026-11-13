@@ -1,0 +1,35 @@
+[statement]
+A name a kept package's `install_if` condition names does not hold back
+the removal of a package losing it: `q` takes `y` from the installed `p`,
+and the kept `k` names `y` in its condition, so apk removes `p` first, as
+where nothing names `y`
+(`a-package-losing-a-name-nothing-else-needs-is-removed-first`).
+
+[repository]
+P:a
+V:1
+
+P:q
+V:1
+p:y=2
+
+[installed]
+P:p
+V:1
+p:y=1
+
+P:k
+V:1
+i:y
+
+[world]
+k
+
+[request]
+a
+q
+
+[answer apk-tools 3.0.9-r0]
+remove p 1
+install a 1
+install q 1

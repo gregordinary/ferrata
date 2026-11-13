@@ -1,0 +1,58 @@
+[statement]
+Observed; the rule is not yet known. `v` and `so:x` are requested. apk
+takes `b` 1, the best candidate for `so:x`, and `e` 3 for `v`, which it
+provides at version 3 where `b` 1 provides it at none, though the two
+cannot stand together, and refuses. `c` 1, whose condition `e` 3
+completes, needs `d`, whose one candidate provides `v`, and does not
+steer `v` to it
+(`install-if/a-package-whose-condition-holds-does-not-steer-the-choice-completing-it`).
+
+[repository]
+P:b
+V:3
+D:e
+p:w=1
+
+P:e
+V:1
+D:w
+
+P:d
+V:2
+D:w
+p:v
+
+P:c
+V:1
+D:!b d
+i:e
+
+P:f
+V:3
+k:1
+p:so:x
+
+[repository]
+P:e
+V:3
+p:v=3
+
+P:b
+V:1
+k:10
+D:v e
+p:v so:x=1
+
+[request]
+v
+so:x
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   e-3:
+|     conflicts: b-1[v=3]
+|     satisfies: world[v] b-1[v] b-1[e]
+|   b-1:
+|     conflicts: e-3[v]
+|     satisfies: world[so:x] world[v] b-1[v]
+refused

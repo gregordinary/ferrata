@@ -1,0 +1,47 @@
+[statement]
+A package displaced by one of the resolution goes just before the walk
+that places its successor, before the successor's dependencies: `ys`
+takes `cmd:sh`, which the installed `bb` holds and the kept `k` needs, and
+`ys` needs `y`. apk removes `bb` after `a` and `b`, and before `y`.
+
+[repository]
+P:ys
+V:1
+p:cmd:sh=2
+D:y
+
+P:y
+V:1
+
+P:app
+V:1
+D:a b ys
+
+P:a
+V:1
+
+P:b
+V:1
+
+[installed]
+P:bb
+V:1
+p:cmd:sh=1
+
+P:k
+V:1
+D:cmd:sh
+
+[world]
+k
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install b 1
+remove bb 1
+install y 1
+install ys 1
+install app 1

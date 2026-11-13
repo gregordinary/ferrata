@@ -1,0 +1,39 @@
+[statement]
+A name every candidate for a required name depends on is required as soon
+as that name is: `p1` and `p2`, the candidates for `v`, both depend on the
+real `kw`, which is installed before `w` is decided, though `app` lists `w`
+first; `kw` provides `w`, so `gk` is not installed.
+
+[repository]
+P:app
+V:1
+D:w v
+
+P:p1
+V:1
+p:v
+k:100
+D:kw
+
+P:p2
+V:1
+p:v
+k:10
+D:kw
+
+P:kw
+V:1
+p:w
+
+P:gk
+V:1
+p:w
+k:100
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install kw 1
+install p1 1
+install app 1

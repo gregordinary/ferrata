@@ -1,0 +1,26 @@
+[statement]
+As `repositories/a-record-with-the-identity-of-another-name-is-no-package`,
+the record read before installed: the root holds `one`, a repository
+offers `two` with `one`'s identity, and apk has no package for `two`.
+
+[repository]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:two
+V:1
+
+[installed]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:one
+V:1
+
+[world]
+one
+
+[request]
+two
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   two (no such package):
+|     required by: world[two]
+refused

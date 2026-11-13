@@ -1,0 +1,24 @@
+[statement]
+As `a-record-with-the-identity-of-another-name-is-no-package`, the
+record of another name in a later repository: `two` has the identity of
+`one`, which the first repository offers, and apk has no package for
+`two`.
+
+[repository]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:one
+V:1
+
+[repository]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:two
+V:1
+
+[request]
+two
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   two (no such package):
+|     required by: world[two]
+refused

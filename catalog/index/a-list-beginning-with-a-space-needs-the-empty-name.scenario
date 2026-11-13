@@ -1,0 +1,20 @@
+[statement]
+A list field whose value begins with a space begins with an empty entry: a
+dependency on the empty name, which no package provides.
+
+[repository]
+P:app
+V:1.0-r0
+D: a
+
+P:a
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|    (no such package):
+|     required by: app-1.0-r0[]
+refused

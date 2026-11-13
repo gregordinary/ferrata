@@ -1,0 +1,39 @@
+[statement]
+Only a provided name whose one candidate depends directly on a real name is
+decided before it: `w`'s candidate `kw` needs `x2`, whose candidate `px`
+needs the real `dep`. `x2` is decided early, but `w` waits its turn after
+`v`, which goes to `gk`.
+
+[repository]
+P:app
+V:1
+D:v w
+
+P:kw
+V:1
+p:v w=1
+D:x2
+
+P:px
+V:1
+p:x2=1
+D:dep
+
+P:dep
+V:1
+
+P:gk
+V:1
+p:v
+k:100
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install gk 1
+install dep 1
+install px 1
+install kw 1
+install app 1

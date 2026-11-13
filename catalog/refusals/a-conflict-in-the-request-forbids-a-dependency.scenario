@@ -1,0 +1,23 @@
+[statement]
+A `!` entry in the request forbids what a requested package depends on, and
+apk refuses rather than install the package without it: `app` needs `lib`,
+and the request states `!lib`.
+
+[repository]
+P:app
+V:1
+D:lib
+
+P:lib
+V:1
+
+[request]
+app
+!lib
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   lib-1:
+|     breaks: world[!lib]
+|     satisfies: app-1[lib]
+refused

@@ -1,0 +1,26 @@
+[statement]
+apk chooses the later of two versions though a requested package fails
+its dependency, and refuses: `c` 2 needs `a~2`, the request installs `a`
+3, and apk refuses rather than install `c` 1.
+
+[repository]
+P:c
+V:2
+D:a~2
+
+P:a
+V:3
+
+P:c
+V:1
+
+[request]
+a
+c
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-3:
+|     breaks: c-2[a~2]
+|     satisfies: world[a]
+refused

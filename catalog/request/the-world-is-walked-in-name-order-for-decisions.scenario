@@ -1,0 +1,33 @@
+[statement]
+Requested packages are walked in the order of their names, for decisions as
+for install order: `b`, sorting first though requested second, reaches
+`y`, whose single provider `p2` also provides `x`, before `z` reaches
+`x`.
+
+[repository]
+P:p1
+V:1.0-r0
+p:x
+k:100
+
+P:p2
+V:1.0-r0
+p:x y=1
+k:10
+
+P:z
+V:1
+D:x
+
+P:b
+V:1
+D:y
+
+[request]
+z
+b
+
+[answer apk-tools 3.0.9-r0]
+install p2 1.0-r0
+install b 1
+install z 1

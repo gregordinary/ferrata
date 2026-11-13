@@ -1,0 +1,21 @@
+[statement]
+A provided name with an operator and no version after it ends its `p:`
+field: the names before it are provided, those after it in the same field
+are not, and a later `p:` field still provides. Asked for the name after
+the unreadable one, apk finds no package.
+
+[repository]
+P:prov
+V:1.0-r0
+p:x=1 w= v=1
+p:y=1
+
+[request]
+v
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: The indexes contain broken packages which might not function properly.
+| ERROR: unable to select packages:
+|   v (no such package):
+|     required by: world[v]
+refused

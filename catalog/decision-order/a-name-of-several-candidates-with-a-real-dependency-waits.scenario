@@ -1,0 +1,38 @@
+[statement]
+As `a-sole-candidate-with-a-real-dependency-is-installed-first`, with `kx`
+also providing `w`: `w`, now of two candidates, waits its turn after `v`,
+which goes to `gk`, though both candidates need the real `dep`.
+
+[repository]
+P:app
+V:1
+D:v w
+
+P:kw
+V:1
+p:v w=1
+k:5
+D:dep
+
+P:kx
+V:1
+p:w=1
+D:dep
+
+P:dep
+V:1
+
+P:gk
+V:1
+p:v
+k:100
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install gk 1
+install dep 1
+install kw 1
+install app 1

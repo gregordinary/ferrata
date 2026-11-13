@@ -1,0 +1,18 @@
+[statement]
+As `a-name-no-candidate-apk-would-choose-answers-is-decided-last`, where
+the name that takes the candidate is the candidate's own dependency: `v`'s
+one candidate, `f`, provides it at no version and without a priority, and
+depends on `w`, which it provides at a version. `w` is decided first, takes
+`f`, and `f` answers `v`.
+
+[repository]
+P:f
+V:3
+D:w
+p:w=3 v
+
+[request]
+v
+
+[answer apk-tools 3.0.9-r0]
+install f 3

@@ -1,0 +1,41 @@
+[statement]
+Observed; the rule is not yet known. `So` is reached before `Pc`, and `jack`
+is its best candidate, yet apk installs `pjack` for it: `pjackdev`, the best
+candidate for `Pc`, needs `pjack`, which provides `So` at a lower version.
+Contrast `...-not-when-a-name-between-takes-what-it-needs`. Reduced from
+Alpine (`reduced/mpv-dev-takes-pipewire-jack`).
+
+[repository]
+P:top
+V:1
+D:libs Pc
+
+P:libs
+V:1
+D:So
+
+P:jack
+V:1.9
+p:So=0.999
+
+P:jackdev
+V:1.9
+p:Pc=1.9
+
+P:pjack
+V:1.6
+p:So=0.3
+
+P:pjackdev
+V:1.6
+D:pjack
+p:Pc=3.1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install pjack 1.6
+install libs 1
+install pjackdev 1.6
+install top 1

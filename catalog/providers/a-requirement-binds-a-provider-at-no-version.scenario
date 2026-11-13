@@ -1,0 +1,25 @@
+[statement]
+A requirement on a name binds every package providing it, one providing it
+at no version included: asked for `x=1.0` and for `p1`, which provides `x`
+at no version, apk refuses.
+
+[repository]
+P:x
+V:1.0
+
+P:p1
+V:1
+p:x
+k:5
+
+
+[request]
+x=1.0
+p1
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   p1-1:
+|     breaks: world[x=1.0]
+|     satisfies: world[p1]
+refused

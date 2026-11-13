@@ -1,0 +1,33 @@
+[statement]
+A package is installed as soon as its condition holds, before the names
+still waiting are decided: both providers of `cmd` depend on `base`, which
+is installed first, and `p2`, whose condition names `base`, is installed
+with it and answers `cmd`. `p1`, listed first, is not installed. The rule of
+`reduced/rofi-blocks-takes-rofi-x11-wayland`.
+
+[repository]
+P:app
+V:1
+D:cmd
+
+P:base
+V:1
+
+P:p1
+V:1
+p:cmd=1
+D:base
+
+P:p2
+V:1
+p:cmd=1
+D:base
+i:base
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install p2 1
+install app 1

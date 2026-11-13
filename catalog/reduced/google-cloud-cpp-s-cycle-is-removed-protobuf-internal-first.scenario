@@ -1,0 +1,43 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `google-cloud-cpp-backupdr`'s closure from v3.23 installed
+and asked at a later version, with `dotool`. Nothing installed is in the
+world. `google-cloud-cpp` and `google-cloud-cpp-rest-protobuf-internal`
+need each other through names they provide at a version, and apk removes
+`google-cloud-cpp-rest-protobuf-internal` first. Without the second name
+`google-cloud-cpp` provides, which nothing needs, apk removes
+`google-cloud-cpp` first. `musl`, which both need, takes them in the
+order of apk's table of names, each at the first of its names
+(`installed/the-last-removals-go-in-the-order-of-apk-s-table-of-names`):
+that second name puts `google-cloud-cpp` first, which waits on
+`google-cloud-cpp-rest-protobuf-internal`, so that one goes first; without
+it, `google-cloud-cpp-rest-protobuf-internal` comes first, and waits on
+`google-cloud-cpp` (`installed/removals-in-a-cycle-come-last`).
+
+[repository]
+P:google-cloud-cpp-backupdr
+V:2.47.0-r0
+
+[installed]
+P:musl
+V:1.2.5-r24
+p:so:libc.musl-x86_64.so.1=1
+
+P:google-cloud-cpp-rest-protobuf-internal
+V:2.43.0-r2
+D:so:libc.musl-x86_64.so.1 so:libgoogle_cloud_cpp_common.so.2
+p:so:libgoogle_cloud_cpp_rest_protobuf_internal.so.2=2.43.0
+
+P:google-cloud-cpp
+V:2.43.0-r2
+D:so:libc.musl-x86_64.so.1 so:libgoogle_cloud_cpp_rest_protobuf_internal.so.2
+p:so:libgoogle_cloud_cpp_common.so.2=2.43.0 so:libgoogle_cloud_cpp_compute_storage_pools.so.2=2.43.0
+
+[request]
+google-cloud-cpp-backupdr>2.43.0-r2
+
+[answer apk-tools 3.0.9-r0]
+install google-cloud-cpp-backupdr 2.47.0-r0
+remove google-cloud-cpp-rest-protobuf-internal 2.43.0-r2
+remove google-cloud-cpp 2.43.0-r2
+remove musl 1.2.5-r24

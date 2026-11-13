@@ -1,0 +1,39 @@
+[statement]
+Where several packages provide a name a dependency states, each installed
+for another package, the walk follows the one apk installed first: `zp`,
+which `d` requires, though `c`, which requires `bp`, comes before `d`.
+apk decides `zp` first, since the walk numbers it after `bp`
+(`decision-order/carried-names-are-decided-the-last-numbered-first`).
+
+[repository]
+P:a
+V:1
+D:v
+
+P:zp
+V:1
+p:v
+
+P:bp
+V:1
+p:v
+
+P:c
+V:1
+D:bp
+
+P:d
+V:1
+D:zp
+
+[request]
+a
+c
+d
+
+[answer apk-tools 3.0.9-r0]
+install zp 1
+install a 1
+install bp 1
+install c 1
+install d 1

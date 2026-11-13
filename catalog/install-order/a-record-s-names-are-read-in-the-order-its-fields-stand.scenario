@@ -1,0 +1,29 @@
+[statement]
+apk reads a record's names in the order its fields stand: `other` states
+`p:` before `D:`, so `xp`, which it provides, is read before `au`, on
+which it depends, and `au` comes first of the two, which share a bucket.
+
+[repository]
+P:other
+V:1
+p:xp
+D:au
+
+P:base
+V:1
+
+P:au
+V:1
+i:base
+
+P:xp
+V:1
+i:base
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install au 1
+install xp 1

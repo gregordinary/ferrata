@@ -1,0 +1,36 @@
+[statement]
+A package installed for its `install_if` condition is removed when the
+condition no longer holds, before what its condition names.
+
+[repository]
+P:a
+V:1
+
+P:docs
+V:1
+
+P:a-doc
+V:1
+i:a docs
+
+[installed]
+P:a
+V:1
+
+P:docs
+V:1
+
+P:a-doc
+V:1
+i:a docs
+
+[world]
+a
+docs
+
+[request]
+!docs
+
+[answer apk-tools 3.0.9-r0]
+remove a-doc 1
+remove docs 1

@@ -1,0 +1,26 @@
+[statement]
+A package whose condition holds, and which forbids a package installed,
+is passed over where it depends on the package completing its condition:
+`b`, triggered by `d`, needs `d` and forbids `e`, both requested, and apk
+installs `d` and `e` alone. Without the dependency on `d`, apk refuses
+(`a-conflict-with-the-request-refuses-it`).
+
+[repository]
+P:b
+V:1
+D:d !e
+i:d
+
+P:d
+V:1
+
+P:e
+V:1
+
+[request]
+d
+e
+
+[answer apk-tools 3.0.9-r0]
+install d 1
+install e 1

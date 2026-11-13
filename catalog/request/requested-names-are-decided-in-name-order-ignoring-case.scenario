@@ -1,0 +1,28 @@
+[statement]
+apk decides the request's names in the order it sorts them, ignoring ASCII
+case (`requested-names-in-name-order-ignoring-case`): `x` before `Y`, so
+`x` takes `p1`, and `Y` then `p2`. In byte order `Y` would come first, take
+`p2`, and `p2` would answer `x` too.
+
+[repository]
+P:p1
+V:1
+p:x
+k:100
+
+P:p2
+V:1
+p:x Y=1
+k:10
+
+P:p3
+V:1
+p:Y=1
+
+[request]
+Y
+x
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install p2 1

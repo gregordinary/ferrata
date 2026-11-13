@@ -1,0 +1,21 @@
+[statement]
+A package whose condition holds and whose dependency cannot be met is
+passed over where it also depends on the package completing its
+condition: `c`, triggered by `d`, needs `w>1`, which nothing provides,
+and `d`, and `d` is installed alone. Without the dependency on `d`, apk
+refuses (`install-if/an-unmet-dependency-refuses-the-request`).
+
+[repository]
+P:d
+V:2
+
+P:c
+V:2
+D:w>1 d
+i:d
+
+[request]
+d
+
+[answer apk-tools 3.0.9-r0]
+install d 2

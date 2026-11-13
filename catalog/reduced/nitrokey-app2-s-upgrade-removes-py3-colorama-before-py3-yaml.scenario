@@ -1,0 +1,39 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `nitrokey-app2`'s closure from v3.23 installed and asked at a
+later version. Nothing installed is in the world. `py3-pyocd` needs
+`py3-cmsis-pack-manager`, `py3-colorama` and `py3-yaml`, and
+`py3-cmsis-pack-manager` needs `py3-yaml` too. apk removes `py3-pyocd`,
+`py3-cmsis-pack-manager`, `py3-colorama` and then `py3-yaml`: `py3-yaml`,
+freed by `py3-cmsis-pack-manager`, does not follow it at once, since
+`py3-pyocd` needs it after `py3-colorama`
+(`installed/a-package-two-removals-free-goes-after-the-first-one-s-other-needs`).
+
+[repository]
+P:nitrokey-app2
+V:2.5.2-r1
+
+[installed]
+P:py3-yaml
+V:6.0.3-r0
+
+P:py3-cmsis-pack-manager
+V:0.6.0-r0
+D:py3-yaml
+
+P:py3-colorama
+V:0.4.6-r6
+
+P:py3-pyocd
+V:0.41.0-r0
+D:py3-cmsis-pack-manager py3-colorama py3-yaml
+
+[request]
+nitrokey-app2>2.4.1-r1
+
+[answer apk-tools 3.0.9-r0]
+remove py3-pyocd 0.41.0-r0
+remove py3-cmsis-pack-manager 0.6.0-r0
+remove py3-colorama 0.4.6-r6
+remove py3-yaml 6.0.3-r0
+install nitrokey-app2 2.5.2-r1

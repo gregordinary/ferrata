@@ -1,0 +1,38 @@
+[statement]
+A dependency every candidate shares is required without the constraints the
+candidates state: `p1` and `p2` both need `lib<2`, but `lib`, a real name, is
+decided first, for 2.0, and both are then ruled out; apk refuses.
+
+[repository]
+P:app
+V:1
+D:v lib
+
+P:p1
+V:1
+p:v
+k:100
+D:lib<2
+
+P:p2
+V:1
+p:v
+k:10
+D:lib<2
+
+P:lib
+V:1.0
+
+P:lib
+V:2.0
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   lib-2.0:
+|     breaks: p1-1[lib<2]
+|     satisfies: app-1[lib]
+refused

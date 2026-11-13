@@ -1,0 +1,45 @@
+# cargo-deny configuration, for both of the repository's dependency graphs:
+#
+# - the workspace's (`cargo deny check ...`): the library, which has no
+#   dependencies, and the scenario tooling, which depends on the library
+#   alone; and
+# - the fuzzing harness's (`cargo deny --manifest-path fuzz/Cargo.toml check
+#   ...`), a workspace of its own: cargo-fuzz's `libfuzzer-sys` and the crates
+#   it builds with, which is the third-party code a contributor builds and
+#   runs.
+#
+# CI checks both, dev-dependencies included, for licenses, advisories and
+# sources.
+
+[licenses]
+# cargo-deny leaves dev-dependencies out of the license check unless asked.
+include-dev = true
+# Reject a crate whose license text cannot be matched with high confidence,
+# rather than guessing.
+confidence-threshold = 0.9
+# The minimal set the current graph obliges us to honor. A crate offered under a
+# choice that includes MIT or Apache-2.0 is satisfied by those two.
+allow = ["MIT", "Apache-2.0"]
+
+# libfuzzer-sys carries LLVM's libFuzzer, under the University of Illinois/NCSA
+# license, which it adds to MIT or Apache-2.0. It is a permissive license, and
+# only the fuzzing harness links it, so the workspace's check never meets the
+# exception, and is not to warn that it does not.
+unused-license-exception = "allow"
+
+[[licenses.exceptions]]
+crate = "libfuzzer-sys"
+allow = ["NCSA"]
+
+# The RUSTSEC advisory gate: fails on a known advisory against any crate in the
+# graph.
+[advisories]
+ignore = []
+
+# Where dependencies may come from: crates.io only. A dependency from a git
+# revision or a private registry is a decision to make deliberately, not one to
+# arrive unnoticed.
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

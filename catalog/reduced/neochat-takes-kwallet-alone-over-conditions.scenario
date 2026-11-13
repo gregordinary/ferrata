@@ -1,0 +1,125 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`neochat`. Through the conditions of `kded-systemd`, `nftables-systemd`,
+`nftables-openrc`, `sing-box-openrc`, `sing-box-zsh-completion` and
+`rook-autotype`, the walk reaches `yad`, and from it
+`dbus:org.freedesktop.Secrets`, before `so:libKF6Wallet.so.6`; but the
+names a condition states give nothing a place in the decision order
+(`install-if/the-names-a-condition-states-number-nothing`), which reaches
+`so:libKF6Wallet.so.6` first, and apk installs `kwallet` alone. The shape
+of `pimcommon-takes-kwallet-alone`; contrast
+`neochat-takes-kwallet-alone`.
+
+[repository]
+C:Q1QZ3p3Y7HJmtoBxmpdxG+lMR8mew=
+P:nftables-openrc
+V:1.1.6-r1
+A:x86_64
+i:openrc nftables=1.1.6-r1
+
+C:Q1+EZXPxUYRoq31eZN/6mx96tPWLg=
+P:nftables-systemd
+V:1.1.6-r1
+A:x86_64
+i:systemd nftables=1.1.6-r1
+
+C:Q11raNL0yQY/NOhSJjG4kEubz2eT0=
+P:gnome-keyring
+V:50.0-r0
+A:x86_64
+k:100
+p:dbus:org.freedesktop.Secrets
+
+C:Q13lPpxc+z3vlwi4iNu34eZAnF0/A=
+P:kaccounts-integration
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6KIOCore.so.6 so:libKF6Wallet.so.6
+p:so:libkaccounts6.so.2=26.04.2
+
+C:Q1oT2kPR55jVb8FWn00TGRKa9Gstg=
+P:kded
+V:6.26.0-r0
+A:x86_64
+
+C:Q1dpAPtFdi2efhkSugfDmCrmPgvNU=
+P:kded-systemd
+V:6.26.0-r0
+A:x86_64
+i:systemd kded=6.26.0-r0
+
+C:Q108BgecFtGRQ/WJdPE0v0d2Y08iw=
+P:kio
+V:6.26.0-r0
+A:x86_64
+D:kded
+p:so:libKF6KIOCore.so.6=6.26.0
+
+C:Q1f2/OH80Gug9JSVd1J4XLWT3r7XQ=
+P:kwallet
+V:6.26.0-r0
+A:x86_64
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.26.0
+
+C:Q1ru81/3Xj24sKvfS96GARsmSbTKc=
+P:neochat
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6Purpose.so.6 so:libqt6keychain.so.1
+
+C:Q14yhyHlAxMKFTe3Lm3ZqpUHXUWhU=
+P:purpose
+V:6.26.0-r0
+A:x86_64
+D:so:libkaccounts6.so.2
+p:so:libKF6Purpose.so.6=6.26.0
+
+C:Q111kFujDhAL7Ty70eYhizdwBuCXk=
+P:qtkeychain
+V:0.15.0-r0
+A:x86_64
+D:dbus:org.freedesktop.Secrets
+p:so:libqt6keychain.so.1=0.15.0
+
+C:Q1XdvzsUCuSuVqz7SJvHvGyail+p4=
+P:rook-autotype
+V:0.4.4-r0
+A:x86_64
+i:yad zsh
+
+C:Q1wFbXonUprjxq1ABdlv3XNNoV8FA=
+P:sing-box-openrc
+V:1.13.11-r3
+A:x86_64
+i:openrc sing-box=1.13.11-r3
+
+C:Q1dCiVWgTCSFDcMeRVz7iToHbr+gU=
+P:sing-box-zsh-completion
+V:1.13.11-r3
+A:x86_64
+i:sing-box=1.13.11-r3 zsh
+
+C:Q1DsnuhDCQN7kU2AkDSBTzLtNXgeg=
+P:webkit2gtk-4.1
+V:2.48.7-r0
+A:x86_64
+D:dbus:org.freedesktop.Secrets
+p:so:libwebkit2gtk-4.1.so.0=0.17.12
+
+C:Q1NN0uUt5U0txMf6ZJHyTBxP3cenY=
+P:yad
+V:14.2-r0
+A:x86_64
+D:so:libwebkit2gtk-4.1.so.0
+
+[request]
+neochat
+
+[answer apk-tools 3.0.9-r0]
+install kded 6.26.0-r0
+install kio 6.26.0-r0
+install kwallet 6.26.0-r0
+install kaccounts-integration 26.04.2-r0
+install purpose 6.26.0-r0
+install qtkeychain 0.15.0-r0
+install neochat 26.04.2-r0

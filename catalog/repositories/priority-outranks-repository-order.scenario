@@ -1,0 +1,20 @@
+[statement]
+A provider of higher priority in a later repository is chosen over one in
+an earlier repository.
+
+[repository]
+P:p1
+V:1
+p:x=1
+
+[repository]
+P:p2
+V:1
+p:x=1
+k:5
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p2 1

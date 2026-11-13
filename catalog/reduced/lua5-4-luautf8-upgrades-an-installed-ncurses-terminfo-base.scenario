@@ -1,0 +1,48 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-08): `foot`'s closure from v3.23 installed, `lua5.4-luautf8`
+asked. The installed `ncurses-terminfo-base` is in no world and needed by
+nothing installed. The request reaches `libncursesw`, which needs
+`ncurses-terminfo-base` at the later version exactly, through `lua5.4`
+and `readline`; apk upgrades `ncurses-terminfo-base` and installs the
+chain. Each name on the way has a single candidate, whose constraint is
+required with it: `ncurses-terminfo-base` is required at the later
+version before `libncursesw` is installed
+(`installed/a-sole-candidate-s-constraint-upgrades-an-installed-package`).
+
+[repository]
+P:libncursesw
+V:6.6_p20260516-r0
+D:ncurses-terminfo-base=6.6_p20260516-r0
+p:so:libncursesw.so.6=6.6
+
+P:lua5.4
+V:5.4.8-r0
+D:so:libreadline.so.8
+
+P:ncurses-terminfo-base
+V:6.6_p20260516-r0
+
+P:readline
+V:8.3.3-r1
+D:so:libncursesw.so.6
+p:so:libreadline.so.8=8.3
+
+[repository]
+P:lua5.4-luautf8
+V:0.1.5-r0
+D:lua5.4
+
+[installed]
+P:ncurses-terminfo-base
+V:6.5_p20251123-r0
+
+[request]
+lua5.4-luautf8
+
+[answer apk-tools 3.0.9-r0]
+upgrade ncurses-terminfo-base 6.5_p20251123-r0 6.6_p20260516-r0
+install libncursesw 6.6_p20260516-r0
+install readline 8.3.3-r1
+install lua5.4 5.4.8-r0
+install lua5.4-luautf8 0.1.5-r0

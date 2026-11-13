@@ -1,0 +1,31 @@
+[statement]
+As `a-constraint-met-later-narrows-the-choice-a-first`, with `app` listing `b`
+first: the answer is the same.
+
+[repository]
+P:app
+V:1
+D:b a
+
+P:a
+V:1
+D:lib
+
+P:b
+V:1
+D:lib<2
+
+P:lib
+V:1.0
+
+P:lib
+V:2.0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install lib 1.0
+install b 1
+install a 1
+install app 1

@@ -1,0 +1,28 @@
+[statement]
+apk reads the names a request states after the repositories', unlike the
+world's (`installed/the-world-s-names-are-read-before-the-installed-database-s`):
+a request changes no name's place in its table. `au` and `xp` share a
+bucket, and `xp`, listed later, is read last and walked first. Were the
+request's `xp` read before the repositories, `au` would be read last and
+walked first.
+
+[repository]
+P:base
+V:1
+
+P:au
+V:1
+i:base
+
+P:xp
+V:1
+i:base
+
+[request]
+base
+xp
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install xp 1
+install au 1

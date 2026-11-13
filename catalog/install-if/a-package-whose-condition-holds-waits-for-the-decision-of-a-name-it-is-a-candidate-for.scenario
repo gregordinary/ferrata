@@ -1,0 +1,27 @@
+[statement]
+Observed; the rule is not yet known. A package whose condition holds and
+which is a candidate for a name the request requires is not installed
+for its condition first: `a` 3, requested with one candidate, is
+installed first and completes the condition of `b` 2, yet apk decides
+`b` among its candidates and takes `b` 3. With `b` required only later,
+through another package, apk takes `b` 3 too; with `b` not required at
+all, it installs `b` 2 for its condition.
+
+[repository]
+P:b
+V:3
+
+P:b
+V:2
+i:a
+
+P:a
+V:3
+
+[request]
+b
+a
+
+[answer apk-tools 3.0.9-r0]
+install a 3
+install b 3

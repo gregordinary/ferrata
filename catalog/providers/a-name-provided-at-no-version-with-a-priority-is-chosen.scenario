@@ -1,0 +1,15 @@
+[statement]
+A provider of a name at no version, with a priority above 0, is chosen for
+that name.
+
+[repository]
+P:p1
+V:1
+p:x
+k:1
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+install p1 1

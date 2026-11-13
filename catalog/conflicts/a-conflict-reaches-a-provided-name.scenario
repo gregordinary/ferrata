@@ -1,0 +1,23 @@
+[statement]
+A `!` dependency forbids a package providing the name it states, as well
+as one carrying it.
+
+[repository]
+P:app
+V:1
+D:!y
+
+P:p1
+V:1
+p:y=1
+
+[request]
+app
+p1
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   p1-1:
+|     breaks: app-1[!y]
+|     satisfies: world[p1]
+refused

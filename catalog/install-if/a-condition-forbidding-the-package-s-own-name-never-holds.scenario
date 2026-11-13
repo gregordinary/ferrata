@@ -1,0 +1,19 @@
+[statement]
+A condition whose `!` entry names the package's own name never holds,
+whatever version the entry admits: `b` 1's condition is `e` and `!b>5`,
+`e` is installed, and `b` is not. Required, `b` is installed as any
+package is.
+
+[repository]
+P:b
+V:1
+i:!b>5 e
+
+P:e
+V:1
+
+[request]
+e
+
+[answer apk-tools 3.0.9-r0]
+install e 1

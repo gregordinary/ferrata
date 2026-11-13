@@ -1,0 +1,25 @@
+[statement]
+A preliminary choice made for a name walked first does not steer a name
+some package carries that the request names: `d`, requested and walked
+before `f`, has `f` 2 as its best candidate, providing it at 2; `f`
+takes its own best candidate, `f` 3, which answers `d` at 1, and apk
+installs `f` 3 alone. A name required only through other packages takes
+the package chosen already (`a-name-a-choice-answers-takes-that-package`).
+The rule is known only in part: in some shapes apk still takes the
+earlier choice for a requested name.
+
+[repository]
+P:f
+V:3
+p:d=1
+
+P:f
+V:2
+p:d=2
+
+[request]
+d
+f
+
+[answer apk-tools 3.0.9-r0]
+install f 3

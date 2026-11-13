@@ -1,0 +1,25 @@
+[statement]
+As `records-after-a-format-error-do-not-load`, the format error being a record whose identity checksum does not decode.
+
+[repository verbatim]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:ok
+V:1.0-r0
+
+C:xyz
+P:bad
+V:1.0-r0
+
+C:Q1CCCCCCCCCCCCCCCCCCCCCCCCCCC=
+P:after
+V:1.0-r0
+
+[request]
+after
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: opening repository-1/x86_64/APKINDEX.tar.gz: v2 database format error
+| ERROR: unable to select packages:
+|   after (no such package):
+|     required by: world[after]
+refused

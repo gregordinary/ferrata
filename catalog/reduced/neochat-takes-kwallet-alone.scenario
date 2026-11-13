@@ -1,0 +1,46 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`neochat`. As `akonadi-calendar-takes-gnome-keyring` with the dependencies
+the other way round: the walk follows the chain to `kwallet` first, and
+when it reaches `dbus:org.freedesktop.Secrets` under `qtkeychain`,
+`kwallet` already provides it. The rule of
+`decision-order/provided-names-are-decided-depth-first-w-reached-first`.
+
+[repository]
+P:gnome-keyring
+V:50.0-r0
+k:100
+p:dbus:org.freedesktop.Secrets
+
+P:kaccounts-integration
+V:26.04.2-r0
+D:so:libKF6Wallet.so.6
+p:so:libkaccounts6.so.2=26.04.2
+
+P:kwallet
+V:6.26.0-r0
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.26.0
+
+P:neochat
+V:26.04.2-r0
+D:so:libKF6Purpose.so.6 so:libqt6keychain.so.1
+
+P:purpose
+V:6.26.0-r0
+D:so:libkaccounts6.so.2
+p:so:libKF6Purpose.so.6=6.26.0
+
+P:qtkeychain
+V:0.15.0-r0
+D:dbus:org.freedesktop.Secrets
+p:so:libqt6keychain.so.1=0.15.0
+
+[request]
+neochat
+
+[answer apk-tools 3.0.9-r0]
+install kwallet 6.26.0-r0
+install kaccounts-integration 26.04.2-r0
+install purpose 6.26.0-r0
+install qtkeychain 0.15.0-r0
+install neochat 26.04.2-r0

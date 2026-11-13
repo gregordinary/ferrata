@@ -1,0 +1,33 @@
+[statement]
+A provided name whose one candidate depends on a real name is decided
+before that real name, and so before provided names reached earlier: `w`'s
+one candidate `kw` needs the real `dep`, and `kw` is installed before `v` is
+decided; it provides `v`, so `gk` is not installed. Contrast
+`a-sole-candidate-without-a-real-dependency-waits`.
+
+[repository]
+P:app
+V:1
+D:v w
+
+P:kw
+V:1
+p:v w=1
+D:dep
+
+P:dep
+V:1
+
+P:gk
+V:1
+p:v
+k:100
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install dep 1
+install kw 1
+install app 1

@@ -1,0 +1,52 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and
+`community`, 2026-11-11): `liferea`'s closure installed, `kdav-dev`
+asked. The world is empty and `x`, unrelated, is requested, so every
+installed package goes. `libpciaccess` and `zstd-libs` are needed
+through names they provide at a version and are removed last: apk
+removes `libpciaccess` first, whichever of `libdrm` and `libelf`, which
+need them, the installed database lists first; with `libpciaccess` listed
+before `zstd-libs` the orders agree. `musl` goes after both, which wait
+on it, in the order of apk's table of names: `libpciaccess`'s own name
+comes before `zstd-libs`'s names
+(`installed/the-last-removals-go-in-the-order-of-apk-s-table-of-names`;
+`reduced/lua5-4-s-freed-dependencies-are-removed-readline-first` is the
+same shape).
+
+[repository]
+P:x
+V:1-r0
+
+[installed]
+P:musl
+V:1.2.6-r3
+p:so:libc.musl-x86_64.so.1=1
+
+P:zstd-libs
+V:1.5.7-r2
+D:so:libc.musl-x86_64.so.1
+p:so:libzstd.so.1=1.5.7
+
+P:libpciaccess
+V:0.19-r0
+D:so:libc.musl-x86_64.so.1
+p:so:libpciaccess.so.0=0.11.1
+
+P:libdrm
+V:2.4.134-r0
+D:so:libpciaccess.so.0
+
+P:libelf
+V:0.195-r0
+D:so:libzstd.so.1
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+remove libdrm 2.4.134-r0
+remove libelf 0.195-r0
+install x 1-r0
+remove libpciaccess 0.19-r0
+remove zstd-libs 1.5.7-r2
+remove musl 1.2.6-r3

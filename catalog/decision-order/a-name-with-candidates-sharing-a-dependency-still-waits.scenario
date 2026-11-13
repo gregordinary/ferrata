@@ -1,0 +1,45 @@
+[statement]
+Taking a dependency every candidate shares does not decide the name: `kw`,
+which every candidate for `v` needs, is installed first, but `v` waits its
+turn after `u`, which `r1` answers; `r1` provides `v` too, so neither `p1`
+nor `p2` is installed.
+
+[repository]
+P:app
+V:1
+D:u v
+
+P:p1
+V:1
+p:v
+k:100
+D:kw
+
+P:p2
+V:1
+p:v
+k:10
+D:kw
+
+P:r1
+V:1
+p:u v
+k:100
+D:kw
+
+P:r2
+V:1
+p:u
+k:10
+
+P:kw
+V:1
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install kw 1
+install r1 1
+install app 1

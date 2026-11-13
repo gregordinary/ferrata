@@ -1,0 +1,25 @@
+[statement]
+A dependency with a single candidate of a package whose condition holds
+answers no name whose choice completes that condition, as it answers
+others (`a-dependency-of-a-condition-that-will-hold-answers-an-earlier-name`):
+`d` 3, the best candidate for `d`, completes `a`'s condition, and `a`
+needs `v`, which only `d` 1 provides. apk takes `d` 3 and passes `a` over.
+
+[repository]
+P:d
+V:1
+p:v
+
+P:a
+V:2
+D:v
+i:d
+
+P:d
+V:3
+
+[request]
+d
+
+[answer apk-tools 3.0.9-r0]
+install d 3

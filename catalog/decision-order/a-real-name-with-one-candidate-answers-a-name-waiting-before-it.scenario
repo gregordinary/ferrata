@@ -1,0 +1,26 @@
+[statement]
+`c`, a real name, is installed before `v`, which `b` lists first, is
+decided; `c` provides `v`, without a priority, and answers it, so `p5` is not
+installed.
+
+[repository]
+P:b
+V:1
+D:v c
+
+P:c
+V:1
+p:v
+
+P:p5
+V:1
+p:v
+k:500
+
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install c 1
+install b 1

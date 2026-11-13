@@ -1,0 +1,25 @@
+[statement]
+A priority of 0 is no priority: of a provider at `k:0` and one stating none,
+neither is chosen for a name they provide at no version.
+
+[repository]
+P:p1
+V:1
+p:x
+k:0
+
+P:p2
+V:1
+p:x
+
+[request]
+x
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   x (virtual):
+|     note: please select one of the 'provided by'
+|           packages explicitly
+|     provided by: p1 p2
+|     required by: world[x]
+refused

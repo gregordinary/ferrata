@@ -1,0 +1,26 @@
+[statement]
+A package installed providing a name at no version keeps it against a
+provider at a version, which would outrank it in an empty root.
+
+[repository]
+P:r
+V:1
+p:v=1
+
+P:b
+V:1
+
+[installed]
+P:q
+V:1
+p:v
+k:10
+
+[world]
+v
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 1

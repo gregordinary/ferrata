@@ -1,0 +1,14 @@
+[statement]
+An identity checksum is read as `Q1` and exactly 28 base64 characters, or
+`Q2` and 44; what follows the digest is ignored, and the record loads.
+
+[repository verbatim]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA= trailing text
+P:app
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install app 1.0-r0

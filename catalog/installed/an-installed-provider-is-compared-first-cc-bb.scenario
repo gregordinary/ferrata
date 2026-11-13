@@ -1,0 +1,33 @@
+[statement]
+As `an-installed-provider-is-compared-first-bb-cc`, with `cc` listed
+first: `a` keeps its place against `cc`, and gives way to `bb`.
+
+[repository]
+P:cc
+V:1
+p:v=1
+
+P:bb
+V:1
+p:v
+k:20
+
+P:b
+V:1
+
+[installed]
+P:a
+V:1
+p:v
+k:10
+
+[world]
+v
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove a 1
+install b 1
+install bb 1

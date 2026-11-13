@@ -1,0 +1,38 @@
+[statement]
+As `a-package-whose-condition-may-hold-leads-to-a-provider-it-does-not-name`,
+with the other provider named by the condition: placing `a` reaches `b`
+(`i:a c`), which provides `so:x`, and `c` provides `so:x` too, but `b`'s
+condition names `c`, and the walk does not go to it there. `d` and `b` go
+first, where `f` reaches them.
+
+[repository]
+P:c
+V:1
+p:so:x
+
+P:b
+V:1
+D:d
+p:so:x
+i:a c
+
+P:d
+V:1
+
+P:f
+V:2
+D:a>=2 b c
+
+[repository]
+P:a
+V:2
+
+[request]
+f
+
+[answer apk-tools 3.0.9-r0]
+install a 2
+install d 1
+install b 1
+install c 1
+install f 2

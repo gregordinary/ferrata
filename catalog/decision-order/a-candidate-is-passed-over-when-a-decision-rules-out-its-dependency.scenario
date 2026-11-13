@@ -1,0 +1,35 @@
+[statement]
+A candidate whose dependency a decision already made does not meet is
+passed over: `lib`, a real name, is decided first, for 2.0, so `p1`, which
+needs `lib<2`, is passed over for `v`, and `p2` is installed.
+
+[repository]
+P:app
+V:1
+D:v lib
+
+P:p1
+V:1
+p:v
+k:100
+D:lib<2
+
+P:p2
+V:1
+p:v
+k:10
+
+P:lib
+V:1.0
+
+P:lib
+V:2.0
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install p2 1
+install lib 2.0
+install app 1

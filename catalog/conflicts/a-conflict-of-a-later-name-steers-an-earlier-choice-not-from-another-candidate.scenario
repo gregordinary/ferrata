@@ -1,0 +1,43 @@
+[statement]
+As `a-conflict-of-a-later-name-steers-an-earlier-choice`, with the conflict
+stated by `base2`, which is not the best candidate for `B`: `f1` is
+installed.
+
+[repository]
+P:top
+V:1
+D:z B
+
+P:base
+V:1
+k:9
+p:B
+
+P:base2
+V:1
+k:5
+p:B
+D:!f1
+
+P:z
+V:1
+D:F
+
+P:f1
+V:1
+k:100
+p:F
+
+P:f2
+V:1
+k:10
+p:F
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install f1 1
+install z 1
+install base 1
+install top 1

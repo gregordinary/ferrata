@@ -1,0 +1,38 @@
+[statement]
+A package replaced does not hold up the removal of a package that provided
+a name it needed, where another package provides that name now: `q` is
+removed first, and `r` provides `v` to `kk` 2.
+
+[repository]
+P:r
+V:1
+p:v=2
+
+P:zz
+V:1
+
+P:kk
+V:2
+D:v>=2
+
+[installed]
+P:q
+V:1
+p:v=1
+
+P:kk
+V:1
+D:v
+
+[world]
+kk
+
+[request]
+kk>=2
+zz
+
+[answer apk-tools 3.0.9-r0]
+remove q 1
+install r 1
+upgrade kk 1 2
+install zz 1

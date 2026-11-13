@@ -1,0 +1,35 @@
+[statement]
+`b` 3, the best candidate for `b`, needs `a`, whose one candidate, `a` 2,
+has the condition `b` and needs `w`, which only `b` 2 provides. `b` 3
+completes `a` 2's condition, and a package with a condition steers no
+choice that completes it
+(`install-if/a-package-whose-condition-holds-does-not-steer-the-choice-completing-it`),
+though it is a dependency of that choice too: apk takes `b` 3 for `b` and
+refuses, as it does where `a` 2 has no condition.
+
+[repository]
+P:b
+V:2
+p:w=3
+
+P:b
+V:3
+D:a
+
+P:a
+V:2
+D:w
+i:b
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   b-2:
+|     conflicts: b-3
+|     satisfies: world[b] a-2[w]
+|   b-3:
+|     conflicts: b-2
+|     satisfies: world[b]
+refused

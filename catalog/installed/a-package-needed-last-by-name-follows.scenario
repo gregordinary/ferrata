@@ -1,0 +1,31 @@
+[statement]
+Where a package states two entries an installed package answers, through
+a name it provides at a version and by its own name, the one stated last
+decides: `y` needs `v`, which `x` provides at a version, and then `x`, and
+apk removes `x` right after `y`. Stated the other way round, `x` goes
+last (`a-package-needed-by-name-and-through-a-provided-name-is-removed-last`).
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:x
+V:1
+p:v=1
+
+P:y
+V:1
+D:v x
+
+P:z
+V:1
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove y 1
+remove x 1
+remove z 1
+install b 1

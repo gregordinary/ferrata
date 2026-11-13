@@ -1,0 +1,42 @@
+[statement]
+Observed; the rule is not yet known in full. As
+`a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-on-the-first-of-two-requirers`,
+with `n` 1 needing `y`, the second of the two packages that need `q`:
+apk chooses `n` 2 and refuses. Two requested names show the same where
+the one first in name order needs `q` itself and the other needs it
+through `z`, and `n` 1 needs `z`: apk refuses whichever order the request
+states them in.
+
+[repository]
+P:top
+V:1
+D:z y
+
+P:z
+V:1
+D:q
+
+P:y
+V:1
+D:q
+
+P:q
+V:1
+D:n
+
+P:n
+V:2
+D:missing
+
+P:n
+V:1
+D:y
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   missing (no such package):
+|     required by: n-2[missing]
+refused

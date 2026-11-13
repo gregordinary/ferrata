@@ -1,0 +1,30 @@
+[statement]
+A package whose condition names two names steers neither choice that
+completes it, the later name's included: `a`'s condition is `e d`, `d` 3
+is the best candidate for `d`, and `a` needs `w`, which only `d` 1
+provides. apk takes `d` 3 and passes `a` over, as
+`a-package-whose-condition-holds-does-not-steer-the-choice-completing-it`.
+
+[repository]
+P:a
+V:1
+D:w
+i:e d
+
+P:d
+V:3
+
+P:d
+V:1
+p:w=2
+
+P:e
+V:1
+
+[request]
+d
+e
+
+[answer apk-tools 3.0.9-r0]
+install d 3
+install e 1

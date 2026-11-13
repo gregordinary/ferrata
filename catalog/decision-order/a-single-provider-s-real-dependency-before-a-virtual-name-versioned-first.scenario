@@ -1,0 +1,32 @@
+[statement]
+As
+`a-single-provider-s-real-dependency-before-a-virtual-name-unversioned-first`,
+with `app` listing `so:libw.so.1` first: the answer is the same.
+
+[repository]
+P:app
+V:1.0-r0
+D:so:libw.so.1 sec
+
+P:libw
+V:1.0-r0
+p:so:libw.so.1=1
+D:kw
+
+P:kw
+V:1.0-r0
+p:sec
+k:10
+
+P:gk
+V:1.0-r0
+p:sec
+k:100
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install kw 1.0-r0
+install libw 1.0-r0
+install app 1.0-r0

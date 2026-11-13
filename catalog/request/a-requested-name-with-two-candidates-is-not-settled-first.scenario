@@ -1,0 +1,27 @@
+[statement]
+As `a-requested-name-with-one-candidate-is-settled-first`, with `p3` also
+providing `y`: `y` has two candidates, and the names are decided in order,
+`x` first, for `p1`.
+
+[repository]
+P:p1
+V:1
+p:x
+k:100
+
+P:p2
+V:1
+p:x y=1
+k:10
+
+P:p3
+V:1
+p:y=1
+
+[request]
+x
+y
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install p2 1

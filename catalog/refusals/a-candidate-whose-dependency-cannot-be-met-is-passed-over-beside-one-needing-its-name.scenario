@@ -1,0 +1,28 @@
+[statement]
+Observed; the rule is not yet known. `w` is requested, and `d` 1 and `d`
+2 provide it; `d` 2 needs `f`, which nothing provides, and `d` 1 needs
+`d`, whose best candidate is `d` 3. apk installs `d` 1. Where `d` 1 does
+not need `d`, or `d` 3 is left out, apk refuses, as
+`a-candidate-whose-dependency-cannot-be-met-is-not-passed-over`; where a
+package other than `d` 3 provides `d` at version 3, apk installs `d` 1
+again.
+
+[repository]
+P:d
+V:1
+D:d
+p:w
+
+P:d
+V:2
+D:f
+p:w
+
+P:d
+V:3
+
+[request]
+w
+
+[answer apk-tools 3.0.9-r0]
+install d 1

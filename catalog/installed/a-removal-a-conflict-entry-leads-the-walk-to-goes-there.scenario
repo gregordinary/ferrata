@@ -1,0 +1,30 @@
+[statement]
+A `!` entry the walk follows leads it to a package to be removed that
+carries or provides its name, at whatever version, and apk removes it
+there: `x`, which `y` needed through `v`, a name `x` provides at a version,
+would be removed last
+(`a-package-needed-through-a-name-it-provides-at-a-version-is-removed-last`),
+but `b` states `!x>5`, and apk removes `x` as its walk follows that entry,
+before installing `b`.
+
+[repository]
+P:b
+V:1
+D:!x>5
+
+[installed]
+P:x
+V:1
+p:v=1
+
+P:y
+V:1
+D:v
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove y 1
+remove x 1
+install b 1

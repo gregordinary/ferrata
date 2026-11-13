@@ -1,0 +1,61 @@
+[statement]
+Placing a package reaches a package of the set whose condition names it;
+where the walk has not reached that package, a name it provides leads to
+a package of the set answering the name that its condition does not name:
+placing `uis` reaches `uiso` (`i:openrc uis`), which provides `dev`, and
+`bmo`, which provides `dev` too, is walked next, though the repository
+lists `uiso` first: its dependency `openrc` is placed, which completes
+`uiso`'s condition, so `uiso` goes before `bmo`, all before `eudev`.
+The shape of postmarketOS's devices, whose `postmarketos-base` pulls in
+`udev-init-scripts` and, through `postmarketos-base-openrc`,
+`busybox-mdev-openrc`.
+
+[repository]
+P:pb
+V:1
+D:ramdisk init
+
+P:initramfs
+V:1
+p:ramdisk=1
+D:udev
+
+P:pbo
+V:1
+p:init=1
+D:bmo uiso
+
+[repository]
+P:uiso
+V:1
+p:dev
+i:openrc uis
+
+P:bmo
+V:1
+p:dev
+D:openrc
+
+P:eudev
+V:1
+p:udev=1
+D:uis
+
+P:openrc
+V:1
+
+P:uis
+V:1
+
+[request]
+pb
+
+[answer apk-tools 3.0.9-r0]
+install uis 1
+install openrc 1
+install uiso 1
+install bmo 1
+install eudev 1
+install initramfs 1
+install pbo 1
+install pb 1

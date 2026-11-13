@@ -1,0 +1,36 @@
+[statement]
+A dependency on a name provided at a version is not followed at once, as a
+real name is: `b` depends on `w`, provided at a version by `kw` alone, and
+`v`, reached first under `a`, is decided before it, for `gk`.
+
+[repository]
+P:app
+V:1
+D:a b
+
+P:a
+V:1
+D:v
+
+P:b
+V:1
+D:w
+
+P:kw
+V:1
+p:v w=1
+
+P:gk
+V:1
+p:v
+k:100
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install gk 1
+install a 1
+install kw 1
+install b 1
+install app 1

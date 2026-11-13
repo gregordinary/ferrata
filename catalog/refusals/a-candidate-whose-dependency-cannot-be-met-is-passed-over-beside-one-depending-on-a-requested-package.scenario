@@ -1,0 +1,33 @@
+[statement]
+Observed; the rule is not yet known in full. As
+`a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-on-its-requirer`,
+where the candidate depends on a package the request names beside the
+requirer: `b` needs `a`, `a` 3 needs `missing`, `a` 1 needs `z`, and `b`
+and `z` are requested; apk installs `a` 1. Where `z` is needed beside `b`
+by a package, apk refuses
+(`a-candidate-whose-dependency-cannot-be-met-is-not-passed-over-for-a-package-beside-the-chain`).
+
+[repository]
+P:z
+V:1
+
+P:a
+V:1
+D:z
+
+P:a
+V:3
+D:missing
+
+P:b
+V:2
+D:a
+
+[request]
+b
+z
+
+[answer apk-tools 3.0.9-r0]
+install z 1
+install a 1
+install b 2

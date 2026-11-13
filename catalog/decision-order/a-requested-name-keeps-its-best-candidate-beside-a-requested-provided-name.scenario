@@ -1,0 +1,36 @@
+[statement]
+Observed; the rule is not yet known. `b` and `w` are requested. `b` 3,
+the best candidate for `b`, provides `w` and needs `d`, whose one
+candidate needs `a`, which only `b` 2 provides; `b` 2 provides `w` at
+version 1, with a priority of 1, and needs `w`. apk takes `b` 3 for `b`
+and `b` 2 for `w`, and refuses.
+
+[repository]
+P:b
+V:3
+D:d
+p:w
+
+P:b
+V:2
+k:1
+D:w
+p:w=1 a=3
+
+P:d
+V:1
+D:a
+
+[request]
+b
+w
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   b-2:
+|     conflicts: b-3 b-3[w=1]
+|     satisfies: world[b] world[w] b-2[w] d-1[a]
+|   b-3:
+|     conflicts: b-2 b-2[w]
+|     satisfies: world[b] world[w] b-2[w]
+refused

@@ -1,0 +1,32 @@
+[statement]
+A name some package carries does not wait as a name packages only provide
+does (`a-name-no-candidate-apk-would-choose-answers-is-decided-last`):
+`top` needs `x` and `B`; `B`'s one candidate, `b`, provides `x` at no
+version and cannot stand beside `x` 1, which leaves `x` no candidate apk
+would choose. apk refuses rather than let `B` answer `x`. Asked for `x`
+and `B` together, apk installs `b` alone.
+
+[repository]
+P:top
+V:1
+D:x B
+
+P:x
+V:1
+
+P:b
+V:1
+p:B=1 x
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   x-1:
+|     conflicts: b-1
+|     satisfies: top-1[x]
+|   b-1:
+|     conflicts: x-1[x]
+|     satisfies: top-1[x] top-1[B]
+refused

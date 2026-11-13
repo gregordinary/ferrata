@@ -1,0 +1,23 @@
+[statement]
+As `a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-on-its-requirer`,
+where the candidate passed over is the one depending on the package that
+requires it: `a` 3 needs `missing` and `b`, and apk installs `a` 1.
+
+[repository]
+P:a
+V:1
+
+P:a
+V:3
+D:missing b
+
+P:b
+V:2
+D:a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install b 2

@@ -1,0 +1,24 @@
+[statement]
+A requested name with a single candidate is settled before the request's
+other names, whatever their order: `y`, provided by `p2` alone, at no
+version and with a priority, is settled first, and `p2` then provides `x`.
+A package's own dependency list has no such rule
+(`a-name-with-one-candidate-is-not-settled-first-in-a-package`).
+
+[repository]
+P:p1
+V:1
+p:x
+k:100
+
+P:p2
+V:1
+p:x y
+k:10
+
+[request]
+x
+y
+
+[answer apk-tools 3.0.9-r0]
+install p2 1

@@ -1,0 +1,72 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-08): `freecad`'s closure from v3.23 installed and asked at a
+later version. The request needs `so:libSoQt.so.20`, which the installed
+`soqt` 1.6.4-r0 provides and needs `so:libQt5Core.so.5`, and which the
+repository's `soqt` 1.6.4-r1 provides needing nothing. apk keeps `soqt`
+and upgrades the installed `qt5-qtbase` under it, which brings
+`icu-data-full`, where it could upgrade `soqt` and remove `qt5-qtbase`.
+Observed; the rule is not yet known.
+
+[repository]
+P:icu-data-en
+V:78.1-r0
+p:icu-data=78.1-r0
+
+P:icu-data-full
+V:78.1-r0
+p:icu-data=78.1-r0
+
+P:icu-libs
+V:78.1-r0
+D:icu-data=78.1-r0
+p:so:libicuuc.so.78=78.1
+
+[repository]
+P:freecad
+V:1.1.1-r0
+D:py3-pivy
+
+P:py3-pivy
+V:0.6.11-r0
+D:so:libQt6Core.so.6 so:libSoQt.so.20
+
+P:qt5-qtbase
+V:5.15.18_git20251101-r0
+D:icu-data-full
+p:so:libQt5Core.so.5=5.15.18
+
+P:qt6-qtbase
+V:6.11.1-r0
+D:so:libicuuc.so.78
+p:so:libQt6Core.so.6=6.11.1
+
+P:soqt
+V:1.6.4-r1
+p:so:libSoQt.so.20=20.6.4
+
+[installed]
+P:icu-libs
+V:76.1-r1
+p:so:libicuuc.so.76=76.1
+
+P:qt5-qtbase
+V:5.15.10_git20230714-r4
+D:so:libicuuc.so.76
+p:so:libQt5Core.so.5=5.15.10
+
+P:soqt
+V:1.6.4-r0
+D:so:libQt5Core.so.5
+p:so:libSoQt.so.20=20.6.4
+
+[request]
+freecad>1.0.2-r3
+
+[answer apk-tools 3.0.9-r0]
+install icu-data-full 78.1-r0
+upgrade icu-libs 76.1-r1 78.1-r0
+install qt6-qtbase 6.11.1-r0
+upgrade qt5-qtbase 5.15.10_git20230714-r4 5.15.18_git20251101-r0
+install py3-pivy 0.6.11-r0
+install freecad 1.1.1-r0

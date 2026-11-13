@@ -1,0 +1,29 @@
+[statement]
+The packages a change frees are removed in the order the package changed
+states its dependencies: `o2` before `o1`.
+
+[repository]
+P:app
+V:2
+
+[installed]
+P:o1
+V:1
+
+P:o2
+V:1
+
+P:app
+V:1
+D:o2 o1
+
+[world]
+app
+
+[request]
+app>=2
+
+[answer apk-tools 3.0.9-r0]
+upgrade app 1 2
+remove o2 1
+remove o1 1

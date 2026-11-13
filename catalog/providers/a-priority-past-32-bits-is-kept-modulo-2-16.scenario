@@ -1,0 +1,19 @@
+[statement]
+A provider's priority (`k:`) is kept modulo 2^16, so 4294967306 is 10, below 11: `p1` at `k:4294967306` against `p2` at `k:11`.
+
+[repository]
+P:p1
+V:1.0-r0
+p:v
+k:4294967306
+
+P:p2
+V:1.0-r0
+p:v
+k:11
+
+[request]
+v
+
+[answer apk-tools 3.0.9-r0]
+install p2 1.0-r0

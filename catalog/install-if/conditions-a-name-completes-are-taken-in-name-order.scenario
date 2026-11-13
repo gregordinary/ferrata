@@ -1,0 +1,52 @@
+[statement]
+Where several conditions name one name, the preliminary choices take their
+packages in the order of their names, not the order the repository lists
+them. `rb` is listed before `ra`, but `ra`, whose dependency `Y` has `lo`
+alone, comes first: `lo` is chosen for `Y` before `X` is reached, and
+answers `X`, which `top` states first, so `hi` is not installed. Neither
+condition ever holds.
+
+[repository]
+P:top
+V:1
+D:n w v
+
+P:n
+V:1
+
+P:rb
+V:1
+i:n zz
+D:X
+
+P:ra
+V:1
+i:n zz
+D:Y
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+P:w
+V:1
+D:X
+
+P:v
+V:1
+D:Y
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install lo 1
+install w 1
+install v 1
+install top 1

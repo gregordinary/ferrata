@@ -1,0 +1,23 @@
+[statement]
+A package whose `install_if` names two packages follows the second of them
+to be installed.
+
+[repository]
+P:a
+V:1
+
+P:z
+V:1
+
+P:az-extra
+V:1
+i:a z
+
+[request]
+a
+z
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install z 1
+install az-extra 1

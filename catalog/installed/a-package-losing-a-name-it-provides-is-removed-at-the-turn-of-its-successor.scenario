@@ -1,0 +1,56 @@
+[statement]
+A package removed because a package the request brings takes a name it
+provides at a version is removed at that package's turn: `icu-data-full`
+takes `icu-data` from the installed `icu-data-en`, and apk removes
+`icu-data-en` just before installing `icu-data-full`, after `a` and `b`,
+not with `old`, which waits for nothing. Found in a layered request over
+Alpine v3.24 (`liferea`'s closure installed, `kdav-dev` asked).
+
+[repository]
+P:icu-data-en
+V:78.1-r0
+p:icu-data=78.1-r0
+
+P:icu-data-full
+V:78.1-r0
+p:icu-data=78.1-r0
+
+P:icu-libs
+V:78.1-r0
+D:icu-data=78.1-r0
+
+P:app
+V:1-r0
+D:a b icu-data-full
+
+P:a
+V:1-r0
+
+P:b
+V:1-r0
+
+[installed]
+P:old
+V:1-r0
+
+P:icu-data-en
+V:78.1-r0
+p:icu-data=78.1-r0
+
+P:icu-libs
+V:78.1-r0
+D:icu-data=78.1-r0
+
+[world]
+icu-libs
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+remove old 1-r0
+install a 1-r0
+install b 1-r0
+remove icu-data-en 78.1-r0
+install icu-data-full 78.1-r0
+install app 1-r0

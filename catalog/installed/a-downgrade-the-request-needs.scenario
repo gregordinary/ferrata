@@ -1,0 +1,25 @@
+[statement]
+A package installed is replaced by an earlier version where the request
+needs it: `foo` needs `a<2`.
+
+[repository]
+P:a
+V:1.0-r0
+
+P:foo
+V:1.0-r0
+D:a<2
+
+[installed]
+P:a
+V:2.0-r0
+
+[world]
+a
+
+[request]
+foo
+
+[answer apk-tools 3.0.9-r0]
+downgrade a 2.0-r0 1.0-r0
+install foo 1.0-r0

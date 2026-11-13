@@ -1,0 +1,31 @@
+[statement]
+Of two real names, apk decides the one whose candidate depends on the other
+first: `z` 2.0 needs `m<2`, so `z` is decided first, for 2.0, and `m` then
+for 1.0, though `app` lists `m` first and `m` sorts first.
+
+[repository]
+P:app
+V:1
+D:m z
+
+P:z
+V:1.0
+
+P:z
+V:2.0
+D:m<2
+
+P:m
+V:1.0
+
+P:m
+V:2.0
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install m 1.0
+install z 2.0
+install app 1

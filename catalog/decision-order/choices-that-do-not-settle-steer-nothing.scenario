@@ -1,0 +1,36 @@
+[statement]
+Where the preliminary choices do not settle, none steers a decision.
+`c` 3, the best candidate for `c`, forbids `a` and needs `d`, which it
+provides itself; `f` 3, the other candidate for `d`, needs `so:x`, whose
+one candidate `e` 1 provides `a`. Choosing `f` 3 for `d` steers `c` to
+`c` 2, which leaves `d` required by nothing; without that choice `c`
+keeps `c` 3, which requires `d` again. apk takes `c` 3.
+
+[repository]
+P:c
+V:2
+k:1
+
+P:f
+V:3
+k:10
+D:d f so:x
+p:d
+
+P:e
+V:1
+k:100
+D:so:x a
+p:so:x a
+
+P:c
+V:3
+k:10
+D:!a d
+p:d
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+install c 3

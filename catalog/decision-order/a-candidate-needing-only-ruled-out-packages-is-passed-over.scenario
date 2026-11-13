@@ -1,0 +1,35 @@
+[statement]
+A candidate whose dependency only packages already ruled out could meet is
+ruled out too: `q`, decided first, holds `v` at 2, which rules out `y`,
+providing it at 1, and with it `p`, which needs `y`; `n` 1.0 is installed
+rather than `p`, which provides `n` at 2.
+
+[repository]
+P:app
+V:1
+D:q n
+
+P:q
+V:1
+p:v=2
+
+P:n
+V:1.0
+
+P:p
+V:1
+p:n=2
+D:y
+
+P:y
+V:1
+p:v=1
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install q 1
+install n 1.0
+install app 1

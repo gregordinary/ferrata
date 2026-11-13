@@ -1,0 +1,48 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `py3-python-socks`'s closure from v3.23 installed, `gimp`
+asked. `gimp` needs `py3-cairo`, which needs `python3~3.14`; the world's
+`py3-python-socks`, installed, needs `python3~3.12`, and the repository
+offers a later version of it that states no version of `python3`. apk
+upgrades `python3` and `py3-python-socks`. `python3~3.14` is required
+through `py3-cairo`, the single candidate of a name `gimp` needs, before
+`py3-cairo` is installed
+(`installed/a-sole-candidate-s-constraint-upgrades-an-installed-package`),
+and the upgrade reaches the installed dependent as in
+`installed/an-upgrade-the-request-needs-reaches-an-installed-dependent`.
+
+[repository]
+P:py3-cairo
+V:1.28.0-r1
+D:python3~3.14
+
+P:python3
+V:3.14.10-r1
+
+[repository]
+P:gimp
+V:3.2.4-r0
+D:py3-cairo
+
+P:py3-python-socks
+V:2.8.1-r0
+
+[installed]
+P:python3
+V:3.12.16-r0
+
+P:py3-python-socks
+V:2.4.4-r1
+D:python3~3.12
+
+[world]
+py3-python-socks
+
+[request]
+gimp
+
+[answer apk-tools 3.0.9-r0]
+upgrade python3 3.12.16-r0 3.14.10-r1
+install py3-cairo 1.28.0-r1
+install gimp 3.2.4-r0
+upgrade py3-python-socks 2.4.4-r1 2.8.1-r0

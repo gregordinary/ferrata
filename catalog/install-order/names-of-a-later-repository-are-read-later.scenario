@@ -1,0 +1,25 @@
+[statement]
+apk reads the repositories' names in the order it is given the
+repositories: `au`, in the second, is read after `xp`, in the first, and
+comes first of the two, which share a bucket.
+
+[repository]
+P:base
+V:1
+
+P:xp
+V:1
+i:base
+
+[repository]
+P:au
+V:1
+i:base
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install au 1
+install xp 1

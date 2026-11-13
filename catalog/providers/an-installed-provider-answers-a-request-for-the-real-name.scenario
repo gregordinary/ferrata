@@ -1,0 +1,20 @@
+[statement]
+A requested package with a single candidate is installed first, and a name
+it provides needs nothing more: asked for `x` and `p1`, which provides `x` at
+1.0, apk installs `p1` alone, not `x`.
+
+[repository]
+P:x
+V:1.0
+
+P:p1
+V:1
+p:x=1.0
+
+
+[request]
+x
+p1
+
+[answer apk-tools 3.0.9-r0]
+install p1 1

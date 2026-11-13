@@ -1,0 +1,35 @@
+[statement]
+`app` needs `sec`, provided at no version by `kw` and `gk`, and
+`so:libw.so.1`, provided at a version by `libw` alone, which depends on the
+real `kw`. `kw` is installed before `sec` is decided, though `app` lists
+`sec` first, and `sec` then needs nothing more, though `gk` ranks higher
+for it. A single provider's dependency on a real name is followed when its
+name is reached (`a-real-name-is-followed-at-once`).
+
+[repository]
+P:app
+V:1.0-r0
+D:sec so:libw.so.1
+
+P:libw
+V:1.0-r0
+p:so:libw.so.1=1
+D:kw
+
+P:kw
+V:1.0-r0
+p:sec
+k:10
+
+P:gk
+V:1.0-r0
+p:sec
+k:100
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install kw 1.0-r0
+install libw 1.0-r0
+install app 1.0-r0

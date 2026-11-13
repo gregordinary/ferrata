@@ -1,0 +1,29 @@
+[statement]
+A name some package carries is decided as a real name even where the
+constraint excludes that package: `b` needs `x>=5`, which only `p3` meets,
+and `p3` is installed before `v` is decided, so `v` needs nothing more.
+
+[repository]
+P:b
+V:1
+D:v x>=5
+
+P:p1
+V:1
+p:v
+k:100
+
+P:x
+V:1
+
+P:p3
+V:1
+p:x=5 v
+
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install p3 1
+install b 1

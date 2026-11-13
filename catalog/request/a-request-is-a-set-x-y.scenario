@@ -1,0 +1,22 @@
+[statement]
+The order of a request does not matter, unlike the order of a package's
+dependencies (`dependency-order-decides-a-shared-virtual-y-first`): asked
+for `x y`, apk installs `p2` alone, which provides both.
+
+[repository]
+P:p1
+V:1.0-r0
+p:x
+k:100
+
+P:p2
+V:1.0-r0
+p:x y=1
+k:10
+
+[request]
+x
+y
+
+[answer apk-tools 3.0.9-r0]
+install p2 1.0-r0

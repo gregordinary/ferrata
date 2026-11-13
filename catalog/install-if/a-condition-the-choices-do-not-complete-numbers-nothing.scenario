@@ -1,0 +1,48 @@
+[statement]
+A package whose condition the preliminary choices do not complete gives
+what it depends on no place in the decision order, though its condition
+could hold. `e`'s condition names `base`, the one candidate for `B`, and
+`zz`, which nothing requires. The walk reaches `e` through `base` before
+`W`, and `e` needs `V`; yet `W` is decided first, for `kw`, which answers
+`V` too, and `gk` is not installed. Contrast
+`a-condition-naming-a-candidate-has-its-turn-there`.
+
+[repository]
+P:top
+V:1
+D:B W K
+
+P:base
+V:1
+p:B=1
+
+P:e
+V:1
+D:V
+i:base zz
+
+P:zz
+V:1
+
+P:gk
+V:1
+k:100
+p:V
+
+P:kw
+V:1
+p:V W=1
+
+P:pk
+V:1
+D:V
+p:K=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install kw 1
+install pk 1
+install top 1

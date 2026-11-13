@@ -1,0 +1,19 @@
+[statement]
+A name packages only provide, none of whose candidates apk would choose
+for it, is decided after every other name: `c`, requested and walked
+before `v`, has one candidate, `f`, which provides it at no version and
+without a priority; `v` takes `f`, which then answers `c`, and apk
+installs `f` alone. With nothing else to install `f`, apk refuses `c`
+(`providers/a-name-provided-at-no-version-needs-a-priority`).
+
+[repository]
+P:f
+V:1
+p:v=1 c
+
+[request]
+c
+v
+
+[answer apk-tools 3.0.9-r0]
+install f 1

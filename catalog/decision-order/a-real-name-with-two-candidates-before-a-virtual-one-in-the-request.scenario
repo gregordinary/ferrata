@@ -1,0 +1,31 @@
+[statement]
+As `a-real-name-with-two-candidates-before-a-virtual-one`, in a request:
+asked for `v` and `x`, apk decides `x` first, and its dependency `p2`
+answers `v`.
+
+[repository]
+P:p1
+V:1
+p:v
+k:100
+
+P:p2
+V:1
+p:v
+k:10
+
+P:x
+V:1.0
+
+P:x
+V:2.0
+D:p2
+
+
+[request]
+v
+x
+
+[answer apk-tools 3.0.9-r0]
+install p2 1
+install x 2.0

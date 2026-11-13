@@ -1,0 +1,54 @@
+name: Bug report
+description: Report an answer ferrata gives otherwise than apk, or another defect.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not report a security issue here. Use the private channel
+        described in
+        [SECURITY.md](https://github.com/gregordinary/ferrata/blob/main/SECURITY.md).
+
+        The cases where ferrata is known to answer otherwise than apk are
+        listed in the documentation of its `resolve` module; a case it lists
+        is not a new defect.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened
+      description: What you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: The input
+      description: >
+        A catalog scenario holding the records, the root if there is one,
+        and the request is the best form (see CONTRIBUTING.md; `scenario
+        reduce` shrinks a large case). Otherwise, the repositories and
+        their order, the request, and the installed database and world if
+        the root was not empty.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: answers
+    attributes:
+      label: What apk and ferrata answer
+      description: >
+        What `apk add --simulate` prints for the input, and what ferrata
+        returned: its changes in order, or its refusal and the explanation.
+      render: text
+  - type: input
+    id: apk
+    attributes:
+      label: apk version
+      description: The output of `apk --version` for the apk you compared with.
+  - type: input
+    id: version
+    attributes:
+      label: ferrata version
+      description: The commit or crate version.
+    validations:
+      required: true

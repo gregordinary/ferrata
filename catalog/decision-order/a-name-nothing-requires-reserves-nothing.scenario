@@ -1,0 +1,49 @@
+[statement]
+A name nothing requires makes no preliminary choice. The walk reaches
+`dq5` through `px`'s condition before it reaches `L`, and nothing requires
+`dq5`: it keeps `L` from neither of its candidates, so `L` goes to `dq6`,
+listed first, and nothing leads to `qt5`, whose dependency on `icu-full`
+would steer `icu` away from `icu-en`.
+
+[repository]
+P:app
+V:1
+D:icu X L
+
+P:px
+V:1
+p:X=1
+i:dq5
+
+P:dq6
+V:1
+p:L=1
+
+P:dq5
+V:1
+p:L=1
+D:Q5
+
+P:qt5
+V:1
+p:Q5=1
+D:icu-full
+
+P:icu-en
+V:1
+k:100
+p:icu=1
+
+P:icu-full
+V:1
+k:10
+p:icu=1
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install icu-en 1
+install px 1
+install dq6 1
+install app 1

@@ -1,0 +1,23 @@
+[statement]
+As `of-two-versions-providing-a-name-alike-the-later-is-chosen-in-turn`,
+with `d` 1 listed first: it ties with `c` 1 and with `c` 2, and apk
+installs it.
+
+[repository]
+P:d
+V:1
+p:w=3
+
+P:c
+V:1
+p:w=3
+
+P:c
+V:2
+p:w=3
+
+[request]
+w
+
+[answer apk-tools 3.0.9-r0]
+install d 1

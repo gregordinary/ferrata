@@ -1,0 +1,28 @@
+[statement]
+Removals that wait for nothing go in the order of the installed database,
+each followed at once by what waited for it alone: `a` frees `lib`, which
+goes before `x`.
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:a
+V:1
+D:lib
+
+P:x
+V:1
+
+P:lib
+V:1
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove a 1
+remove lib 1
+remove x 1
+install b 1

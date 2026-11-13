@@ -1,0 +1,58 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `libgedit-tepl-dev`'s closure from v3.23 installed and asked
+at a later version, with `py3-txacme`. The later `libgedit-tepl-dev`
+needs `pc:libgedit-gfls-1>=0.3`, which the installed
+`libgedit-gfls-dev` 0.3.1 and the repository's 0.4.1 both provide, and
+`libgedit-gtksourceview-dev`, whose one candidate admitted needs
+`pc:libgedit-gfls-1>=0.4`. That leaves 0.4.1 the only candidate, whose
+`libgedit-gfls=0.4.1-r0` is required before `libgedit-gfls` is decided;
+apk upgrades both.
+
+[repository]
+C:Q1JNxr0iYLwfFU5WJLAikn0PLZqW0=
+P:libgedit-gfls
+V:0.4.1-r0
+A:x86_64
+
+C:Q1JEHCGZFds98bMcXTJoLJUcveyHo=
+P:libgedit-gfls-dev
+V:0.4.1-r0
+A:x86_64
+D:libgedit-gfls=0.4.1-r0
+p:pc:libgedit-gfls-1=0.4.1
+
+C:Q1V776v+FFmqFmJ5SJ8g85DGoY1+I=
+P:libgedit-gtksourceview-dev
+V:299.7.0-r0
+A:x86_64
+D:pc:libgedit-gfls-1>=0.4
+p:pc:libgedit-gtksourceview-300=299.7.0
+
+C:Q1cisAZuILBe2vF/Z53jqWuUIgujo=
+P:libgedit-tepl-dev
+V:6.14.0-r2
+A:x86_64
+D:libgedit-gtksourceview-dev pc:libgedit-gfls-1>=0.3 pc:libgedit-gtksourceview-300>=299.6.0
+
+[installed]
+C:Q1FU0Rfbz5UpDczklLvBFpH/XQMgE=
+P:libgedit-gfls
+V:0.3.1-r0
+A:x86_64
+
+C:Q1b94IoaMwCgBnNU8S/SV/sPnMjUU=
+P:libgedit-gfls-dev
+V:0.3.1-r0
+A:x86_64
+D:libgedit-gfls=0.3.1-r0
+p:pc:libgedit-gfls-1=0.3.1
+
+[request]
+libgedit-tepl-dev>6.13.0-r0
+
+[answer apk-tools 3.0.9-r0]
+upgrade libgedit-gfls 0.3.1-r0 0.4.1-r0
+upgrade libgedit-gfls-dev 0.3.1-r0 0.4.1-r0
+install libgedit-gtksourceview-dev 299.7.0-r0
+install libgedit-tepl-dev 6.14.0-r2

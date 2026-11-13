@@ -1,0 +1,18 @@
+[statement]
+Two requested packages with no dependencies are installed in the order of
+their names, not in the order they are asked for.
+
+[repository]
+P:lib
+V:1.0-r0
+
+P:a
+V:1.0-r0
+
+[request]
+lib
+a
+
+[answer apk-tools 3.0.9-r0]
+install a 1.0-r0
+install lib 1.0-r0

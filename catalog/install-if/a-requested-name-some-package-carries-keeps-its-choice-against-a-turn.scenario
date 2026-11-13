@@ -1,0 +1,23 @@
+[statement]
+A package whose condition the preliminary choices complete does not steer
+a name the request names away from its choice: `c` 3, the best candidate
+for `c`, completes `a`'s condition, and `a` needs `c=1`. apk takes `c` 3
+and passes `a` over.
+
+[repository]
+P:a
+V:1
+D:c=1
+i:c
+
+P:c
+V:1
+
+P:c
+V:3
+
+[request]
+c
+
+[answer apk-tools 3.0.9-r0]
+install c 3

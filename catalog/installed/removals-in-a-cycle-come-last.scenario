@@ -1,0 +1,33 @@
+[statement]
+Packages removed that need each other wait for each other, and come after
+everything else, in the order given, each after the removals waiting on it:
+`a`, given first, waits on `c`, which needs it, so `c` goes first.
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:x
+V:1
+
+P:a
+V:1
+D:c
+
+P:c
+V:1
+D:a
+
+P:y
+V:1
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+remove x 1
+remove y 1
+install b 1
+remove c 1
+remove a 1

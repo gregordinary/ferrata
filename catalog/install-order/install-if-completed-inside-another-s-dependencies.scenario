@@ -1,0 +1,29 @@
+[statement]
+A package placed while the walk follows another's dependencies completes a
+condition there: `d`, a dependency of `e1`, places `f` after it, before
+`e1` itself.
+
+[repository]
+P:base
+V:1
+
+P:e1
+V:1
+i:base
+D:d
+
+P:d
+V:1
+
+P:f
+V:1
+i:d
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install d 1
+install f 1
+install e1 1

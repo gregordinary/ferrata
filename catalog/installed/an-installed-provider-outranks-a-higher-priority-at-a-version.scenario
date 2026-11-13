@@ -1,0 +1,27 @@
+[statement]
+A package installed keeps a name it provides at a version against a higher
+priority at the same version.
+
+[repository]
+P:r
+V:1
+p:v=1
+k:20
+
+P:b
+V:1
+
+[installed]
+P:q
+V:1
+p:v=1
+k:10
+
+[world]
+v
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 1

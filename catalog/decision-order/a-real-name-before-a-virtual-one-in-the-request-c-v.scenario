@@ -1,0 +1,27 @@
+[statement]
+The order of `a-real-name-before-a-virtual-one-virtual-first` holds in a request too:
+asked for `c v`, apk decides `c` first, and its dependency installs
+`p4`, which provides `v`.
+
+[repository]
+P:c
+V:1.0-r0
+D:p4
+
+P:p4
+V:1.0-r0
+p:v
+k:400
+
+P:p5
+V:1.0-r0
+p:v
+k:500
+
+[request]
+c
+v
+
+[answer apk-tools 3.0.9-r0]
+install p4 1.0-r0
+install c 1.0-r0

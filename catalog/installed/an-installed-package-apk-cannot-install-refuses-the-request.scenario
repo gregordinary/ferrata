@@ -1,0 +1,26 @@
+[statement]
+As `an-installed-package-apk-cannot-install-is-replaced`, with nothing to
+replace it: the world's `a` refuses the request.
+
+[repository]
+P:b
+V:1
+
+[installed]
+P:a
+V:1
+X:strange
+
+[world]
+a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| WARNING: This apk-tools is OLD! Some packages are not installable.
+| ERROR: unable to select packages:
+|   a-1:
+|     error: uninstallable
+|     satisfies: world[a]
+refused

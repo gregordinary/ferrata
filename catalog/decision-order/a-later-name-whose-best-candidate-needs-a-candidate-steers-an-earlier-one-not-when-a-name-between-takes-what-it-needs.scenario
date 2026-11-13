@@ -1,0 +1,50 @@
+[statement]
+As `a-later-name-whose-best-candidate-needs-a-candidate-steers-an-earlier-
+one`, with `T` reached between `So` and `Pc`: `t1`, the best candidate for
+`T`, holds `Q`, which `pjackdev` provides too, and `So` keeps `jack`.
+
+[repository]
+P:top
+V:1
+D:libs T Pc
+
+P:libs
+V:1
+D:So
+
+P:jack
+V:1.9
+p:So=0.999
+
+P:jackdev
+V:1.9
+p:Pc=1.9
+
+P:pjack
+V:1.6
+p:So=0.3
+
+P:pjackdev
+V:1.6
+D:pjack
+p:Pc=3.1 Q=1
+
+P:t1
+V:1
+k:100
+p:T Q=1
+
+P:t2
+V:1
+k:10
+p:T
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install jack 1.9
+install libs 1
+install t1 1
+install jackdev 1.9
+install top 1

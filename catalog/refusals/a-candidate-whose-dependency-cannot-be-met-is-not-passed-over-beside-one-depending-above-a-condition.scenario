@@ -1,0 +1,43 @@
+[statement]
+A package installed for its `install_if` condition ends the chain of
+requirements: `base` and `top` are requested, `q` is installed for its
+condition on `base` and needs `n`, `top` needs `z`, and `z` needs `q`.
+`n` 2 needs `missing`, and `n` 1 needs `z`; apk chooses `n` 2 and
+refuses, since no requirement brought `q`. Where `q` has no condition and
+`z` alone requires it, `z` is up the chain, and apk passes `n` 2 over, as
+`a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-further-up`.
+
+[repository]
+P:base
+V:1
+
+P:q
+V:1
+i:base
+D:n
+
+P:top
+V:1
+D:z
+
+P:z
+V:1
+D:q
+
+P:n
+V:2
+D:missing
+
+P:n
+V:1
+D:z
+
+[request]
+base
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   missing (no such package):
+|     required by: n-2[missing]
+refused

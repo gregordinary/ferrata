@@ -1,0 +1,35 @@
+[statement]
+A package with a condition, reached as a dependency, leads the walk through
+its dependencies only, not its condition: `b-extra` places `y` before it,
+and `b`, its condition, after.
+
+[repository]
+P:a
+V:1
+D:b-extra
+
+P:b-extra
+V:1
+i:b
+D:y
+
+P:b
+V:1
+
+P:y
+V:1
+
+P:z
+V:1
+D:b
+
+[request]
+a
+z
+
+[answer apk-tools 3.0.9-r0]
+install y 1
+install b-extra 1
+install a 1
+install b 1
+install z 1

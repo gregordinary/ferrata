@@ -1,0 +1,30 @@
+[statement]
+As `a-requirer-is-decided-before-what-it-requires-m-z`, with `app` listing
+`z` first: the answer is the same.
+
+[repository]
+P:app
+V:1
+D:z m
+
+P:z
+V:1.0
+
+P:z
+V:2.0
+D:m<2
+
+P:m
+V:1.0
+
+P:m
+V:2.0
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install m 1.0
+install z 2.0
+install app 1

@@ -1,0 +1,55 @@
+[package]
+name = "ferrata-fuzz"
+version = "0.0.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+ferrata = { path = ".." }
+# The property checks, and the generator of the cases they run over.
+ferrata-scenario = { path = "../scenario" }
+
+# A workspace of its own, so the fuzzing harness never joins the library's
+# build.
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "versions"
+path = "fuzz_targets/versions.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "dependencies"
+path = "fuzz_targets/dependencies.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "index"
+path = "fuzz_targets/index.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "resolve"
+path = "fuzz_targets/resolve.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "generated"
+path = "fuzz_targets/generated.rs"
+test = false
+doc = false
+bench = false

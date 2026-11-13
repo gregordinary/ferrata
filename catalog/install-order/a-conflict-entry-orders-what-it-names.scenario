@@ -1,0 +1,20 @@
+[statement]
+A `!` entry places the package carrying its name before the package stating
+it, though the entry does not admit that package's version: `x` 2.0 comes
+before `app`, whose `!x>5` it is.
+
+[repository]
+P:app
+V:1
+D:!x>5
+
+P:x
+V:2.0
+
+[request]
+app
+x
+
+[answer apk-tools 3.0.9-r0]
+install x 2.0
+install app 1

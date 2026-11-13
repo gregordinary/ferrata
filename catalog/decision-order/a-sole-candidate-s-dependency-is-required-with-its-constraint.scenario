@@ -1,0 +1,37 @@
+[statement]
+A name whose single candidate depends on another requires that name with
+the constraint the candidate states: `so:r`'s one candidate `r` needs
+`so:n`, whose one candidate `n` needs `lib<2`. `lib`, a name some package
+carries, is required with `lib<2` before `n` is installed, and gets 1.0.
+Contrast `a-shared-dependency-carries-no-constraint`, where two candidates
+share the dependency and `lib` gets 2.0.
+
+[repository]
+P:app
+V:1
+D:so:r
+
+P:r
+V:1
+p:so:r=1
+D:so:n
+
+P:n
+V:1
+p:so:n=1
+D:lib<2
+
+P:lib
+V:1.0
+
+P:lib
+V:2.0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install lib 1.0
+install n 1
+install r 1
+install app 1

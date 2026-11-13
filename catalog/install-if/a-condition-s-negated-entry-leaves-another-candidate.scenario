@@ -1,0 +1,35 @@
+[statement]
+As `a-condition-s-negated-entry-keeps-its-name-out-of-the-package-s-dependencies`,
+where the dependency has another candidate: `e` needs `Q`, which `docs`
+provides at 2 and `q2` at 1; apk passes over `docs`, whose name `e`'s
+condition forbids, and installs `q2` with `e`.
+
+[repository]
+P:top
+V:1
+D:base
+
+P:base
+V:1
+
+P:docs
+V:2
+p:Q=2
+
+P:q2
+V:1
+p:Q=1
+
+P:e
+V:1
+D:Q
+i:base !docs
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install q2 1
+install e 1
+install top 1

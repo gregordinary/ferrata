@@ -1,0 +1,21 @@
+[statement]
+As `a-condition-forbidding-the-package-s-own-name-never-holds`, for a name
+the package provides at a version: `b` provides `x` at 1, its condition is
+`!x>5` and `e`, and only `e` is installed. Where `b` provides `x` at no
+version, it is installed with `e`
+(`a-condition-forbidding-a-name-the-package-provides-at-no-version-holds`).
+
+[repository]
+P:b
+V:1
+i:!x>5 e
+p:x=1
+
+P:e
+V:1
+
+[request]
+e
+
+[answer apk-tools 3.0.9-r0]
+install e 1

@@ -1,0 +1,51 @@
+[statement]
+A package whose name a package of the resolution takes, where no package
+kept or replaced needs that name, is removed among the first removals,
+not at its successor's turn: `idf` takes `id` from the installed `ide`,
+and nothing installed needs `id`, so apk removes `ide` right after `old`.
+Contrast `a-package-losing-a-name-it-provides-is-removed-at-the-turn-of-its-successor`,
+where `x` needs `id`.
+
+[repository]
+P:ide
+V:1
+p:id=78
+
+P:idf
+V:1
+p:id=78
+
+P:app
+V:1
+D:a b idf
+
+P:a
+V:1
+
+P:b
+V:1
+
+[installed]
+P:old
+V:1
+
+P:ide
+V:1
+p:id=78
+
+P:x
+V:1
+
+[world]
+x
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+remove old 1
+remove ide 1
+install a 1
+install b 1
+install idf 1
+install app 1

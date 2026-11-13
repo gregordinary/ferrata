@@ -1,0 +1,96 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`pimcommon`. Through `iso-codes-lang`'s condition (`lang`) and
+`akonadi-contacts-lang`'s, the walk reaches `ktextaddons`, and from it
+`dbus:org.freedesktop.Secrets`, before `so:libKF6Wallet.so.6`; but a name
+reached early through conditions is not decided early
+(`install-if/the-names-a-condition-states-number-nothing`), and apk
+installs `kwallet` alone. Contrast
+`install-if/conditions-that-never-hold-steer-a-choice`, where the
+conditions lead to `so:libKF6Wallet.so.6` first.
+
+[repository]
+C:Q1Dm6psMHtyXCs29Dqzpj3jAkGXKI=
+P:iso-codes-lang
+V:4.20.1-r0
+A:x86_64
+i:lang
+
+C:Q1GPEMd5eSfYG5TCtVxbee4PgzRE0=
+P:akonadi-contacts
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6TextUtils.so.1
+
+C:Q1Ecw1NKvcnOdbTI98mHZtk9He0SU=
+P:akonadi-contacts-lang
+V:26.04.2-r0
+A:x86_64
+i:akonadi-contacts=26.04.2-r0 lang
+
+C:Q11raNL0yQY/NOhSJjG4kEubz2eT0=
+P:gnome-keyring
+V:50.0-r0
+A:x86_64
+k:100
+p:dbus:org.freedesktop.Secrets
+
+C:Q13lPpxc+z3vlwi4iNu34eZAnF0/A=
+P:kaccounts-integration
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6I18n.so.6 so:libKF6Wallet.so.6
+p:so:libkaccounts6.so.2=26.04.2
+
+C:Q1oe9sj5dVz0W80DhJb4ikFQu5NqM=
+P:ki18n
+V:6.26.0-r0
+A:x86_64
+D:iso-codes-lang
+p:so:libKF6I18n.so.6=6.26.0
+
+C:Q1GvfWEAisQwyUjbe3MOg5uvrMprA=
+P:ktextaddons
+V:2.0.2-r0
+A:x86_64
+D:so:libqt6keychain.so.1
+p:so:libKF6TextAddonsWidgets.so.1=2.0.2 so:libKF6TextUtils.so.1=2.0.2
+
+C:Q1f2/OH80Gug9JSVd1J4XLWT3r7XQ=
+P:kwallet
+V:6.26.0-r0
+A:x86_64
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.26.0
+
+C:Q1rmD+RXdQrtwmNkDdFTVBPMYpBQg=
+P:pimcommon
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6PurposeWidgets.so.6 so:libKF6TextAddonsWidgets.so.1
+
+C:Q14yhyHlAxMKFTe3Lm3ZqpUHXUWhU=
+P:purpose
+V:6.26.0-r0
+A:x86_64
+D:so:libkaccounts6.so.2
+p:so:libKF6PurposeWidgets.so.6=6.26.0
+
+C:Q111kFujDhAL7Ty70eYhizdwBuCXk=
+P:qtkeychain
+V:0.15.0-r0
+A:x86_64
+D:dbus:org.freedesktop.Secrets
+p:so:libqt6keychain.so.1=0.15.0
+
+[request]
+pimcommon
+
+[answer apk-tools 3.0.9-r0]
+install iso-codes-lang 4.20.1-r0
+install ki18n 6.26.0-r0
+install kwallet 6.26.0-r0
+install kaccounts-integration 26.04.2-r0
+install purpose 6.26.0-r0
+install qtkeychain 0.15.0-r0
+install ktextaddons 2.0.2-r0
+install pimcommon 26.04.2-r0

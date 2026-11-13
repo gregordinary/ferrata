@@ -1,0 +1,20 @@
+[statement]
+A package whose `install_if` names a package not installed is not
+installed.
+
+[repository]
+P:base
+V:1.0
+
+P:docs
+V:1.0
+
+P:extra
+V:1.0
+i:base docs
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1.0

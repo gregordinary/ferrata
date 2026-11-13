@@ -1,0 +1,19 @@
+[statement]
+A package providing its own name, in any form, conflicts with itself: `a`
+provides `a` at no version, and asked for `a`, apk refuses.
+
+[repository]
+P:a
+V:1
+p:a
+
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-1:
+|     conflicts: a-1[a]
+|     satisfies: world[a]
+refused

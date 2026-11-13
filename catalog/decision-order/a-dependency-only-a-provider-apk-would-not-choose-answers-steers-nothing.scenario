@@ -1,0 +1,39 @@
+[statement]
+A later name's dependency that only a provider at no version without a
+priority could answer steers no earlier choice: `top` needs `so:x`, then
+`w`; `app`, the one candidate for `w`, needs `so:y`, which only `old`
+provides, at no version and without a priority, and `old` cannot be
+installed beside `new`, the best candidate for `so:x`. `so:x` keeps
+`new`, and apk refuses `so:y`. With a priority on `old`, `app`'s
+dependency steers `so:x` to `old`, and apk installs `old`, `app` and
+`top`.
+
+[repository]
+P:top
+V:1
+D:so:x w
+
+P:app
+V:1
+D:so:y
+p:w=1
+
+P:new
+V:1
+p:so:x=3
+
+P:old
+V:1
+p:so:x so:y
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   so:y (virtual):
+|     note: please select one of the 'provided by'
+|           packages explicitly
+|     provided by: old
+|     required by: app-1[so:y]
+refused

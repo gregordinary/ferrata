@@ -1,0 +1,23 @@
+[statement]
+A package whose `install_if` names only installed packages is installed
+with them.
+
+[repository]
+P:base
+V:1.0
+
+P:docs
+V:1.0
+
+P:extra
+V:1.0
+i:base docs
+
+[request]
+base
+docs
+
+[answer apk-tools 3.0.9-r0]
+install base 1.0
+install docs 1.0
+install extra 1.0

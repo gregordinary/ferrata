@@ -1,0 +1,40 @@
+[statement]
+The walk takes candidates by priority before version, unlike the choice
+between them: `pa`, providing `v` at 1 with priority 100, is walked before
+`pz`, providing it at 2, so `q2` is decided first, though `pz` is the one
+installed for `v`.
+
+[repository]
+P:app
+V:1
+D:v
+
+P:pa
+V:1
+p:v=1
+k:100
+D:q2 q1
+
+P:pz
+V:1
+p:v=2
+D:q1 q2
+
+P:c1
+V:1
+p:q1
+k:100
+
+P:c2
+V:1
+p:q1 q2=1
+k:10
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install c2 1
+install pz 1
+install app 1

@@ -1,0 +1,32 @@
+[statement]
+A name a real package carries is decided before a name provided only at no
+version, whichever a package lists first. `b` lists the virtual `v` first,
+but `c` is decided first, and its dependency on `p4` installs a provider of
+`v`, so `v` needs nothing more, though `p5` ranks higher for it.
+
+[repository]
+P:b
+V:1.0-r0
+D:v c
+
+P:c
+V:1.0-r0
+D:p4
+
+P:p4
+V:1.0-r0
+p:v
+k:400
+
+P:p5
+V:1.0-r0
+p:v
+k:500
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install p4 1.0-r0
+install c 1.0-r0
+install b 1.0-r0

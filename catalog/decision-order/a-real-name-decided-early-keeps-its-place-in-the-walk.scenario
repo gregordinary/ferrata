@@ -1,0 +1,47 @@
+[statement]
+A real name is decided before provided names, but what it reaches keeps its
+place in the walk: `x` is decided first, for 2.0, which needs `z`; `v`,
+listed before `x`, is still decided before `z`, for `p1`, and `zk`, which
+provides `v` too, comes after.
+
+[repository]
+P:app
+V:1
+D:v x
+
+P:p1
+V:1
+p:v
+k:100
+
+P:p2
+V:1
+p:v
+k:10
+
+P:x
+V:1.0
+
+P:x
+V:2.0
+D:z
+
+P:zk
+V:1
+p:z v
+k:100
+
+P:zg
+V:1
+p:z
+k:10
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install zk 1
+install x 2.0
+install app 1

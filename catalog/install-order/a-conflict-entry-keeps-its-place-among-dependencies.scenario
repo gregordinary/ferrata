@@ -1,0 +1,23 @@
+[statement]
+A `!` entry leads the walk where it is stated among a package's
+dependencies: `y`, stated first, comes before `x`, which `!x<2` names.
+
+[repository]
+P:app
+V:1
+D:y !x<2
+
+P:x
+V:2.0
+
+P:y
+V:1
+
+[request]
+app
+x
+
+[answer apk-tools 3.0.9-r0]
+install y 1
+install x 2.0
+install app 1

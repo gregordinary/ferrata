@@ -1,0 +1,26 @@
+[statement]
+A package's dependencies are installed in the order it states them, not in
+the order of their names.
+
+[repository]
+P:a
+V:1
+D:z b y
+
+P:b
+V:1
+
+P:y
+V:1
+
+P:z
+V:1
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+install z 1
+install b 1
+install y 1
+install a 1

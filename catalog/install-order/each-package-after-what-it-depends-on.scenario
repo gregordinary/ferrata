@@ -1,0 +1,22 @@
+[statement]
+A package is installed after what it depends on.
+
+[repository]
+P:a
+V:1
+D:b
+
+P:b
+V:1
+D:c
+
+P:c
+V:1
+
+[request]
+a
+
+[answer apk-tools 3.0.9-r0]
+install c 1
+install b 1
+install a 1

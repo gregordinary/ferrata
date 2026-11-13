@@ -1,0 +1,49 @@
+[statement]
+As `a-condition-that-never-holds-reserves-a-provider`, with nothing else
+requiring `F`: nothing is reserved, and `s1` is installed.
+
+[repository]
+P:top
+V:1
+D:n z
+
+P:n
+V:1
+
+P:z
+V:1
+D:S
+
+P:r
+V:1
+i:n zz
+D:F
+
+P:f1
+V:1
+k:100
+p:F K=1
+
+P:f2
+V:1
+k:10
+p:F S
+
+P:s1
+V:1
+k:100
+p:S K=1
+
+P:s2
+V:1
+k:10
+p:S
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install s1 1
+install z 1
+install top 1

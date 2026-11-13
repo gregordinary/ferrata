@@ -1,0 +1,35 @@
+[statement]
+Where several packages installed provide a name a dependency states, the
+walk follows the one installed for the request: `zp`, requested, comes
+before `a`, and `bp`, installed for `c`, after it, though `bp` states the
+higher priority.
+
+[repository]
+P:a
+V:1
+D:v
+
+P:zp
+V:1
+p:v
+k:1
+
+P:bp
+V:1
+p:v
+k:9
+
+P:c
+V:1
+D:bp
+
+[request]
+a
+zp
+c
+
+[answer apk-tools 3.0.9-r0]
+install zp 1
+install a 1
+install bp 1
+install c 1

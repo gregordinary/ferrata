@@ -1,0 +1,18 @@
+[statement]
+The same build, one identity, offered by two repositories is one package.
+
+[repository]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:foo
+V:1.0
+
+[repository]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:foo
+V:1.0
+
+[request]
+foo
+
+[answer apk-tools 3.0.9-r0]
+install foo 1.0

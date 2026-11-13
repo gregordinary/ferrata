@@ -1,0 +1,14 @@
+[statement]
+A provided name's operator is ignored: `x>=1.0` provides `x` at 1.0, which
+meets `x<2.0`.
+
+[repository]
+P:prov
+V:5.0-r0
+p:x>=1.0
+
+[request]
+x<2.0
+
+[answer apk-tools 3.0.9-r0]
+install prov 5.0-r0

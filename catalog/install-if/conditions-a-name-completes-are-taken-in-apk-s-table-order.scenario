@@ -1,0 +1,54 @@
+[statement]
+As `conditions-a-name-completes-are-taken-in-name-order`, with conditions
+that hold once `n` is installed, and `qb` in place of `rb`: apk installs
+`ra`, which its name table holds before `qb`
+(`install-order/packages-one-placement-triggers-in-apk-s-table-order`),
+and with it `lo`, the one candidate for its dependency `Y`; `lo` answers
+`X`, which `qb` needs, and `hi` is not installed.
+
+[repository]
+P:top
+V:1
+D:n w v
+
+P:n
+V:1
+
+P:qb
+V:1
+i:n
+D:X
+
+P:ra
+V:1
+i:n
+D:Y
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+P:w
+V:1
+D:X
+
+P:v
+V:1
+D:Y
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install lo 1
+install ra 1
+install qb 1
+install w 1
+install v 1
+install top 1

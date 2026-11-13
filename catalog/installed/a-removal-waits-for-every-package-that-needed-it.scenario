@@ -1,0 +1,40 @@
+[statement]
+A removal waits for every package that needed it: `ol` goes after both
+`app1` and `app2` are upgraded, before `mid` is installed.
+
+[repository]
+P:app1
+V:2
+
+P:app2
+V:2
+
+P:mid
+V:1
+
+[installed]
+P:ol
+V:1
+
+P:app1
+V:1
+D:ol
+
+P:app2
+V:1
+D:ol
+
+[world]
+app1
+app2
+
+[request]
+app1>=2
+app2>=2
+mid
+
+[answer apk-tools 3.0.9-r0]
+upgrade app1 1 2
+upgrade app2 1 2
+remove ol 1
+install mid 1

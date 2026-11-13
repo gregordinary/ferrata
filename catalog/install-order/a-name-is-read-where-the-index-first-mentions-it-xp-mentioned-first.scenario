@@ -1,0 +1,30 @@
+[statement]
+apk reads a name where the index first mentions it, as a record's own
+name or an entry of its dependencies, provides or `install_if`, whether
+or not that record is installed, and a list's entries in the order
+stated. `other` mentions `xp` before `au`, so `au` is read last and comes
+first of the two, which share a bucket.
+
+[repository]
+P:other
+V:1
+D:xp au
+
+P:base
+V:1
+
+P:au
+V:1
+i:base
+
+P:xp
+V:1
+i:base
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install au 1
+install xp 1

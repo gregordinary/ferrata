@@ -1,0 +1,157 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`kmail`, over the records the request can reach and those whose
+`install_if` names one of them. No condition takes part: apk installs
+`kwallet` alone, though the walk reaches `dbus:org.freedesktop.Secrets`,
+for which `gnome-keyring` ranks first, long before `so:libKF6Wallet.so.6`,
+which only `kwallet` provides. The carried `xdg-utils` is decided before
+any provided name, and before it `so:libQt6PrintSupport.so.6`, whose one
+candidate `qt6-qtbase-x11` needs it; before that, the names that would
+require a name `qt6-qtbase-x11` provides, among them
+`so:libKF6Wallet.so.6`, since `kwallet` needs `so:libQt6Gui.so.6`.
+`kwallet` then answers `dbus:org.freedesktop.Secrets`
+(`decision-order/a-requirer-s-requirers-are-decided-first`). Without any
+one dependency entry here, apk installs `gnome-keyring` too.
+
+[repository]
+C:Q1gkX/ff7mAMnaZ+N1ehVr2FJ2QlE=
+P:libbsd
+V:0.12.2-r0
+A:x86_64
+D:musl
+p:so:libbsd.so.0=0.12.2
+
+C:Q1jKp0ng0vxHiOBwaTAmKsgdnNDhA=
+P:libxcb
+V:1.17.0-r2
+A:x86_64
+D:so:libXdmcp.so.6
+p:so:libxcb.so.1=1.1.0
+
+C:Q1IE5BPAIitq56lK3FO5BX01Nv0gA=
+P:libxdmcp
+V:1.1.5-r1
+A:x86_64
+D:so:libbsd.so.0
+p:so:libXdmcp.so.6=6.0.0
+
+C:Q1dw6DBNlY3O2Y12mX356Podtcoy8=
+P:musl
+V:1.2.6-r3
+A:x86_64
+p:so:libc.musl-x86_64.so.1=1
+
+C:Q1CLOCf1X5zFaR4n9o0D10G/lCKgs=
+P:tzdata
+V:2026f-r0
+A:x86_64
+
+[repository]
+C:Q11raNL0yQY/NOhSJjG4kEubz2eT0=
+P:gnome-keyring
+V:50.0-r0
+A:x86_64
+k:100
+p:dbus:org.freedesktop.Secrets
+
+C:Q13lPpxc+z3vlwi4iNu34eZAnF0/A=
+P:kaccounts-integration
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6Wallet.so.6 so:libQt6Widgets.so.6
+p:so:libkaccounts6.so.2=26.04.2
+
+C:Q1Sr7NOc2YUMJCmgwMdamLNm5Z2x8=
+P:kitemmodels
+V:6.26.0-r0
+A:x86_64
+p:so:libKF6ItemModels.so.6=6.26.0
+
+C:Q1R4VFjHnVDFLvPEW53PYh6MPI0bE=
+P:kmail
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6TextUtils.so.1 so:libKPim6PimCommonAkonadi.so.6 so:libQt6Network.so.6 so:libQt6WebEngineCore.so.6
+
+C:Q1GvfWEAisQwyUjbe3MOg5uvrMprA=
+P:ktextaddons
+V:2.0.2-r0
+A:x86_64
+D:so:libqt6keychain.so.1
+p:so:libKF6TextUtils.so.1=2.0.2
+
+C:Q1f2/OH80Gug9JSVd1J4XLWT3r7XQ=
+P:kwallet
+V:6.26.0-r0
+A:x86_64
+D:so:libQt6DBus.so.6 so:libQt6Gui.so.6
+p:dbus:org.freedesktop.Secrets so:libKF6Wallet.so.6=6.26.0
+
+C:Q1rmD+RXdQrtwmNkDdFTVBPMYpBQg=
+P:pimcommon
+V:26.04.2-r0
+A:x86_64
+D:so:libKF6ItemModels.so.6 so:libKF6PurposeWidgets.so.6
+p:so:libKPim6PimCommonAkonadi.so.6=6.7.2
+
+C:Q14yhyHlAxMKFTe3Lm3ZqpUHXUWhU=
+P:purpose
+V:6.26.0-r0
+A:x86_64
+D:kitemmodels so:libc.musl-x86_64.so.1 so:libkaccounts6.so.2
+p:so:libKF6PurposeWidgets.so.6=6.26.0
+
+C:Q1VVGtPv37HnVcS7Jc83kU/7UY7MY=
+P:qt6-qtbase
+V:6.11.1-r0
+A:x86_64
+D:tzdata
+p:so:libQt6DBus.so.6=6.11.1 so:libQt6Network.so.6=6.11.1
+
+C:Q11DI5BQwGCuJugP/G0qL/+nPJDBQ=
+P:qt6-qtbase-x11
+V:6.11.1-r0
+A:x86_64
+D:xdg-utils so:libxcb.so.1
+p:so:libQt6Gui.so.6=6.11.1 so:libQt6PrintSupport.so.6=6.11.1 so:libQt6Widgets.so.6=6.11.1
+
+C:Q1WiATgnh19kmxFoRRLfbjaBZPQfM=
+P:qt6-qtwebengine
+V:6.11.1-r3
+A:x86_64
+D:so:libQt6PrintSupport.so.6 so:libc.musl-x86_64.so.1
+p:so:libQt6WebEngineCore.so.6=6.11.1
+
+C:Q111kFujDhAL7Ty70eYhizdwBuCXk=
+P:qtkeychain
+V:0.15.0-r0
+A:x86_64
+D:dbus:org.freedesktop.Secrets
+p:so:libqt6keychain.so.1=0.15.0
+
+C:Q1BR8t0Tsi3lHG/Qg00hSk18QPJaQ=
+P:xdg-utils
+V:1.2.1-r1
+A:x86_64
+
+[request]
+kmail
+
+[answer apk-tools 3.0.9-r0]
+install tzdata 2026f-r0
+install qt6-qtbase 6.11.1-r0
+install xdg-utils 1.2.1-r1
+install musl 1.2.6-r3
+install libbsd 0.12.2-r0
+install libxdmcp 1.1.5-r1
+install libxcb 1.17.0-r2
+install qt6-qtbase-x11 6.11.1-r0
+install kwallet 6.26.0-r0
+install qtkeychain 0.15.0-r0
+install ktextaddons 2.0.2-r0
+install kitemmodels 6.26.0-r0
+install kaccounts-integration 26.04.2-r0
+install purpose 6.26.0-r0
+install pimcommon 26.04.2-r0
+install qt6-qtwebengine 6.11.1-r3
+install kmail 26.04.2-r0

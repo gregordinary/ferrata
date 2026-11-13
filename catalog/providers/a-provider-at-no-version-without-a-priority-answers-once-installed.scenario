@@ -1,0 +1,16 @@
+[statement]
+A package installed for its own name answers a name it provides at no
+version, though it states no priority: `d` is requested, and answers `b`
+too.
+
+[repository]
+P:d
+V:2
+p:b
+
+[request]
+d
+b
+
+[answer apk-tools 3.0.9-r0]
+install d 2

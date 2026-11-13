@@ -1,0 +1,23 @@
+[statement]
+Only a space separates the entries of a list field: a tab is part of a
+name, so `app` depends on one package named `a<TAB>b`.
+
+[repository]
+P:app
+V:1.0-r0
+D:a	b
+
+P:a
+V:1.0-r0
+
+P:b
+V:1.0-r0
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a	b (no such package):
+|     required by: app-1.0-r0[a	b]
+refused

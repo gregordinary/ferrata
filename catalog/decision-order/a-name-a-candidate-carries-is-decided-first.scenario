@@ -1,0 +1,24 @@
+[statement]
+A real name is decided after a pending real name that one of its candidates
+carries: `openblas`, which provides `blas` at no version, is installed first
+and answers `blas`, though `app` lists `blas` first and `blas` has a package
+of its own.
+
+[repository]
+P:app
+V:1
+D:blas openblas
+
+P:blas
+V:3.12
+
+P:openblas
+V:0.3
+p:blas
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install openblas 0.3
+install app 1

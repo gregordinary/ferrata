@@ -1,0 +1,35 @@
+[statement]
+A choice made for a name packages only provide does not steer a name some
+package carries that the request names away from its choice: `x`,
+requested and decided first, takes `x` 3, its best candidate. `y1`, the
+best candidate for `Y`, needs `w`, which only `x` 1 provides; apk keeps
+`x` 3 and takes `y2` for `Y`. Contrast
+`a-requested-name-some-package-carries-follows-a-carried-name` and
+`a-requested-name-some-package-carries-is-steered-from-a-package-it-does-not-admit`.
+
+[repository]
+P:x
+V:3
+
+P:x
+V:1
+p:w=2
+
+P:y1
+V:1
+k:5
+p:Y
+D:w
+
+P:y2
+V:1
+k:1
+p:Y
+
+[request]
+x
+Y
+
+[answer apk-tools 3.0.9-r0]
+install x 3
+install y2 1

@@ -1,0 +1,22 @@
+[statement]
+As `of-two-versions-providing-a-name-alike-the-later-is-chosen`, at no
+version: `c` 1 and `c` 2 both provide `w` at no version, `c` 1 with a
+priority of 10 and `c` 2 with one of 5, and `c` 2 is installed for `w`.
+Of two packages of different names, the priority decides.
+
+[repository]
+P:c
+V:1
+k:10
+p:w
+
+P:c
+V:2
+k:5
+p:w
+
+[request]
+w
+
+[answer apk-tools 3.0.9-r0]
+install c 2

@@ -1,0 +1,31 @@
+[statement]
+Observed: an earlier choice whose `!` entry forbids, through a name it
+provides, the one candidate of a later name gives way. `top` needs `b`
+and `c`; `b` 3, the best candidate for `b`, forbids `v`, which `c` 1, the
+one candidate for `c`, provides. apk takes `b` 2. Contrast
+`a-candidate-forbidding-an-installed-package-is-not-passed-over`, where
+the `!` entry names the package itself.
+
+[repository]
+P:top
+V:1
+D:b c
+
+P:c
+V:1
+p:v
+
+P:b
+V:3
+D:!v
+
+P:b
+V:2
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install b 2
+install c 1
+install top 1

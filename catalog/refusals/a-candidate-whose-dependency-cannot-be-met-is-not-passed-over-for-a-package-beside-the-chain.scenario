@@ -1,0 +1,35 @@
+[statement]
+A candidate depending on a package beside the chain of requirements that
+brought its name does not have a candidate whose dependency nothing can
+answer passed over: `top` needs `z` and `b`, `b` needs `a`, and `a` 1
+needs `z`; apk chooses `a` 3, which needs `missing`, and refuses
+(`a-candidate-whose-dependency-cannot-be-met-is-passed-over-beside-one-depending-further-up`).
+
+[repository]
+P:top
+V:1
+D:z b
+
+P:z
+V:1
+
+P:a
+V:1
+D:z
+
+P:a
+V:3
+D:missing
+
+P:b
+V:2
+D:a
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   missing (no such package):
+|     required by: a-3[missing]
+refused

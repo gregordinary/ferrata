@@ -1,0 +1,49 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `picard`'s closure from v3.23 installed and asked at a later
+version. `picard` needs `python3~3.14` and `py3-dateutil`, whose later
+build no longer needs `py3-six`. apk upgrades `py3-dateutil`, then
+`py3-dateutil-pyc`, whose condition names `py3-dateutil`, and only then
+removes `py3-six`, which nothing needs any more: a removal following a
+replacement waits until the walk has placed what placing the replacement
+led to (`installed/a-package-replaced-frees-what-it-needed-after-what-it-triggers`).
+
+[repository]
+P:py3-dateutil
+V:2.9.0-r4
+
+P:py3-dateutil-pyc
+V:2.9.0-r4
+i:py3-dateutil=2.9.0-r4
+
+P:python3
+V:3.14.10-r1
+
+[repository]
+P:picard
+V:2.13.3_git20251006-r2
+D:py3-dateutil python3~3.14
+
+[installed]
+P:python3
+V:3.12.16-r0
+
+P:py3-dateutil-pyc
+V:2.9.0-r2
+
+P:py3-six
+V:1.17.0-r0
+
+P:py3-dateutil
+V:2.9.0-r2
+D:py3-six python3~3.12
+
+[request]
+picard>2.13.3_git20251006-r0
+
+[answer apk-tools 3.0.9-r0]
+upgrade py3-dateutil 2.9.0-r2 2.9.0-r4
+upgrade py3-dateutil-pyc 2.9.0-r2 2.9.0-r4
+remove py3-six 1.17.0-r0
+upgrade python3 3.12.16-r0 3.14.10-r1
+install picard 2.13.3_git20251006-r2

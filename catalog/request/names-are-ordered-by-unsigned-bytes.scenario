@@ -1,0 +1,29 @@
+[statement]
+apk orders names byte by byte, and a byte above ASCII after every ASCII
+byte: `x` comes before `é`, whose first byte is 0xc3. So `x` is decided
+first and takes `p1`, and `é` then `p2`. Were 0xc3 a negative byte, `é`
+would come first, take `p2`, and `p2` would answer `x` too. A name that is
+not UTF-8 orders the same way: 0xff and 0x80 also come after `x`.
+
+[repository]
+P:p1
+V:1
+p:x
+k:100
+
+P:p2
+V:1
+p:x é=1
+k:10
+
+P:p3
+V:1
+p:é=1
+
+[request]
+é
+x
+
+[answer apk-tools 3.0.9-r0]
+install p1 1
+install p2 1

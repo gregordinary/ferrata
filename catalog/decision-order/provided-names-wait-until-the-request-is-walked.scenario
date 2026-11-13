@@ -1,0 +1,31 @@
+[statement]
+Names packages only provide wait until every requested name has been
+walked: `app1` requires `v` before `app2` is reached, yet `kw`, which
+`app2` needs and which provides `v`, answers it, and `gk` is not installed.
+
+[repository]
+P:app1
+V:1
+D:v
+
+P:app2
+V:1
+D:kw
+
+P:kw
+V:1
+p:v
+
+P:gk
+V:1
+p:v
+k:100
+
+[request]
+app1
+app2
+
+[answer apk-tools 3.0.9-r0]
+install kw 1
+install app1 1
+install app2 1

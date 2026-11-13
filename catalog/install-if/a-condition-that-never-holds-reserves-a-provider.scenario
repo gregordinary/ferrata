@@ -1,0 +1,54 @@
+[statement]
+A package whose condition never holds, since nothing provides `zz`, has
+its dependencies chosen for where the walk reaches it, and those choices
+reserve what they hold. `r` needs `F`, reached through `r` before `z`;
+`f1`, chosen for it, holds `K`. `S`, decided first, passes over `s1`,
+which would hold `K` too, for `f2`, which then answers `F` as well.
+Contrast
+`a-condition-that-never-holds-reserves-a-provider-only-if-required`.
+
+[repository]
+P:top
+V:1
+D:n z
+
+P:n
+V:1
+
+P:z
+V:1
+D:S F
+
+P:r
+V:1
+i:n zz
+D:F
+
+P:f1
+V:1
+k:100
+p:F K=1
+
+P:f2
+V:1
+k:10
+p:F S
+
+P:s1
+V:1
+k:100
+p:S K=1
+
+P:s2
+V:1
+k:10
+p:S
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install n 1
+install f2 1
+install z 1
+install top 1

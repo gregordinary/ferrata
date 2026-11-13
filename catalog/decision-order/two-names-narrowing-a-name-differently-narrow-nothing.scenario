@@ -1,0 +1,32 @@
+[statement]
+Two names narrowing a third to different candidates narrow nothing: `w`
+narrows `d` to `d` 1 and `d` 2, and `u` to `d` 1 and `d` 3. apk does not
+take `d` 1, which both admit, and refuses.
+
+[repository]
+P:d
+V:1
+p:w u
+
+P:d
+V:2
+p:w
+
+P:d
+V:3
+p:u
+
+[request]
+w
+u
+d
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   d-3:
+|     conflicts: d-2
+|     satisfies: world[d] world[u]
+|   d-2:
+|     conflicts: d-3
+|     satisfies: world[d] world[w]
+refused

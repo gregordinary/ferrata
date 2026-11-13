@@ -1,0 +1,49 @@
+[statement]
+Reduced from postmarketOS v26.06 over Alpine v3.24 (`main` and
+`community`, 2026-11-11), asked for `postmarketos-base-openrc`;
+postmarketOS's repository first. It needs `alpine-conf`,
+`busybox-mdev-openrc` and `udev-init-scripts-openrc`, in that order;
+`alpine-conf` and `udev-init-scripts-openrc`, through its condition, both
+come after `openrc`. apk installs `busybox-mdev-openrc`, with `mdev-conf`,
+before `alpine-conf`: placing `openrc` reaches `udev-init-scripts-openrc`,
+whose condition names `udev-init-scripts`, which nothing installs, and
+which provides `dev-openrc`; `busybox-mdev-openrc` provides it too, and is
+walked there
+(`install-order/a-package-whose-condition-may-hold-leads-to-a-provider-it-does-not-name`).
+
+[repository]
+P:postmarketos-base-openrc
+V:62-r0
+D:alpine-conf busybox-mdev-openrc udev-init-scripts-openrc
+
+[repository]
+P:alpine-conf
+V:3.22.0-r0
+D:openrc>=0.24.1-r6
+
+P:busybox-mdev-openrc
+V:1.37.0-r31
+D:mdev-conf
+p:dev-openrc
+
+P:mdev-conf
+V:4.10-r0
+
+P:openrc
+V:0.63.2-r0
+
+P:udev-init-scripts-openrc
+V:35-r1
+p:dev-openrc
+i:openrc udev-init-scripts=35-r1
+
+[request]
+postmarketos-base-openrc
+
+[answer apk-tools 3.0.9-r0]
+install openrc 0.63.2-r0
+install mdev-conf 4.10-r0
+install busybox-mdev-openrc 1.37.0-r31
+install alpine-conf 3.22.0-r0
+install udev-init-scripts-openrc 35-r1
+install postmarketos-base-openrc 62-r0

@@ -1,0 +1,32 @@
+[package]
+name = "ferrata"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/gregordinary/ferrata"
+documentation = "https://docs.rs/ferrata"
+description = "Alpine package dependency resolution that matches apk, in safe Rust"
+keywords = ["alpine", "apk", "dependency", "solver", "resolver"]
+categories = ["algorithms", "parser-implementations", "no-std"]
+# What ships is the library and its documentation. The behavior catalog, the
+# scenario tooling, the integration tests and the fuzzing harness are
+# development inputs, and stay in the repository, where the suite runs.
+include = ["/src", "/README.md", "/CHANGELOG.md", "/LICENSE-APACHE", "/LICENSE-MIT"]
+# Not published until the first release.
+publish = false
+
+# The scenario tooling is a member, so `cargo test --workspace` runs the
+# catalog's checks with the library's tests. The fuzzing harness is a
+# workspace of its own.
+[workspace]
+members = ["scenario"]
+exclude = ["fuzz"]
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+missing_debug_implementations = "warn"
+unreachable_pub = "warn"
+
+[dependencies]

@@ -1,0 +1,30 @@
+[statement]
+A triggered package is walked at the first of the names it carries and
+provides in the order of apk's table: `z`, in bucket 18,392, provides
+`w`, in bucket 80, and is walked before `c` (7,966) and `a` (12,779).
+
+[repository]
+P:base
+V:1
+
+P:a
+V:1
+i:base
+
+P:c
+V:1
+i:base
+
+P:z
+V:1
+i:base
+p:w
+
+[request]
+base
+
+[answer apk-tools 3.0.9-r0]
+install base 1
+install z 1
+install c 1
+install a 1

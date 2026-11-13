@@ -1,0 +1,41 @@
+[statement]
+Reduced from a layered request over Alpine v3.24 (`main` and `community`,
+2026-11-11): `girara`'s closure from v3.23 installed and asked at a later
+version, with `aws-sdk-cpp-qapps`. The later `girara` no longer needs
+`gtk+3.0`, which needs `gobject-introspection` and
+`gtk-update-icon-cache`, in that order, by their names; the installed
+database lists them in that order too. apk removes `gtk+3.0`, then
+`gtk-update-icon-cache`, then `gobject-introspection`: `gtk+3.0` was
+needed through a name it provides at a version, so they are among the
+removals left for last, and the packages a removal there frees go the one
+the database lists last first
+(`installed/the-last-removals-a-removal-frees-go-the-one-given-last-first`).
+
+[repository]
+P:girara
+V:2026.02.04-r0
+
+[installed]
+P:gobject-introspection
+V:1.86.0-r0
+
+P:gtk-update-icon-cache
+V:3.24.51-r0
+
+P:gtk+3.0
+V:3.24.51-r0
+D:gobject-introspection gtk-update-icon-cache
+p:so:libgdk-3.so.0=0.2419.32
+
+P:girara
+V:0.4.5-r4
+D:so:libgdk-3.so.0
+
+[request]
+girara>0.4.5-r4
+
+[answer apk-tools 3.0.9-r0]
+upgrade girara 0.4.5-r4 2026.02.04-r0
+remove gtk+3.0 3.24.51-r0
+remove gtk-update-icon-cache 3.24.51-r0
+remove gobject-introspection 1.86.0-r0

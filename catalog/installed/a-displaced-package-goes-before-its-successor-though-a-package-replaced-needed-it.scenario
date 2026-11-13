@@ -1,0 +1,36 @@
+[statement]
+A package the request's packages displace goes just before its successor
+even where a package replaced later still needed it: `w` 0.20 provides
+`wl` at its version, which the installed `wl` 0.19 holds, and `lab` 1,
+which `lab` 2 replaces after `w` is installed, needed `so:w19`, which only
+`wl` provides. apk removes `wl`, installs `w`, then upgrades `lab`. The
+shape of `labwc`'s upgrade from Alpine v3.23 to v3.24.
+
+[repository]
+P:w
+V:20
+p:wl=20 so:w20=0
+
+P:lab
+V:2
+D:so:w20
+
+[installed]
+P:wl
+V:19
+p:so:w19=0
+
+P:lab
+V:1
+D:so:w19
+
+[world]
+lab
+
+[request]
+lab>1
+
+[answer apk-tools 3.0.9-r0]
+remove wl 19
+install w 20
+upgrade lab 1 2

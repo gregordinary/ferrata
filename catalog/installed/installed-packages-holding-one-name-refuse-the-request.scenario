@@ -1,0 +1,33 @@
+[statement]
+Two installed packages that hold one name, both in the world, refuse a
+request that has nothing to do with them.
+
+[repository]
+P:b
+V:1.0-r0
+
+[installed]
+P:a
+V:1.0-r0
+p:x=1
+
+P:a2
+V:1.0-r0
+p:x=1
+
+[world]
+a
+a2
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   a-1.0-r0:
+|     conflicts: a2-1.0-r0[x=1]
+|     satisfies: world[a]
+|   a2-1.0-r0:
+|     conflicts: a-1.0-r0[x=1]
+|     satisfies: world[a2]
+refused

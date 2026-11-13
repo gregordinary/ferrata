@@ -1,0 +1,33 @@
+[statement]
+Reduced from Alpine v3.24 (`main` and `community`, 2026-11-08), asked for
+`lua-resty-lock`. As `acf-db-lib-takes-lua-from-its-dependency`: the real
+`lua-resty-core` is decided before the virtual `lua`, and installs
+`luajit`, which provides `lua` and states no priority; `lua5.5`, at
+priority 500, is not installed. The two repositories are kept as found.
+
+[repository]
+P:lua-resty-core
+V:0.1.34_rc3-r0
+D:luajit
+
+P:lua5.5
+V:5.5.0-r1
+k:500
+p:lua
+
+P:luajit
+V:2.1_p20251030-r0
+p:lua
+
+[repository]
+P:lua-resty-lock
+V:0.09-r2
+D:lua lua-resty-core
+
+[request]
+lua-resty-lock
+
+[answer apk-tools 3.0.9-r0]
+install luajit 2.1_p20251030-r0
+install lua-resty-core 0.1.34_rc3-r0
+install lua-resty-lock 0.09-r2

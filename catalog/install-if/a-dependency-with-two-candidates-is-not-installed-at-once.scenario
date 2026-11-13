@@ -1,0 +1,45 @@
+[statement]
+As `a-dependency-with-one-candidate-is-installed-at-once`, with `lo2`
+providing `Y` too: `X` is decided first, for `hi`, and `Y` goes to `lo2`,
+listed before `lo`.
+
+[repository]
+P:top
+V:1
+D:z base
+
+P:base
+V:1
+
+P:z
+V:1
+D:X
+
+P:e
+V:1
+i:base
+D:Y
+
+P:lo2
+V:1
+p:Y=1
+
+P:hi
+V:1
+k:100
+p:X
+
+P:lo
+V:1
+p:X Y=1
+
+[request]
+top
+
+[answer apk-tools 3.0.9-r0]
+install hi 1
+install z 1
+install base 1
+install lo2 1
+install e 1
+install top 1

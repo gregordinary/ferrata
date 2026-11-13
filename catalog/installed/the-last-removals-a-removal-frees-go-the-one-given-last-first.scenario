@@ -1,0 +1,39 @@
+[statement]
+Of the removals left for last, a package needed through a name it provides
+at a version goes first, and the packages it frees after it, the one the
+installed database lists last first: `r` 2 no longer needs `so:g`, which
+`g` provides at a version; `g` needs `gi` and `guic`, listed in that
+order. apk removes `g`, `guic`, then `gi`. With the database listing
+`guic` first, it removes `g`, `gi`, then `guic`.
+
+[repository]
+P:r
+V:2
+
+[installed]
+P:gi
+V:1
+
+P:guic
+V:1
+
+P:g
+V:1
+p:so:g=1
+D:gi guic
+
+P:r
+V:1
+D:so:g
+
+[world]
+r
+
+[request]
+r>1
+
+[answer apk-tools 3.0.9-r0]
+upgrade r 1 2
+remove g 1
+remove guic 1
+remove gi 1

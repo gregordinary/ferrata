@@ -1,0 +1,25 @@
+[statement]
+A name narrowed by another to the candidates that hold it ranks them as
+it ranks its own candidates: `w`'s candidates `p1` and `p2` each provide
+`D` at a version, and `D` takes `p2`, providing it at 2, though `p1`
+provides `w` at a later version and `p3` provides `D` at 3.
+
+[repository]
+P:p1
+V:1
+p:D=1 w=5
+
+P:p2
+V:1
+p:D=2 w=1
+
+P:p3
+V:1
+p:D=3
+
+[request]
+w
+D
+
+[answer apk-tools 3.0.9-r0]
+install p2 1

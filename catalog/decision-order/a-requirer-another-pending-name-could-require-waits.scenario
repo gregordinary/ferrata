@@ -1,0 +1,39 @@
+[statement]
+A name is decided before the carried name its one candidate needs only if
+no package another pending name could choose depends on it: `kw`, the
+one candidate for `w`, needs the carried `dep`, but `ku`, the one
+candidate for `u`, depends on `w`. `w` waits its turn after `v`, which
+goes to `gk`. Contrast `a-sole-candidate-with-a-real-dependency-is-installed-first`.
+
+[repository]
+P:app
+V:1
+D:v w u
+
+P:ku
+V:1
+D:w
+p:u=1
+
+P:kw
+V:1
+D:dep
+p:v w=1
+
+P:dep
+V:1
+
+P:gk
+V:1
+k:100
+p:v
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install gk 1
+install dep 1
+install kw 1
+install ku 1
+install app 1

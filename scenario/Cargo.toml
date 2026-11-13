@@ -1,0 +1,19 @@
+[package]
+name = "ferrata-scenario"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT OR Apache-2.0"
+description = "Test tooling for ferrata: scenarios, apk.static as their oracle, and a reducer"
+publish = false
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[dependencies]
+ferrata = { path = ".." }
+
+[[bin]]
+name = "scenario"
+path = "src/main.rs"

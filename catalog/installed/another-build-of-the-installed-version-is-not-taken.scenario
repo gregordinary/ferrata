@@ -1,0 +1,25 @@
+[statement]
+A package installed stays though a repository offers its version as
+another build, one of another identity.
+
+[repository]
+C:Q1BBBBBBBBBBBBBBBBBBBBBBBBBBB=
+P:a
+V:1.0-r0
+
+P:b
+V:1.0-r0
+
+[installed]
+C:Q1AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+P:a
+V:1.0-r0
+
+[world]
+a
+
+[request]
+b
+
+[answer apk-tools 3.0.9-r0]
+install b 1.0-r0

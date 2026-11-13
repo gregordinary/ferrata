@@ -1,0 +1,43 @@
+[statement]
+As `a-package-losing-a-name-it-provides-is-removed-at-the-turn-of-its-successor`,
+with the name taken the package's own: `bar`, which the request brings,
+provides `foo` at a version, and apk removes the installed `foo` just
+before installing `bar`, after `a` and `b`.
+
+[repository]
+P:foo
+V:1
+
+P:bar
+V:1
+p:foo=2
+
+P:app
+V:1
+D:a b bar
+
+P:a
+V:1
+
+P:b
+V:1
+
+[installed]
+P:old
+V:1
+
+P:foo
+V:1
+
+[world]
+old
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+install a 1
+install b 1
+remove foo 1
+install bar 1
+install app 1

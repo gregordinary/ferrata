@@ -1,0 +1,35 @@
+[statement]
+`a` requires `v=1` and `b` requires `v=2`; two packages cannot both provide
+`v` at a version, so apk refuses.
+
+[repository]
+P:app
+V:1
+D:a b
+
+P:a
+V:1
+D:v=1
+
+P:b
+V:1
+D:v=2
+
+P:p1
+V:1
+p:v=1
+
+P:p2
+V:1
+p:v=2
+
+
+[request]
+app
+
+[answer apk-tools 3.0.9-r0]
+| ERROR: unable to select packages:
+|   p1-1:
+|     breaks: b-1[v=2]
+|     satisfies: a-1[v=1]
+refused

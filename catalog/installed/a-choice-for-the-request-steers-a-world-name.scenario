@@ -1,0 +1,36 @@
+[statement]
+The preliminary choices take the request's names before the world's:
+`y`, requested, is chosen first, for `p2`, which provides the world's `x`
+too, so `x` takes `p2` and the installed `p1` is removed. Decisions still
+go in name order (`world-and-request-names-are-decided-in-name-order`).
+
+[repository]
+P:p1
+V:1
+p:x
+k:100
+
+P:p2
+V:1
+p:x y=1
+k:10
+
+P:p3
+V:1
+p:y=1
+
+[installed]
+P:p1
+V:1
+p:x
+k:100
+
+[world]
+x
+
+[request]
+y
+
+[answer apk-tools 3.0.9-r0]
+remove p1 1
+install p2 1
